@@ -1,0 +1,16 @@
+lakehouse:
+  target: dev
+
+  outputs:
+    dev:
+      type: spark
+      method: thrift
+      host: spark
+      port: 10000
+      schema: default
+      user: airflow
+      auth: NOSASL
+      threads: 4
+      connect_retries: 10
+      connect_timeout: 60
+      retry_all: true

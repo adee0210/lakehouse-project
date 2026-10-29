@@ -1,0 +1,209 @@
+name: training-lakehouse
+
+services:
+  # =====================================================
+  # Airflow Metadata Database (Postgres - chỉ dùng cho Airflow)
+  # =====================================================
+  airflow-db:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: airflow
+    volumes:
+      - airflow-db-data:/var/lib/postgresql/data
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d airflow" ]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    networks:
+      - lakehouse-net
+
+  # =====================================================
+  # MinIO (Object Storage)
+  # Bronze  ← Oracle (source)
+  # Silver  ← transform từ Bronze
+  # Gold    ← transform từ Silver
+  # =====================================================
+  minio:
+    image: bitnamilegacy/minio:2024.4.18
+    command: /opt/bitnami/minio/bin/minio server /data --console-address ":9001"
+    user: "0:0"
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD}
+      MINIO_DEFAULT_BUCKETS: warehouse,bronze,silver,gold
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    volumes:
+      - minio-data:/data
+    healthcheck:
+      test: [ "CMD-SHELL", "bash -c '</dev/tcp/127.0.0.1/9000'" ]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    networks:
+      - lakehouse-net
+
+  # =====================================================
+  # Spark Cluster
+  # =====================================================
+  spark-master:
+    image: apache/spark:3.5.3
+    command: [ "/bin/bash", "-c", "/opt/spark/sbin/start-master.sh && tail -f /dev/null" ]
+    environment:
+      SPARK_MODE: master
+      SPARK_RPC_AUTHENTICATION_ENABLED: "no"
+      SPARK_RPC_ENCRYPTION_ENABLED: "no"
+      SPARK_LOCAL_STORAGE_ENCRYPTION_ENABLED: "no"
+      SPARK_SSL_ENABLED: "no"
+    ports:
+      - "7077:7077"
+      - "8080:8080"
+    networks:
+      - lakehouse-net
+
+  spark-worker:
+    image: apache/spark:3.5.3
+    depends_on:
+      spark-master:
+        condition: service_started
+    environment:
+      SPARK_MODE: worker
+      SPARK_MASTER_URL: spark://spark-master:7077
+      SPARK_WORKER_MEMORY: 2G
+      SPARK_WORKER_CORES: 2
+      SPARK_RPC_AUTHENTICATION_ENABLED: "no"
+      SPARK_RPC_ENCRYPTION_ENABLED: "no"
+      SPARK_LOCAL_STORAGE_ENCRYPTION_ENABLED: "no"
+      SPARK_SSL_ENABLED: "no"
+    command: [ "/bin/bash", "-c", "/opt/spark/sbin/start-worker.sh spark://spark-master:7077 && tail -f /dev/null" ]
+    networks:
+      - lakehouse-net
+
+  spark-thrift:
+    image: apache/spark:3.5.3
+    depends_on:
+      spark-master:
+        condition: service_started
+      minio:
+        condition: service_healthy
+    command:
+      - /bin/bash
+      - -c
+      - >
+        /opt/spark/sbin/start-thriftserver.sh --master spark://spark-master:7077 --hiveconf hive.server2.thrift.port=10000 --conf spark.sql.catalogImplementation=hive && tail -f /dev/null
+    ports:
+      - "10000:10000"
+      - "4040:4040"
+    networks:
+      - lakehouse-net
+
+  # =====================================================
+  # dbt (chỉ làm việc với Silver / Gold trên Spark)
+  # =====================================================
+  dbt:
+    image: ghcr.io/dbt-labs/dbt-spark:1.9.0
+    depends_on:
+      spark-thrift:
+        condition: service_started
+    working_dir: /usr/app
+    volumes:
+      - ./dbt:/usr/app
+    environment:
+      DBT_PROFILES_DIR: /usr/app
+    entrypoint: [ "/bin/sh", "-c" ]
+    command: [ "tail -f /dev/null" ]
+    networks:
+      - lakehouse-net
+
+  # =====================================================
+  # Airflow
+  # - Extract từ Oracle → Bronze (MinIO)
+  # - Orchestrate dbt (Silver / Gold)
+  # =====================================================
+  airflow-init:
+    image: apache/airflow:2.10.4-python3.12
+    depends_on:
+      airflow-db:
+        condition: service_healthy
+    environment: &airflow-environment
+      AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://${POSTGRES_USER}:${POSTGRES_PASSWORD}@airflow-db:5432/airflow
+      AIRFLOW__CORE__EXECUTOR: LocalExecutor
+      AIRFLOW__CORE__LOAD_EXAMPLES: "false"
+      AIRFLOW__CORE__FERNET_KEY: ${AIRFLOW_FERNET_KEY}
+      AIRFLOW__WEBSERVER__SECRET_KEY: ${AIRFLOW_SECRET_KEY}
+      _PIP_ADDITIONAL_REQUIREMENTS: dbt-spark==1.9.0 oracledb==2.4.1
+
+      # ---------- Oracle (chỉ dùng cho Bronze) ----------
+      ORACLE_HOST: ${ORACLE_HOST}
+      ORACLE_PORT: ${ORACLE_PORT:-1521}
+      ORACLE_SERVICE: ${ORACLE_SERVICE}
+      ORACLE_USER: ${ORACLE_USER}
+      ORACLE_PASSWORD: ${ORACLE_PASSWORD}
+      ORACLE_JDBC_URL: jdbc:oracle:thin:@//${ORACLE_HOST}:${ORACLE_PORT:-1521}/${ORACLE_SERVICE}
+
+      # ---------- MinIO ----------
+      MINIO_ENDPOINT: http://minio:9000
+      MINIO_ACCESS_KEY: ${MINIO_ROOT_USER}
+      MINIO_SECRET_KEY: ${MINIO_ROOT_PASSWORD}
+      MINIO_BUCKET_BRONZE: bronze
+      MINIO_BUCKET_SILVER: silver
+      MINIO_BUCKET_GOLD: gold
+    command: >
+      bash -c "airflow db migrate && airflow users create
+        --username ${POSTGRES_USER}
+        --password ${POSTGRES_PASSWORD}
+        --firstname Local
+        --lastname Admin
+        --role Admin
+        --email admin@example.local || true"
+    volumes:
+      - ./airflow/dags:/opt/airflow/dags
+      - ./airflow/logs:/opt/airflow/logs
+      - ./airflow/plugins:/opt/airflow/plugins
+      - ./dbt:/opt/airflow/dbt
+    networks:
+      - lakehouse-net
+
+  airflow-webserver:
+    image: apache/airflow:2.10.4-python3.12
+    depends_on:
+      airflow-init:
+        condition: service_completed_successfully
+    environment: *airflow-environment
+    command: webserver
+    ports:
+      - "8081:8080"
+    volumes:
+      - ./airflow/dags:/opt/airflow/dags
+      - ./airflow/logs:/opt/airflow/logs
+      - ./airflow/plugins:/opt/airflow/plugins
+      - ./dbt:/opt/airflow/dbt
+    networks:
+      - lakehouse-net
+
+  airflow-scheduler:
+    image: apache/airflow:2.10.4-python3.12
+    depends_on:
+      airflow-init:
+        condition: service_completed_successfully
+    environment: *airflow-environment
+    command: scheduler
+    volumes:
+      - ./airflow/dags:/opt/airflow/dags
+      - ./airflow/logs:/opt/airflow/logs
+      - ./airflow/plugins:/opt/airflow/plugins
+      - ./dbt:/opt/airflow/dbt
+    networks:
+      - lakehouse-net
+
+volumes:
+  airflow-db-data:
+  minio-data:
+
+networks:
+  lakehouse-net:
+    driver: bridge
