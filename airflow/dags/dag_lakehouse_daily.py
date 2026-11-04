@@ -43,6 +43,30 @@ STG_MODELS = {os.path.basename(f)[4:-4] for root, _, fs in os.walk(os.path.join(
               for f in fs if f.startswith("stg_") and f.endswith(".sql")}
 
 
+MODEL_FILES = {f[:-4]: os.path.join(root, f) for root, _, fs in os.walk(os.path.join(DBT_DIR, "models"))
+               for f in fs if f.endswith(".sql")}
+
+
+def model_header(model):
+    """Header comment của model SQL = tóm tắt yêu cầu BA (sheet, cột, SCD, nhánh logic) để đối chiếu trên UI."""
+    lines = []
+    try:
+        for line in open(MODEL_FILES[model], encoding="utf-8"):
+            if not line.startswith("--"):
+                break
+            lines.append(line[2:].strip())
+    except (KeyError, OSError):
+        pass
+    return "\n".join(f"- {l}" for l in lines) or "- (model sinh tự động 1:1 từ nguồn)"
+
+
+def trino_check(obj):
+    schema, table = obj.lower().split(".")
+    return ("```sql\n-- Trino: CloudBeaver http://localhost:8978 hoặc Trino CLI\n"
+            f"SELECT * FROM lakehouse.{schema}.{table} LIMIT 100;\n"
+            f"SELECT count(*) FROM lakehouse.{schema}.{table};\n```")
+
+
 def dbt_select(model):
     return f"stg_{model} {model}" if model in STG_MODELS else model
 
@@ -82,9 +106,14 @@ with DAG(
             tasks[job["object"].upper()] = BashOperator(
                 task_id=job["model"],
                 bash_command=DBT.replace("__CMD__", f"run -s {dbt_select(job['model'])}"),
-                doc_md=(f"**{job['object']}** | {job['group']} | PIC: {job['pic']}\n\n"
-                        f"Schedule (sheet): `{job['schedule']}` | SQL: `{job['sql']}`\n\n"
-                        f"WAITING: {', '.join(job['waiting'])}"),
+                doc_md=(f"### {job['object']}\n\n"
+                        f"| Sheet Job_dependence | Giá trị |\n|---|---|\n"
+                        f"| GRP_OBJ | `{job['group']}` |\n| STATUS | `{job['status']}` |\n"
+                        f"| SCHEDULE | `{job['schedule']}` |\n| SQL_EXC | `{job['sql']}` |\n"
+                        f"| PIC | {job['pic']} |\n| WAITING | {'<br>'.join(job['waiting'])} |\n"
+                        f"| dbt model | `{dbt_select(job['model'])}` |\n\n"
+                        f"#### Yêu cầu nghiệp vụ (header model)\n{model_header(job['model'])}\n\n"
+                        f"#### Kiểm tra dữ liệu\n{trino_check(job['object'])}"),
             )
 
     for job in JOBS:
@@ -97,5 +126,10 @@ with DAG(
             prepare_source >> t
 
     dq = BashOperator(task_id="dbt_test_data_quality", bash_command=DBT.replace("__CMD__", "test"), trigger_rule="all_done")
+    stats = BashOperator(
+        task_id="report_layer_row_counts", trigger_rule="all_done",
+        bash_command=f"python {SCRIPTS}/layer_stats.py {ETL_DATE}",
+        doc_md="Số dòng từng bảng Bronze/Silver/Gold tại ETL_DATE (bảng SCD2: tổng + số bản ghi hiện hành). Xem tab Logs.",
+    )
     end = EmptyOperator(task_id="end")
-    [tasks[j["object"].upper()] for j in JOBS] >> dq >> end
+    [tasks[j["object"].upper()] for j in JOBS] >> dq >> stats >> end

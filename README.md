@@ -36,6 +36,9 @@ cả 3 tầng được lưu trên **ổ đĩa local** (`./data/minio`).
 | Postgres | 16 | Iceberg JDBC catalog + Airflow metadata |
 | Airflow | 2.10.4 (LocalExecutor) | DAG 69 job sinh từ sheet `Job_dependence` |
 | Oracle JDBC (ojdbc8) | 23.5 | Đọc nguồn Oracle cho tầng Bronze |
+| Trino | 467 | Query engine thứ 2 (đọc chung Iceberg catalog) + catalog `oracle` để đối chiếu nguồn |
+| CloudBeaver | 24.3 | SQL editor trên web, kết nối sẵn tới Trino |
+| graphify | 0.9 | Đồ thị code (`graphify-out/`) để tra cứu nhanh cấu trúc dự án |
 
 Khác biệt so với local-lakehouse gốc (có chủ đích, do máy chỉ cấp **4 GB RAM** cho Docker):
 * Catalog Iceberg dùng **JDBC catalog trên Postgres** sẵn có thay cho service `iceberg-rest` (bớt 1 JVM).
@@ -46,13 +49,16 @@ Khác biệt so với local-lakehouse gốc (có chủ đích, do máy chỉ c�
 
 ```
 lakehouse-project/
-├── docker-compose.yml            # postgres, minio, spark-thrift, dbt, (airflow-init, airflow – profile airflow)
+├── docker-compose.yml            # postgres, minio, spark-thrift, dbt | profile airflow: airflow-init, airflow | profile ui: trino, cloudbeaver
 ├── .env / .env.example           # thông tin Oracle, MinIO, Postgres, SOURCE_MODE
 ├── docker/
 │   ├── spark/                    # Dockerfile (Iceberg + AWS bundle + Postgres/Oracle JDBC), spark-defaults.conf, entrypoint
 │   ├── postgres/init.sql         # tạo DB iceberg_catalog
-│   └── airflow/Dockerfile        # Airflow + dbt-spark
+│   ├── airflow/Dockerfile        # Airflow + dbt-spark
+│   ├── trino/                    # config.properties, jvm.config, catalog/lakehouse.properties (Iceberg JDBC), catalog/oracle.properties
+│   └── cloudbeaver/              # initial-data-sources.conf (2 kết nối Trino khai báo sẵn)
 ├── docs/Training_Fresher_DeepChecked.xlsx   # tài liệu BA (nguồn sự thật)
+├── docs/queries/trino_checks.sql # bộ query kiểm tra mẫu cho CloudBeaver/Trino
 ├── tools/
 │   ├── gen_from_excel.py         # SINH CODE từ Excel: bronze models, YAML comment/test, 4 bảng staging, jobs.json
 │   ├── templates/*.sql.j2        # khung FROM/JOIN cho 4 bảng staging nhiều cột
@@ -66,6 +72,7 @@ lakehouse-project/
 │   ├── generate_mock_source.py   # dữ liệu giả lập offline (khi không có VPN/Oracle)
 │   ├── reset_lakehouse.py        # DROP PURGE toàn bộ bảng các tầng
 │   ├── layer_stats.py            # thống kê số dòng 69 bảng theo ngày chạy
+│   ├── dbt_docs.sh               # dbt docs generate + serve :8082 (lineage)
 │   └── sql.py                    # chạy nhanh SQL qua Thrift
 ├── dbt/
 │   ├── dbt_project.yml, profiles.yml
@@ -79,6 +86,7 @@ lakehouse-project/
 │   ├── models/gold/dim|interface|fact/   # 8 + 4 + 1 model Wave 3-4
 │   └── tests/                    # đối soát (reconciliation)
 ├── airflow/dags/dag_lakehouse_daily.py + jobs.json
+├── graphify-out/                 # graph.json / graph.html / GRAPH_REPORT.md (graphify, tự cập nhật)
 └── data/minio/                   # DỮ LIỆU LAKEHOUSE TRÊN MÁY LOCAL (bucket source/bronze/silver/gold)
 ```
 
@@ -164,6 +172,7 @@ Kết quả đối chiếu 28 bảng / 392 cột với Oracle `DBPDB`:
 | 4 bảng staging, SAOKE_TINDUNG | Không có cột ngày snapshot | bổ sung cột kỹ thuật `ETL_DATE` làm partition |
 | PST_ENTR/AR_AVY_SHD/sk_lich_tra_no/AST | `COMMIT_ACTION <> 'D'`, `FLAG_STATUS <> 'DELETE'` loại cả NULL | `NVL(...,'_')` |
 | Master | 68 job | sheet thực tế 69 job |
+| Loan Arrangement | `PD_CODE`: HĐ có `ACC_FCC` lấy `TDATE.SAN_PHAM_CHO_VAY_KHCN/KHDN`, nhưng TDATE thật chỉ có giá trị ở ~7% HĐ → **100% dòng FCT rỗng `PD_DIM_KEY`** (phát hiện khi query bằng Trino) | `NVL(<CASE spec>, NVL(PRODUCT_CODE, PRODUCTGR_CODE))` – rơi về nhánh ELSE của chính spec. FCT: PD 0 → 1,580/1,812 dòng. Test cảnh báo mới `dq_fct_dim_key_coverage` |
 
 ## 6. Cài đặt & chạy
 
@@ -204,9 +213,12 @@ docker compose exec dbt dbt run -s +fct_loan_ar --vars '{etl_date: 2025-10-07}' 
 ### 6.5 Chạy bằng Airflow
 ```bash
 docker compose --profile airflow up -d --build      # http://localhost:8081  (airflow / airflow)
-# Trigger DAG dag_lakehouse_daily với conf: {"etl_date": "2025-10-07"}
+# DAG để pause (tránh run theo lịch với ngày hôm nay). Trigger tay với ngày nghiệp vụ của Oracle:
+docker compose exec airflow airflow dags unpause dag_lakehouse_daily
+docker compose exec airflow airflow dags trigger dag_lakehouse_daily -c '{"etl_date": "2025-10-07"}'
+# hoặc trên UI: nút ▶ "Trigger DAG w/ config"
 ```
-DAG `dag_lakehouse_daily` (72 task = `prepare_source` + 69 job + `dbt_test_data_quality` + `end`):
+DAG `dag_lakehouse_daily` (73 task = `prepare_source` + 69 job + `dbt_test_data_quality` + `report_layer_row_counts` + `end`):
 * TaskGroup theo `GRP_OBJ` (WAVE_0 … WAVE_4); mỗi job = `dbt run -s <model>`.
 * Phụ thuộc task-level đúng cột **WAITING** (vd `FCT_LOAN_AR` chờ 18 bảng; `AR_TVR_SMY` chờ `PST_ENTR, AR_DLQ_SMY, LOAN_AR`).
 * Lịch `30 0 * * *` (Wave 0); các mốc 01:00–02:45 của sheet được thay bằng dependency thực (job chạy ngay khi upstream xong).
@@ -227,12 +239,49 @@ MSYS_NO_PATHCONV=1 docker compose exec dbt sh /usr/app/scripts/run_pipeline.sh 2
 python tools/gen_from_excel.py     # bronze models, YAML comment/test, 4 bảng staging, jobs.json, test đối soát Bronze
 ```
 
-### 6.8 Truy vấn dữ liệu
+### 6.8 Giao diện theo dõi & truy vấn (Trino + CloudBeaver + dbt docs)
+
 ```bash
-docker compose exec dbt python /usr/app/scripts/sql.py "select * from pg_gold.fct_loan_ar limit 10"
-docker compose exec dbt python /usr/app/scripts/sql.py "select * from pg_silver.loan_ar.history"   # Iceberg metadata
+docker compose --profile ui up -d                                          # Trino + CloudBeaver
+MSYS_NO_PATHCONV=1 docker compose exec dbt bash /usr/app/scripts/dbt_docs.sh 2025-10-07   # dbt docs
 ```
-Hoặc kết nối bất kỳ client Hive/JDBC tới `localhost:10000` (auth NOSASL). Dữ liệu vật lý: `./data/minio/{bronze,silver,gold}/<table>/{data,metadata}`.
+
+| Giao diện | URL | Đăng nhập | Dùng để |
+|---|---|---|---|
+| **Airflow** | http://localhost:8081 | `airflow` / mật khẩu Postgres trong `.env` | Xem 69 job theo Wave/WAITING (Graph), log từng job, task `report_layer_row_counts` in số dòng 3 tầng |
+| **CloudBeaver** (SQL editor web) | http://localhost:8978 | vào thẳng (ẩn danh); admin: `cbadmin` / `Lakehouse123` | Duyệt cây schema `pg_bronze/pg_silver/pg_gold`, xem dữ liệu dạng lưới, chạy SQL, export CSV/Excel |
+| **Trino Web UI** | http://localhost:8080 | user bất kỳ (vd `admin`) | Theo dõi query đang chạy / lịch sử / plan |
+| **dbt docs** | http://localhost:8082 | – | **Lineage graph** 74 model (nút xanh góc phải dưới), mô tả bảng/cột lấy từ sheet BA, SQL đã compile, test |
+| **MinIO console** | http://localhost:9001 | `MINIO_ROOT_USER` / `MINIO_ROOT_PASSWORD` | File Parquet + metadata Iceberg vật lý của từng bảng (`bronze/ silver/ gold/`) |
+| **Spark UI** | http://localhost:4040 | – | Job/stage Spark khi dbt đang chạy, tab *JDBC/ODBC Server* xem câu SQL dbt gửi |
+
+**Trino** (`docker/trino/`) dùng chung Iceberg JDBC catalog với Spark (`catalog-name=lakehouse` trên Postgres
+`iceberg_catalog`, dữ liệu MinIO) nên thấy ngay các bảng dbt-spark vừa ghi, không phải copy dữ liệu. Có 2 catalog:
+
+| Catalog Trino | Nội dung |
+|---|---|
+| `lakehouse` | `pg_bronze`, `pg_silver`, `pg_silver_stg`, `pg_gold` (Iceberg) – vd `SELECT * FROM lakehouse.pg_gold.fct_loan_ar` |
+| `oracle` | Nguồn thật `PG_*` qua VPN – vd `SELECT count(*) FROM oracle.pg_t24core.ld_loans_and_deposits` → đối chiếu với Bronze |
+
+CloudBeaver được khai báo sẵn 2 kết nối (`docker/cloudbeaver/initial-data-sources.conf`):
+*Trino - Lakehouse* và *Trino - Oracle nguồn*. Bộ câu query kiểm tra mẫu: **`docs/queries/trino_checks.sql`**
+(lịch sử snapshot Iceberg, Bronze vs Oracle, SCD2 single-current, đối soát dư nợ 3 tầng, star-schema FCT × DIM).
+
+Kiểm tra yêu cầu sheet trên Airflow: mở DAG `dag_lakehouse_daily` → tab **Graph** (6 TaskGroup = GRP_OBJ, cạnh = cột
+WAITING) → bấm 1 task → **Task Instance Details / Rendered Template**: phần *doc* hiển thị bảng thông tin sheet
+`Job_dependence` (GRP_OBJ, STATUS, SCHEDULE, SQL_EXC, PIC, WAITING), tóm tắt yêu cầu nghiệp vụ (header của model SQL)
+và câu SQL Trino để xem dữ liệu bảng đó.
+
+Truy vấn qua dòng lệnh:
+```bash
+docker compose exec trino trino --execute "select * from lakehouse.pg_gold.dim_pd limit 10"
+docker compose exec dbt python /usr/app/scripts/sql.py "select * from pg_silver.loan_ar.history"   # Spark, Iceberg metadata
+```
+Dữ liệu vật lý: `./data/minio/{bronze,silver,gold}/<table>/{data,metadata}`.
+
+> RAM: Trino (~0,9 GB) + CloudBeaver (~0,25 GB) cộng với Spark đang chạy pipeline (~2 GB) vượt 4 GB của Docker.
+> Khi chạy pipeline nên `docker compose stop trino cloudbeaver`, chạy xong `docker compose --profile ui up -d`.
+> Hoặc nâng RAM cho Docker (WSL2) trong `%USERPROFILE%\.wslconfig`: `[wsl2]` / `memory=6GB` rồi `wsl --shutdown`.
 
 ## 7. Kiểm thử chất lượng dữ liệu (Master – Bước 6)
 
@@ -265,7 +314,21 @@ Môi trường: Docker Desktop 4 GB RAM, 8 vCPU (Windows 11). Nguồn: Oracle `D
 | Wave 4 – Gold INF/INTF/FCT | 5 | **5/5 PASS** | 38 s |
 | `dbt test` | 206 test | **203 PASS · 3 WARN · 0 ERROR** | 6 phút 20 s |
 
-Chạy lại cùng ngày cho kết quả không đổi (idempotent): Bronze/Snapshot xoá rồi ghi lại phân vùng; SCD MERGE không sinh phiên bản mới khi dữ liệu không đổi.
+**Chạy lại qua Airflow** (run `manual_oracle_20251007_v2`, conf `{"etl_date": "2025-10-07"}`, 04/11/2026):
+
+| Bước | Task | Kết quả | Thời gian |
+|---|---:|---|---:|
+| `prepare_source` | 1 | success | 34 s |
+| WAVE_0 … WAVE_4 (69 job, 2 task song song) | 69 | **69/69 success** | ~16 phút |
+| `dbt_test_data_quality` | 207 test | **203 PASS · 4 WARN · 0 ERROR** | 6 phút 40 s |
+| `report_layer_row_counts` | 1 | success (bảng số dòng trong log) | 9 s |
+| **Tổng** | 73 | **73/73 success** | **~23 phút** |
+
+Qua Airflow chậm hơn chạy tay theo wave vì mỗi task khởi động 1 tiến trình dbt riêng (~20 s parse + kết nối),
+đổi lại thấy được từng job, log và retry riêng.
+
+Chạy lại cùng ngày cho kết quả không đổi (idempotent): Bronze/Snapshot xoá rồi ghi lại phân vùng; SCD MERGE không sinh
+phiên bản mới khi dữ liệu không đổi (lần chạy thứ 2: mọi bảng SCD2 vẫn có số dòng = số dòng hiện hành, vd LOAN_AR 54,483/54,483).
 
 ### 8.2 Đối soát dư nợ (Master – Bước 5 & 6)
 
@@ -277,13 +340,16 @@ Chạy lại cùng ngày cho kết quả không đổi (idempotent): Bronze/Snap
 | PG_GOLD.FCT_LOAN_AR – SUM(OTSND_AMT_LCY) | 1,071,027,260,932 ✅ khớp 100% trên tập HĐ hợp lệ của FCT |
 | Chênh lệch FCT = dư nợ 2 HĐ có KH không tồn tại trong `PG_T24CORE.CUSTOMER` (FCT inner join DIM_CST theo spec) | 1,782,177,263 ⚠ (test `recon_fct_excluded_balance`, mức warn) |
 
-### 8.3 Ba cảnh báo (WARN) – đều do dữ liệu nguồn, đã kiểm chứng trực tiếp trên Oracle
+### 8.3 Bốn cảnh báo (WARN) – đều do dữ liệu nguồn, đã kiểm chứng trực tiếp trên Oracle
 
 | Test | Nguyên nhân |
 |---|---|
 | `hash_match_rate` LOAN_AR.CST_ID → CST | Trên Oracle: 48,195 HĐ LD, chỉ 28,010 có CUSTOMER_ID và chỉ 4,903 tồn tại trong `PG_T24CORE.CUSTOMER` (bảng nguồn chỉ có 36,346 KH, đã che tên). Khoá băm vẫn khớp đúng; vấn đề là thiếu dữ liệu master. |
 | `recon_fct_excluded_balance` | 2 HĐ có số dư nhưng không có KH nên không vào được FCT (inner join DIM_CST theo thiết kế). |
 | `unique_key` INTF_LOAN_AR (CDR_DT, AR_CODE, GL_ITM_CODE) | SAOKE_CRB có 2 nhóm dòng cùng (APP_ID, SBV_CODE) nhưng khác `ASSET_TYPE`. INTF kế thừa grain của AR_BAL, mà spec không có cột ASSET_TYPE, nên 1 cặp dòng trùng khoá hiển thị (số tiền không bị nhân bản). |
+| `dq_fct_dim_key_coverage` (mới) | 2 DIM key trong FCT rỗng 100%: `CCY_DIM_KEY` – `LD.CURRENCY` trên Oracle chỉ có giá trị ở 292/48,195 HĐ (kéo theo `EXG_RATE_TO_LCL_CCY` rỗng); `LMT_DIM_KEY` – bảng `LIMIT` nguồn chỉ có 2/6 cột. |
+
+Độ phủ DIM key của FCT_LOAN_AR (1,812 dòng): LOAN_AR/CST/OU/FNC_ST 100% · **PD 1,580 (87%)** · RSTC 278 · CCY 0 · LMT 0.
 
 ### 8.4 Số dòng theo tầng (`scripts/layer_stats.py 2025-10-07`)
 
@@ -391,3 +457,7 @@ Ghi chú số liệu: `IP_ALT_IDENTN` = 0 dòng vì nguồn `PG_T24CORE.CUSTOMER
 | `''` trong option JDBC báo lỗi cú pháp | literal Spark SQL dùng `'` chứ không phải `''` | escape `'` trong `load_source.py` |
 | Lọc `COMMIT_ACTION <> 'D'` loại hết bút toán | cột NULL trên dữ liệu thật | `NVL(COMMIT_ACTION,'_') <> 'D'` |
 | FCT dư nợ thấp bất thường | ép ngầm chuỗi số tiền sang INT bị tràn | `CAST(... AS DECIMAL(25,5))` tường minh |
+| `UCP-0: Unable to start the Universal Connection Pool` (Trino catalog `oracle`) | VPN chưa kết nối | bật VPN; catalog `lakehouse` không phụ thuộc Oracle |
+| Trino không khởi động: `Unrecognized VM option` | sai tên cờ JVM trong `jvm.config` | dùng `-XX:-OmitStackTraceInFastThrow` |
+| Unpause DAG → Airflow tự tạo 1 run theo lịch với `ds` = hôm nay (2026-11-03), chạy song song chờ slot của run thủ công | `catchup=False` vẫn tạo run cho khoảng lịch gần nhất | đánh dấu run đó failed/skip, xoá phân vùng Bronze lỡ ghi (`DELETE … WHERE etl_date <> DATE '2025-10-07'` bằng Trino). **DAG để ở trạng thái pause**: Oracle là ảnh chụp ngày 2025-10-07 → luôn trigger tay với conf `{"etl_date": "2025-10-07"}` |
+| Docker treo / API 500, Spark bị restart sau `dbt test` | Spark + Trino + CloudBeaver + Airflow vượt 4 GB của WSL | tắt `trino cloudbeaver` khi chạy pipeline; hoặc tăng `memory=6GB` trong `.wslconfig` |

@@ -4,6 +4,7 @@ from pyhive import hive
 d = sys.argv[1]
 cur = hive.connect(host=os.environ.get("DBT_SPARK_HOST", "spark-thrift"), port=10000, username="stats", auth="NOSASL").cursor()
 PART = {"ETL_DATE", "CDR_DT", "SNPST_DT", "PST_DT", "CDR_DT_DIM_KEY"}
+print("LAYER|TABLE|COLS|ROWS|CURRENT(SCD2)")
 for ns in ["pg_bronze", "pg_silver", "pg_gold"]:
     cur.execute(f"show tables in lakehouse.{ns}")
     for _, t, *_ in sorted(cur.fetchall(), key=lambda r: r[1]):

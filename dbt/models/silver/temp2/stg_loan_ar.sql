@@ -61,11 +61,12 @@ b1 as (
         cast(ld.LOS_FAC_CODE as string)                              as LOS_CTR_NBR,
         cast(ld.MB_RM_BANCHEO as string)                             as REFRRER_OFCR_CODE,
         {{ t24_date('ld.ORIG_VAL_DATE') }}                           as VAL_DT,
-        cast(case
+        -- BA-fix: dữ liệu thật TDATE chỉ có SAN_PHAM_* cho ~7% HĐ có ACC_FCC -> CASE đúng spec trả NULL
+        -- cho toàn bộ HĐ trong FCT (PD_DIM_KEY rỗng). Fallback NVL về nhánh ELSE của chính spec.
+        cast(nvl(case
                 when ld.ACC_FCC is not null and i.KHOI = 'INDIV' then td.SAN_PHAM_CHO_VAY_KHCN
                 when ld.ACC_FCC is not null and i.KHOI <> 'INDIV' then td.SAN_PHAM_CHO_VAY_KHDN
-                else nvl(pd_los.PRODUCT_CODE, ld.PRODUCTGR_CODE)
-             end as string)                                          as PD_CODE,
+             end, nvl(pd_los.PRODUCT_CODE, ld.PRODUCTGR_CODE)) as string) as PD_CODE,
         cast(nvl(td.MDVAY_SP, ld.USE_OF_LOAN) as string)             as AR_PPS_TP_CODE,
         cast(ld.USE_OF_LOAN_CHA as string)                           as AR_PPS_GRP_CODE,
         {{ t24_date('ld.VALUE_DATE') }}                              as EFF_DT,
@@ -106,11 +107,10 @@ b2 as (
         cast(null as string),
         cast(ldh.MB_RM_BANCHEO as string),
         {{ t24_date('ldh.ORIG_VAL_DATE') }},
-        cast(case
+        cast(nvl(case
                 when ldh.ACC_FCC is not null and i.KHOI = 'INDIV' then td.SAN_PHAM_CHO_VAY_KHCN
                 when ldh.ACC_FCC is not null and i.KHOI <> 'INDIV' then td.SAN_PHAM_CHO_VAY_KHDN
-                else pd_los.PRODUCT_CODE
-             end as string),
+             end, pd_los.PRODUCT_CODE) as string),
         cast(nvl(td.MDVAY_SP, ldh.USE_OF_LOAN) as string),
         cast(ldh.USE_OF_LOAN_CHA as string),
         {{ t24_date('ldh.VALUE_DATE') }},

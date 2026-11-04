@@ -101,6 +101,8 @@ services:
       - ./data/mock_source:/data/mock_source
     entrypoint: ["/bin/sh", "-c"]
     command: ["tail -f /dev/null"]
+    ports:
+      - "8082:8082"   # dbt docs (lineage 74 model): bash scripts/dbt_docs.sh
     depends_on:
       spark-thrift: { condition: service_healthy }
     mem_limit: 384m
@@ -158,8 +160,63 @@ services:
     mem_limit: 1200m
     networks: [lakehouse-net]
 
+  # ------------------------------------------------------ UI / Query (profile "ui") --
+  # Trino đọc CHUNG Iceberg catalog (JDBC trên Postgres) với Spark -> query Bronze/Silver/Gold
+  # + catalog "oracle" đọc thẳng nguồn PG_* để đối chiếu. Web UI theo dõi query: http://localhost:8080
+  trino:
+    profiles: ["ui"]
+    image: trinodb/trino:467
+    environment:
+      <<: *common-env
+      ORACLE_HOST: ${ORACLE_HOST}
+      ORACLE_PORT: ${ORACLE_PORT:-1521}
+      ORACLE_SERVICE: ${ORACLE_SERVICE}
+      ORACLE_USER: ${ORACLE_USER}
+      ORACLE_PASSWORD: ${ORACLE_PASSWORD}
+    volumes:
+      - ./docker/trino/config.properties:/etc/trino/config.properties:ro
+      - ./docker/trino/jvm.config:/etc/trino/jvm.config:ro
+      - ./docker/trino/catalog:/etc/trino/catalog:ro
+    ports:
+      - "8080:8080"
+    depends_on:
+      postgres: { condition: service_healthy }
+      minio: { condition: service_healthy }
+    healthcheck:
+      test: ["CMD-SHELL", "trino --execute 'select 1' || exit 1"]
+      interval: 10s
+      timeout: 10s
+      retries: 30
+      start_period: 20s
+    mem_limit: 1400m
+    networks: [lakehouse-net]
+
+  # CloudBeaver: SQL editor trên web, đã khai báo sẵn kết nối tới Trino -> http://localhost:8978
+  cloudbeaver:
+    profiles: ["ui"]
+    image: dbeaver/cloudbeaver:24.3.0
+    environment:
+      JAVA_OPTS: "-Xmx384m"
+      # Tự cấu hình server (bỏ qua wizard) + cho phép truy cập ẩn danh vào 2 kết nối Trino khai báo sẵn
+      CB_SERVER_NAME: Training Lakehouse
+      CB_SERVER_URL: http://localhost:8978
+      CB_ADMIN_NAME: cbadmin
+      CB_ADMIN_PASSWORD: ${CB_ADMIN_PASSWORD:-Lakehouse123}
+      CLOUDBEAVER_APP_ANONYMOUS_ACCESS_ENABLED: "true"
+      CLOUDBEAVER_APP_GRANT_CONNECTIONS_ACCESS_TO_ANONYMOUS_TEAM: "true"
+    volumes:
+      - cloudbeaver-data:/opt/cloudbeaver/workspace
+      - ./docker/cloudbeaver/initial-data-sources.conf:/opt/cloudbeaver/conf/initial-data-sources.conf:ro
+    ports:
+      - "8978:8978"
+    depends_on:
+      trino: { condition: service_healthy }
+    mem_limit: 700m
+    networks: [lakehouse-net]
+
 volumes:
   postgres-data:
+  cloudbeaver-data:
 
 networks:
   lakehouse-net:
