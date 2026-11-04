@@ -1,0 +1,194 @@
+version: 2
+
+models:
+  - name: intf_loan_ar
+    description: "PG_GOLD.INTF_LOAN_AR – sheet 'Interface Loan Arrangement'"
+    data_tests:
+      - column_contract:
+          expected: [CDR_DT, AR_CODE, EFF_DT, PD_CGY_CODE, PPR_CTR_NBR, OU_CODE, SUB_PD_CODE, CST_CODE, AR_LCS_TP_CODE, MUD_CODE, FNC_ST_CODE, CCY_CODE, MAT_DT, APPROVE_AMOUNT, VAL_DT, DRAWDOWN_ACCOUNT, AR_TERM_TP_CODE, LMT_CODE, INT_KEY, INT_SPRD, INT_LQD_AR_CODE, FCC_AR_CODE, PNY_RATE, ODUE_INT_RATE, AMOUNT_CUR, INT_TP, INT_BSS, INT_FIX, RATE, TXN_DT, ODUE_PR_AMT, ODUE_IN_AMT, ODUE_PE_AMT, ODUE_PS_AMT, MRGN_RATE, PD_CODE, KHCN_PD_CODE, DSBR_PRPSL_OFCR, DSBR_PRPSL_MGR, MGT_OFCR, MGT_MGR, APRV_AHR, DBT_WVR_F, NBR_OF_DBT_RSTC, AR_PPS_BY_PD, DYS_IN_PNP_ARS, DYS_IN_INT_ARS, TOT_INT_ARS, CST_ID, CST_FNC_ST_CODE, MID_RATE, AMT_LCY, APRV_AMT_LCY, MX_DYS_IN_ARS, TOT_INT_PAID_AMT_FCY, AR_FNC_ST_CODE, JNT_LBY_F, FCC_LMT_CODE, MAKER_OFCR_CODE, CHKER_OFCR_CODE, CST_GRP_CODE, AR_PPS_TP_CODE, AR_PPS_GRP_CODE, LOS_CTR_CODE, LOS_CTR_ID, DBT_RSTC_TP_CODE, CAR_AP_CODE, SCR_TP, MAND_REPYMT, LOS_CTR_NBR, PROM_PRGM, PROM_PRGM_2, SCTR_CODE, COVID19_RSTC_COMPL_DT, NGAY_THANH_TOAN_GOC_TIEPTHEO, SO_TIEN_THUNO_GOC, NGAY_THANH_TOAN_LAI, IDY_LV1_CL_CODE, IDY_LV2_CL_CODE, TOT_ACR_INT_DUE_AMT, NXT_ACR_INT_AMT, DTHU_CONLAI_DUKIEN_KYGANNHAT, OU_NM, ADDITION_DYS_IN_ARS, BDS_TT11, GL_ITM_CODE, CST_TP_CODE, CST_NM]
+      - unique_key:
+          columns: [CDR_DT, AR_CODE, GL_ITM_CODE]
+          where: "CDR_DT = DATE'{{ var('etl_date') }}'"
+          config:
+            severity: warn
+      - has_rows:
+          where: "CDR_DT = DATE'{{ var('etl_date') }}'"
+    columns:
+      - name: cdr_dt
+        description: "Ngày dữ liệu"
+      - name: ar_code
+        description: "Mã hợp đồng"
+      - name: eff_dt
+        description: "Ngày hiệu lực của hợp đồng"
+      - name: pd_cgy_code
+        description: "Mã phân loại sản phẩm"
+      - name: ppr_ctr_nbr
+        description: "Mã hồ sơ"
+      - name: ou_code
+        description: "Mã chi nhánh hạch toán"
+      - name: sub_pd_code
+        description: "Mã sản phẩm con"
+      - name: cst_code
+        description: "Mã khách hàng"
+      - name: ar_lcs_tp_code
+        description: "Trạng thái"
+      - name: mud_code
+        description: "Mã phân hệ"
+      - name: fnc_st_code
+        description: "Nhóm nợ hợp đồng"
+      - name: ccy_code
+        description: "Loại tiền"
+      - name: mat_dt
+        description: "Ngày đáo hạn hợp đồng"
+      - name: approve_amount
+        description: "Số tiền phê duyệt nguyên tệ"
+      - name: val_dt
+        description: "Ngày hiệu lực đầu tiên của hợp đồng"
+      - name: drawdown_account
+        description: "Tài khoản giải ngân"
+      - name: ar_term_tp_code
+        description: "Mã nhóm kỳ hạn"
+      - name: lmt_code
+        description: "Mã tham chiếu hạn mức"
+      - name: int_key
+        description: "Mã khóa lãi suất tham chiếu"
+      - name: int_sprd
+        description: "Biên độ lãi suất"
+      - name: int_lqd_ar_code
+        description: "Tài khoản thanh toán lãi"
+      - name: fcc_ar_code
+        description: "Mã hợp đồng FlexCube"
+      - name: pny_rate
+        description: "Lãi phạt penalty rate"
+      - name: odue_int_rate
+        description: "Lãi suất cho quá hạn"
+      - name: amount_cur
+        description: "Dư nợ hiện tại nguyên tệ"
+      - name: int_tp
+        description: "Loại lãi suất"
+      - name: int_bss
+        description: "Cơ sở tính lãi (Interest Basis)"
+      - name: int_fix
+        description: "Cờ cố định lãi suất"
+      - name: rate
+        description: "Lãi suất hiệu lực"
+      - name: txn_dt
+        description: "Ngày giao dịch"
+      - name: odue_pr_amt
+        description: "Số tiền gốc quá hạn"
+      - name: odue_in_amt
+        description: "Lãi quá hạn"
+      - name: odue_pe_amt
+        description: "Số tiền phạt gốc quá hạn"
+      - name: odue_ps_amt
+        description: "Số tiền phạt lãi quá hạn"
+      - name: mrgn_rate
+        description: "Biên độ thay đổi lãi suất"
+      - name: pd_code
+        description: "Mã sản phẩm"
+      - name: khcn_pd_code
+        description: "Mã sản phẩm cho vay KHCN"
+      - name: dsbr_prpsl_ofcr
+        description: "Cán bộ đề xuất giải ngân"
+      - name: dsbr_prpsl_mgr
+        description: "Người đề xuất giải ngân"
+      - name: mgt_ofcr
+        description: "Cán bộ quản lý khoản vay"
+      - name: mgt_mgr
+        description: "Người quản lý khoản vay"
+      - name: aprv_ahr
+        description: "Cấp phê duyệt giải ngân"
+      - name: dbt_wvr_f
+        description: "Đánh dấu cơ cấu miễn giảm lãi"
+      - name: nbr_of_dbt_rstc
+        description: "Giá trị tương ứng với từng trường"
+      - name: ar_pps_by_pd
+        description: "Mã sản phẩm theo mục đích vay"
+      - name: dys_in_pnp_ars
+        description: "Số ngày gốc quá hạn"
+      - name: dys_in_int_ars
+        description: "Số́ ngày lãi quá hạn"
+      - name: tot_int_ars
+        description: "Tổng lãi phải trả"
+      - name: cst_id
+        description: "ID của khách hàng"
+        data_tests:
+          - is_md5
+      - name: cst_fnc_st_code
+        description: "Nhóm nợ khách hàng"
+      - name: mid_rate
+        description: "Tỷ giá"
+      - name: amt_lcy
+        description: "Dư nợ quy đổi VND"
+      - name: aprv_amt_lcy
+        description: "Số tiền phê duyệt quy đổi VND"
+      - name: mx_dys_in_ars
+        description: "Số ngày quá hạn cao nhất"
+      - name: tot_int_paid_amt_fcy
+        description: "Tổng lãi đã trả"
+      - name: ar_fnc_st_code
+        description: "Nhóm nợ hợp đồng"
+      - name: jnt_lby_f
+        description: "Cờ nợ liên đới"
+      - name: fcc_lmt_code
+        description: "Mã hạn mức trên Flexcube"
+      - name: maker_ofcr_code
+        description: "ID người nhập liệu"
+      - name: chker_ofcr_code
+        description: "Mã người phê duyệt"
+      - name: cst_grp_code
+        description: "Khối khách hàng"
+      - name: ar_pps_tp_code
+        description: "Mã mục đích vay"
+      - name: ar_pps_grp_code
+        description: "Mã nhóm mục đích vay"
+      - name: los_ctr_code
+        description: "mã hợp đồng vay"
+      - name: los_ctr_id
+        description: "mã hồ sơ trên LOS"
+      - name: dbt_rstc_tp_code
+        description: "Loại cơ cấu"
+      - name: car_ap_code
+        description: "Mã hồ sơ đăng ký vay vốn mua xe"
+      - name: scr_tp
+        description: "Loạ̣i hình chứng khoán"
+      - name: mand_repymt
+        description: "Giá trị UDF"
+      - name: los_ctr_nbr
+        description: "Số hồ sơ"
+      - name: prom_prgm
+        description: "Mã chương trình KM cho vay"
+      - name: prom_prgm_2
+        description: "Mã CTKM2"
+      - name: sctr_code
+        description: "Mã thành phần kinh tế"
+      - name: covid19_rstc_compl_dt
+        description: "Ngày hết hạn cơ cấu"
+      - name: ngay_thanh_toan_goc_tieptheo
+        description: "Ngày thanh toán gốc tiếp theo"
+      - name: so_tien_thuno_goc
+        description: "Số tiền thu nợ gốc"
+      - name: ngay_thanh_toan_lai
+        description: "Ngày thanh toán lãi"
+      - name: idy_lv1_cl_code
+        description: "Mã ngành kinh tế cha"
+      - name: idy_lv2_cl_code
+        description: "Mã ngành kinh tế con"
+      - name: tot_acr_int_due_amt
+        description: "Lãi dự thu trong hạn"
+      - name: nxt_acr_int_amt
+        description: "Lãi dự thu tiếp theo"
+      - name: dthu_conlai_dukien_kygannhat
+        description: "Dự thu còn lại dự kiến kỳ gần nhất"
+      - name: ou_nm
+        description: "Tên chi nhánh"
+      - name: addition_dys_in_ars
+        description: "Số ngày quá hạn chuyển đổi"
+      - name: bds_tt11
+        description: "Phân loại bất động sản theo Thông tư 11"
+      - name: gl_itm_code
+        description: "Mã hạch toán theo SBV"
+      - name: cst_tp_code
+        description: "Loại khách hàng (KHCN/KHDN)"
+      - name: cst_nm
+        description: "Tên đầy đủ của khách hàng"

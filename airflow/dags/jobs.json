@@ -1,0 +1,941 @@
+[
+ {
+  "object": "PG_BRONZE.EBANKING_COL_UDF_VALUE",
+  "model": "ebanking_col_udf_value",
+  "group": "WAVE_0_BRONZE_1_1",
+  "waiting": [
+   "EBANKING.COL_UDF_VALUE@PGDB"
+  ],
+  "status": "ACTIVE",
+  "schedule": "30 0 * * *",
+  "sql": "sql/bronze/ebanking_col_udf_value.sql",
+  "pic": "Fresher 2"
+ },
+ {
+  "object": "PG_BRONZE.FLEXBO_PGBLD_CONTRACT_UDFIELD_HIST",
+  "model": "flexbo_pgbld_contract_udfield_hist",
+  "group": "WAVE_0_BRONZE_1_1",
+  "waiting": [
+   "FLEXBO.PGBLD_CONTRACT_UDFIELD_HIST"
+  ],
+  "status": "ACTIVE",
+  "schedule": "30 0 * * *",
+  "sql": "sql/bronze/flexbo_pgbld_contract_udfield_hist.sql",
+  "pic": "Fresher 2"
+ },
+ {
+  "object": "PG_BRONZE.FLEXBO_PGBLD_RT_CONTRACT_UDFIELD_HIST",
+  "model": "flexbo_pgbld_rt_contract_udfield_hist",
+  "group": "WAVE_0_BRONZE_1_1",
+  "waiting": [
+   "FLEXBO.PGBLD_RT_CONTRACT_UDFIELD_HIST"
+  ],
+  "status": "ACTIVE",
+  "schedule": "30 0 * * *",
+  "sql": "sql/bronze/flexbo_pgbld_rt_contract_udfield_hist.sql",
+  "pic": "Fresher 2"
+ },
+ {
+  "object": "PG_BRONZE.FLEXBO_PGB_CONTRACT_UDF_MAP",
+  "model": "flexbo_pgb_contract_udf_map",
+  "group": "WAVE_0_BRONZE_1_1",
+  "waiting": [
+   "FLEXBO.PGB_CONTRACT_UDF_MAP"
+  ],
+  "status": "ACTIVE",
+  "schedule": "30 0 * * *",
+  "sql": "sql/bronze/flexbo_pgb_contract_udf_map.sql",
+  "pic": "Fresher 2"
+ },
+ {
+  "object": "PG_BRONZE.FLEXBO_PGB_LDTB_CONTRACT_MASTER",
+  "model": "flexbo_pgb_ldtb_contract_master",
+  "group": "WAVE_0_BRONZE_1_1",
+  "waiting": [
+   "FLEXBO.PGB_LDTB_CONTRACT_MASTER"
+  ],
+  "status": "ACTIVE",
+  "schedule": "30 0 * * *",
+  "sql": "sql/bronze/flexbo_pgb_ldtb_contract_master.sql",
+  "pic": "Fresher 2"
+ },
+ {
+  "object": "PG_BRONZE.FLEXBO_PGB_LOS_CONTRACT_FIELDS_TDATE",
+  "model": "flexbo_pgb_los_contract_fields_tdate",
+  "group": "WAVE_0_BRONZE_1_1",
+  "waiting": [
+   "FLEXBO.PGB_LOS_CONTRACT_FIELDS_TDATE"
+  ],
+  "status": "ACTIVE",
+  "schedule": "30 0 * * *",
+  "sql": "sql/bronze/flexbo_pgb_los_contract_fields_tdate.sql",
+  "pic": "Fresher 2"
+ },
+ {
+  "object": "PG_BRONZE.LOS_APP_FACILITY",
+  "model": "los_app_facility",
+  "group": "WAVE_0_BRONZE_1_1",
+  "waiting": [
+   "LOS_APP.FACILITY@TO_LOS"
+  ],
+  "status": "ACTIVE",
+  "schedule": "30 0 * * *",
+  "sql": "sql/bronze/los_app_facility.sql",
+  "pic": "Fresher 2"
+ },
+ {
+  "object": "PG_BRONZE.LOS_APP_LOAN_DISBURSEMENT",
+  "model": "los_app_loan_disbursement",
+  "group": "WAVE_0_BRONZE_1_1",
+  "waiting": [
+   "LOS_APP.LOAN_DISBURSEMENT@TO_LOS"
+  ],
+  "status": "ACTIVE",
+  "schedule": "30 0 * * *",
+  "sql": "sql/bronze/los_app_loan_disbursement.sql",
+  "pic": "Fresher 2"
+ },
+ {
+  "object": "PG_BRONZE.LOS_APP_PRODUCT",
+  "model": "los_app_product",
+  "group": "WAVE_0_BRONZE_1_1",
+  "waiting": [
+   "LOS_APP.PRODUCT@TO_LOS"
+  ],
+  "status": "ACTIVE",
+  "schedule": "30 0 * * *",
+  "sql": "sql/bronze/los_app_product.sql",
+  "pic": "Fresher 3"
+ },
+ {
+  "object": "PG_BRONZE.SMY_STMT_DAILY",
+  "model": "smy_stmt_daily",
+  "group": "WAVE_0_BRONZE_1_1",
+  "waiting": [
+   "SMY.STMT_DAILY"
+  ],
+  "status": "ACTIVE",
+  "schedule": "30 0 * * *",
+  "sql": "sql/bronze/smy_stmt_daily.sql",
+  "pic": "Fresher 5"
+ },
+ {
+  "object": "PG_BRONZE.SOURCE_SAOKE_CRB",
+  "model": "source_saoke_crb",
+  "group": "WAVE_0_BRONZE_1_1",
+  "waiting": [
+   "SOURCE.SAOKE_CRB"
+  ],
+  "status": "ACTIVE",
+  "schedule": "30 0 * * *",
+  "sql": "sql/bronze/source_saoke_crb.sql",
+  "pic": "Fresher 6"
+ },
+ {
+  "object": "PG_BRONZE.SOURCE_SAOKE_MVMT",
+  "model": "source_saoke_mvmt",
+  "group": "WAVE_0_BRONZE_1_1",
+  "waiting": [
+   "SOURCE.SAOKE_MVMT"
+  ],
+  "status": "ACTIVE",
+  "schedule": "30 0 * * *",
+  "sql": "sql/bronze/source_saoke_mvmt.sql",
+  "pic": "Fresher 2"
+ },
+ {
+  "object": "PG_BRONZE.T24CORE_COMPANY",
+  "model": "t24core_company",
+  "group": "WAVE_0_BRONZE_1_1",
+  "waiting": [
+   "T24CORE.COMPANY"
+  ],
+  "status": "ACTIVE",
+  "schedule": "30 0 * * *",
+  "sql": "sql/bronze/t24core_company.sql",
+  "pic": "Fresher 3"
+ },
+ {
+  "object": "PG_BRONZE.T24CORE_CURRENCY",
+  "model": "t24core_currency",
+  "group": "WAVE_0_BRONZE_1_1",
+  "waiting": [
+   "T24CORE.CURRENCY"
+  ],
+  "status": "ACTIVE",
+  "schedule": "30 0 * * *",
+  "sql": "sql/bronze/t24core_currency.sql",
+  "pic": "Fresher 3"
+ },
+ {
+  "object": "PG_BRONZE.T24CORE_CURRENCY_HIS",
+  "model": "t24core_currency_his",
+  "group": "WAVE_0_BRONZE_1_1",
+  "waiting": [
+   "T24CORE.CURRENCY_HIS"
+  ],
+  "status": "ACTIVE",
+  "schedule": "30 0 * * *",
+  "sql": "sql/bronze/t24core_currency_his.sql",
+  "pic": "Fresher 5"
+ },
+ {
+  "object": "PG_BRONZE.T24CORE_CUSTOMER",
+  "model": "t24core_customer",
+  "group": "WAVE_0_BRONZE_1_1",
+  "waiting": [
+   "T24CORE.CUSTOMER"
+  ],
+  "status": "ACTIVE",
+  "schedule": "30 0 * * *",
+  "sql": "sql/bronze/t24core_customer.sql",
+  "pic": "Fresher 1"
+ },
+ {
+  "object": "PG_BRONZE.T24CORE_DEPT_ACCT_OFFICER",
+  "model": "t24core_dept_acct_officer",
+  "group": "WAVE_0_BRONZE_1_1",
+  "waiting": [
+   "T24CORE.DEPT_ACCT_OFFICER"
+  ],
+  "status": "ACTIVE",
+  "schedule": "30 0 * * *",
+  "sql": "sql/bronze/t24core_dept_acct_officer.sql",
+  "pic": "Fresher 3"
+ },
+ {
+  "object": "PG_BRONZE.T24CORE_LD_LOANS_AND_DEPOSITS",
+  "model": "t24core_ld_loans_and_deposits",
+  "group": "WAVE_0_BRONZE_1_1",
+  "waiting": [
+   "T24CORE.LD_LOANS_AND_DEPOSITS"
+  ],
+  "status": "ACTIVE",
+  "schedule": "30 0 * * *",
+  "sql": "sql/bronze/t24core_ld_loans_and_deposits.sql",
+  "pic": "Fresher 2"
+ },
+ {
+  "object": "PG_BRONZE.T24CORE_LD_LOANS_AND_DEPOSITS_HIS",
+  "model": "t24core_ld_loans_and_deposits_his",
+  "group": "WAVE_0_BRONZE_1_1",
+  "waiting": [
+   "T24CORE.LD_LOANS_AND_DEPOSITS_HIS"
+  ],
+  "status": "ACTIVE",
+  "schedule": "30 0 * * *",
+  "sql": "sql/bronze/t24core_ld_loans_and_deposits_his.sql",
+  "pic": "Fresher 2"
+ },
+ {
+  "object": "PG_BRONZE.T24CORE_LD_SCHEDULE_DEFINE_MV",
+  "model": "t24core_ld_schedule_define_mv",
+  "group": "WAVE_0_BRONZE_1_1",
+  "waiting": [
+   "T24CORE.LD_SCHEDULE_DEFINE_MV"
+  ],
+  "status": "ACTIVE",
+  "schedule": "30 0 * * *",
+  "sql": "sql/bronze/t24core_ld_schedule_define_mv.sql",
+  "pic": "Fresher 4"
+ },
+ {
+  "object": "PG_BRONZE.T24CORE_LIMIT",
+  "model": "t24core_limit",
+  "group": "WAVE_0_BRONZE_1_1",
+  "waiting": [
+   "T24CORE.LIMIT"
+  ],
+  "status": "ACTIVE",
+  "schedule": "30 0 * * *",
+  "sql": "sql/bronze/t24core_limit.sql",
+  "pic": "Fresher 3"
+ },
+ {
+  "object": "PG_BRONZE.T24CORE_MB_MG_SAVING_MULTI",
+  "model": "t24core_mb_mg_saving_multi",
+  "group": "WAVE_0_BRONZE_1_1",
+  "waiting": [
+   "T24CORE.MB_MG_SAVING_MULTI"
+  ],
+  "status": "ACTIVE",
+  "schedule": "30 0 * * *",
+  "sql": "sql/bronze/t24core_mb_mg_saving_multi.sql",
+  "pic": "Fresher 2"
+ },
+ {
+  "object": "PG_BRONZE.T24CORE_PD_PAYMENT_DUE",
+  "model": "t24core_pd_payment_due",
+  "group": "WAVE_0_BRONZE_1_1",
+  "waiting": [
+   "T24CORE.PD_PAYMENT_DUE"
+  ],
+  "status": "ACTIVE",
+  "schedule": "30 0 * * *",
+  "sql": "sql/bronze/t24core_pd_payment_due.sql",
+  "pic": "Fresher 2"
+ },
+ {
+  "object": "PG_BRONZE.T24CORE_PD_PAYMENT_DUE_HIS",
+  "model": "t24core_pd_payment_due_his",
+  "group": "WAVE_0_BRONZE_1_1",
+  "waiting": [
+   "T24CORE.PD_PAYMENT_DUE_HIS"
+  ],
+  "status": "ACTIVE",
+  "schedule": "30 0 * * *",
+  "sql": "sql/bronze/t24core_pd_payment_due_his.sql",
+  "pic": "Fresher 4"
+ },
+ {
+  "object": "PG_BRONZE.T24CORE_PD_PAYMENT_DUE_HIS_MV",
+  "model": "t24core_pd_payment_due_his_mv",
+  "group": "WAVE_0_BRONZE_1_1",
+  "waiting": [
+   "T24CORE.PD_PAYMENT_DUE_HIS_MV"
+  ],
+  "status": "ACTIVE",
+  "schedule": "30 0 * * *",
+  "sql": "sql/bronze/t24core_pd_payment_due_his_mv.sql",
+  "pic": "Fresher 6"
+ },
+ {
+  "object": "PG_BRONZE.T24CORE_PD_PAYMENT_DUE_MV",
+  "model": "t24core_pd_payment_due_mv",
+  "group": "WAVE_0_BRONZE_1_1",
+  "waiting": [
+   "T24CORE.PD_PAYMENT_DUE_MV"
+  ],
+  "status": "ACTIVE",
+  "schedule": "30 0 * * *",
+  "sql": "sql/bronze/t24core_pd_payment_due_mv.sql",
+  "pic": "Fresher 4"
+ },
+ {
+  "object": "PG_BRONZE.T24CORE_SECTOR",
+  "model": "t24core_sector",
+  "group": "WAVE_0_BRONZE_1_1",
+  "waiting": [
+   "T24CORE.SECTOR"
+  ],
+  "status": "ACTIVE",
+  "schedule": "30 0 * * *",
+  "sql": "sql/bronze/t24core_sector.sql",
+  "pic": "Fresher 1"
+ },
+ {
+  "object": "PG_BRONZE.T24CORE_STMT_ENTRY",
+  "model": "t24core_stmt_entry",
+  "group": "WAVE_0_BRONZE_1_1",
+  "waiting": [
+   "T24CORE.STMT_ENTRY"
+  ],
+  "status": "ACTIVE",
+  "schedule": "30 0 * * *",
+  "sql": "sql/bronze/t24core_stmt_entry.sql",
+  "pic": "Fresher 5"
+ },
+ {
+  "object": "PG_SILVER.IP_ALT_IDENTN",
+  "model": "ip_alt_identn",
+  "group": "WAVE_1_SILVER_TEMP1",
+  "waiting": [
+   "PG_BRONZE.T24CORE_CUSTOMER"
+  ],
+  "status": "ACTIVE",
+  "schedule": "0 1 * * *",
+  "sql": "sql/silver_temp1/ip_alt_identn.sql",
+  "pic": "Fresher 1"
+ },
+ {
+  "object": "PG_SILVER.IP_ELC_ADR",
+  "model": "ip_elc_adr",
+  "group": "WAVE_1_SILVER_TEMP1",
+  "waiting": [
+   "PG_BRONZE.T24CORE_CUSTOMER"
+  ],
+  "status": "ACTIVE",
+  "schedule": "0 1 * * *",
+  "sql": "sql/silver_temp1/ip_elc_adr.sql",
+  "pic": "Fresher 1"
+ },
+ {
+  "object": "PG_SILVER.IP_PST_ADR",
+  "model": "ip_pst_adr",
+  "group": "WAVE_1_SILVER_TEMP1",
+  "waiting": [
+   "PG_BRONZE.T24CORE_CUSTOMER"
+  ],
+  "status": "ACTIVE",
+  "schedule": "0 1 * * *",
+  "sql": "sql/silver_temp1/ip_pst_adr.sql",
+  "pic": "Fresher 1"
+ },
+ {
+  "object": "PG_SILVER.CCY",
+  "model": "ccy",
+  "group": "WAVE_1_SILVER_TEMP1",
+  "waiting": [
+   "PG_BRONZE.T24CORE_CURRENCY"
+  ],
+  "status": "ACTIVE",
+  "schedule": "0 1 * * *",
+  "sql": "sql/silver_temp1/ccy.sql",
+  "pic": "Fresher 3"
+ },
+ {
+  "object": "PG_SILVER.PD",
+  "model": "pd",
+  "group": "WAVE_1_SILVER_TEMP1",
+  "waiting": [
+   "PG_BRONZE.LOS_APP_PRODUCT",
+   "PG_BRONZE.FLEXBO_PGB_LOS_CONTRACT_FIELDS_TDATE",
+   "PG_BRONZE.T24CORE_LD_LOANS_AND_DEPOSITS"
+  ],
+  "status": "ACTIVE",
+  "schedule": "0 1 * * *",
+  "sql": "sql/silver_temp1/pd.sql",
+  "pic": "Fresher 3"
+ },
+ {
+  "object": "PG_SILVER.OU",
+  "model": "ou",
+  "group": "WAVE_1_SILVER_TEMP1",
+  "waiting": [
+   "PG_BRONZE.T24CORE_COMPANY"
+  ],
+  "status": "ACTIVE",
+  "schedule": "0 1 * * *",
+  "sql": "sql/silver_temp1/ou.sql",
+  "pic": "Fresher 3"
+ },
+ {
+  "object": "PG_SILVER.EMPE",
+  "model": "empe",
+  "group": "WAVE_1_SILVER_TEMP1",
+  "waiting": [
+   "PG_BRONZE.T24CORE_DEPT_ACCT_OFFICER"
+  ],
+  "status": "ACTIVE",
+  "schedule": "0 1 * * *",
+  "sql": "sql/silver_temp1/empe.sql",
+  "pic": "Fresher 3"
+ },
+ {
+  "object": "PG_SILVER.LMT",
+  "model": "lmt",
+  "group": "WAVE_1_SILVER_TEMP1",
+  "waiting": [
+   "PG_BRONZE.T24CORE_LIMIT"
+  ],
+  "status": "ACTIVE",
+  "schedule": "0 1 * * *",
+  "sql": "sql/silver_temp1/lmt.sql",
+  "pic": "Fresher 3"
+ },
+ {
+  "object": "PG_SILVER.CV",
+  "model": "cv",
+  "group": "WAVE_1_SILVER_TEMP1",
+  "waiting": [
+   "PG_BRONZE.FLEXBO_PGBLD_RT_CONTRACT_UDFIELD_HIST",
+   "PG_BRONZE.T24CORE_CUSTOMER"
+  ],
+  "status": "ACTIVE",
+  "schedule": "0 1 * * *",
+  "sql": "sql/silver_temp1/cv.sql",
+  "pic": "Fresher 3"
+ },
+ {
+  "object": "PG_SILVER.sk_lich_tra_no",
+  "model": "sk_lich_tra_no",
+  "group": "WAVE_1_SILVER_TEMP1",
+  "waiting": [
+   "PG_BRONZE.T24CORE_LD_LOANS_AND_DEPOSITS",
+   "PG_BRONZE.T24CORE_LD_LOANS_AND_DEPOSITS_HIS",
+   "PG_BRONZE.T24CORE_LD_SCHEDULE_DEFINE_MV",
+   "PG_BRONZE.T24CORE_MB_MG_SAVING_MULTI",
+   "PG_BRONZE.T24CORE_PD_PAYMENT_DUE",
+   "PG_BRONZE.T24CORE_PD_PAYMENT_DUE_HIS",
+   "PG_BRONZE.T24CORE_PD_PAYMENT_DUE_HIS_MV",
+   "PG_BRONZE.T24CORE_PD_PAYMENT_DUE_MV",
+   "PG_BRONZE.T24CORE_SECTOR",
+   "PG_BRONZE.T24CORE_STMT_ENTRY"
+  ],
+  "status": "ACTIVE",
+  "schedule": "0 1 * * *",
+  "sql": "sql/silver_temp1/sk_lich_tra_no.sql",
+  "pic": "Fresher 4"
+ },
+ {
+  "object": "PG_SILVER.EXG_RATE",
+  "model": "exg_rate",
+  "group": "WAVE_1_SILVER_TEMP1",
+  "waiting": [
+   "PG_BRONZE.T24CORE_CURRENCY",
+   "PG_BRONZE.T24CORE_CURRENCY_HIS"
+  ],
+  "status": "ACTIVE",
+  "schedule": "0 1 * * *",
+  "sql": "sql/silver_temp1/exg_rate.sql",
+  "pic": "Fresher 5"
+ },
+ {
+  "object": "PG_SILVER.CUST_INFO_DAILY",
+  "model": "cust_info_daily",
+  "group": "WAVE_1_SILVER_TEMP1",
+  "waiting": [
+   "PG_BRONZE.SMY_STMT_DAILY",
+   "PG_BRONZE.FLEXBO_PGB_LOS_CONTRACT_FIELDS_TDATE",
+   "PG_BRONZE.FLEXBO_PGB_LDTB_CONTRACT_MASTER",
+   "PG_BRONZE.FLEXBO_PGB_CONTRACT_UDF_MAP",
+   "PG_BRONZE.FLEXBO_PGBLD_CONTRACT_UDFIELD_HIST",
+   "PG_BRONZE.FLEXBO_PGBLD_RT_CONTRACT_UDFIELD_HIST",
+   "PG_BRONZE.EBANKING_COL_UDF_VALUE",
+   "PG_BRONZE.LOS_APP_LOAN_DISBURSEMENT",
+   "PG_BRONZE.LOS_APP_FACILITY",
+   "PG_BRONZE.LOS_APP_PRODUCT"
+  ],
+  "status": "ACTIVE",
+  "schedule": "0 1 * * *",
+  "sql": "sql/silver_temp1/cust_info_daily.sql",
+  "pic": "Fresher 5"
+ },
+ {
+  "object": "PG_SILVER.AR_RATE_HIST",
+  "model": "ar_rate_hist",
+  "group": "WAVE_1_SILVER_TEMP1",
+  "waiting": [
+   "PG_BRONZE.T24CORE_LD_LOANS_AND_DEPOSITS",
+   "PG_BRONZE.T24CORE_LD_LOANS_AND_DEPOSITS_HIS",
+   "PG_BRONZE.T24CORE_PD_PAYMENT_DUE",
+   "PG_BRONZE.FLEXBO_PGB_LOS_CONTRACT_FIELDS_TDATE"
+  ],
+  "status": "ACTIVE",
+  "schedule": "0 1 * * *",
+  "sql": "sql/silver_temp1/ar_rate_hist.sql",
+  "pic": "Fresher 6"
+ },
+ {
+  "object": "PG_SILVER.CST",
+  "model": "cst",
+  "group": "WAVE_2_SILVER_TEMP2",
+  "waiting": [
+   "PG_BRONZE.T24CORE_CUSTOMER",
+   "PG_BRONZE.T24CORE_SECTOR"
+  ],
+  "status": "ACTIVE",
+  "schedule": "30 1 * * *",
+  "sql": "sql/silver_temp2/cst.sql",
+  "pic": "Fresher 1"
+ },
+ {
+  "object": "PG_SILVER.IDV_PRFL",
+  "model": "idv_prfl",
+  "group": "WAVE_2_SILVER_TEMP2",
+  "waiting": [
+   "PG_BRONZE.T24CORE_CUSTOMER"
+  ],
+  "status": "ACTIVE",
+  "schedule": "30 1 * * *",
+  "sql": "sql/silver_temp2/idv_prfl.sql",
+  "pic": "Fresher 1"
+ },
+ {
+  "object": "PG_SILVER.IDV_EMP_ST",
+  "model": "idv_emp_st",
+  "group": "WAVE_2_SILVER_TEMP2",
+  "waiting": [
+   "PG_BRONZE.T24CORE_CUSTOMER"
+  ],
+  "status": "ACTIVE",
+  "schedule": "30 1 * * *",
+  "sql": "sql/silver_temp2/idv_emp_st.sql",
+  "pic": "Fresher 1"
+ },
+ {
+  "object": "PG_SILVER.ORG_PRFL",
+  "model": "org_prfl",
+  "group": "WAVE_2_SILVER_TEMP2",
+  "waiting": [
+   "PG_BRONZE.T24CORE_CUSTOMER"
+  ],
+  "status": "ACTIVE",
+  "schedule": "30 1 * * *",
+  "sql": "sql/silver_temp2/org_prfl.sql",
+  "pic": "Fresher 1"
+ },
+ {
+  "object": "PG_SILVER.LOAN_AR",
+  "model": "loan_ar",
+  "group": "WAVE_2_SILVER_TEMP2",
+  "waiting": [
+   "PG_BRONZE.T24CORE_LD_LOANS_AND_DEPOSITS",
+   "PG_BRONZE.T24CORE_LD_LOANS_AND_DEPOSITS_HIS",
+   "PG_BRONZE.T24CORE_PD_PAYMENT_DUE",
+   "PG_BRONZE.T24CORE_PD_PAYMENT_DUE_MV",
+   "PG_BRONZE.FLEXBO_PGB_LDTB_CONTRACT_MASTER",
+   "PG_BRONZE.FLEXBO_PGB_LOS_CONTRACT_FIELDS_TDATE",
+   "PG_BRONZE.LOS_APP_LOAN_DISBURSEMENT",
+   "PG_BRONZE.LOS_APP_FACILITY",
+   "PG_BRONZE.LOS_APP_PRODUCT",
+   "PG_BRONZE.T24CORE_CUSTOMER"
+  ],
+  "status": "ACTIVE",
+  "schedule": "30 1 * * *",
+  "sql": "sql/silver_temp2/loan_ar.sql",
+  "pic": "Fresher 2"
+ },
+ {
+  "object": "PG_SILVER.LOAN_AR_PRFL",
+  "model": "loan_ar_prfl",
+  "group": "WAVE_2_SILVER_TEMP2",
+  "waiting": [
+   "PG_BRONZE.T24CORE_LD_LOANS_AND_DEPOSITS",
+   "PG_BRONZE.T24CORE_LD_LOANS_AND_DEPOSITS_HIS",
+   "PG_BRONZE.T24CORE_PD_PAYMENT_DUE",
+   "PG_BRONZE.T24CORE_PD_PAYMENT_DUE_MV",
+   "PG_BRONZE.EBANKING_COL_UDF_VALUE",
+   "PG_BRONZE.FLEXBO_PGB_CONTRACT_UDF_MAP",
+   "PG_BRONZE.FLEXBO_PGB_LOS_CONTRACT_FIELDS_TDATE",
+   "PG_BRONZE.FLEXBO_PGBLD_CONTRACT_UDFIELD_HIST",
+   "PG_BRONZE.T24CORE_MB_MG_SAVING_MULTI",
+   "PG_BRONZE.FLEXBO_PGBLD_RT_CONTRACT_UDFIELD_HIST",
+   "PG_BRONZE.SOURCE_SAOKE_MVMT",
+   "PG_BRONZE.T24CORE_CUSTOMER"
+  ],
+  "status": "ACTIVE",
+  "schedule": "30 1 * * *",
+  "sql": "sql/silver_temp2/loan_ar_prfl.sql",
+  "pic": "Fresher 2"
+ },
+ {
+  "object": "PG_SILVER.AR_X_IP_RLTNP",
+  "model": "ar_x_ip_rltnp",
+  "group": "WAVE_2_SILVER_TEMP2",
+  "waiting": [
+   "PG_BRONZE.T24CORE_LD_LOANS_AND_DEPOSITS",
+   "PG_BRONZE.T24CORE_LD_LOANS_AND_DEPOSITS_HIS",
+   "PG_BRONZE.T24CORE_PD_PAYMENT_DUE",
+   "PG_BRONZE.T24CORE_PD_PAYMENT_DUE_MV",
+   "PG_BRONZE.FLEXBO_PGB_LOS_CONTRACT_FIELDS_TDATE"
+  ],
+  "status": "ACTIVE",
+  "schedule": "30 1 * * *",
+  "sql": "sql/silver_temp2/ar_x_ip_rltnp.sql",
+  "pic": "Fresher 2"
+ },
+ {
+  "object": "PG_SILVER.AR_AVY_SHD_ITM",
+  "model": "ar_avy_shd_itm",
+  "group": "WAVE_2_SILVER_TEMP2",
+  "waiting": [
+   "PG_BRONZE.T24CORE_STMT_ENTRY",
+   "PG_BRONZE.T24CORE_LD_LOANS_AND_DEPOSITS",
+   "PG_BRONZE.T24CORE_PD_PAYMENT_DUE_MV",
+   "PG_BRONZE.T24CORE_LD_SCHEDULE_DEFINE_MV"
+  ],
+  "status": "ACTIVE",
+  "schedule": "30 1 * * *",
+  "sql": "sql/silver_temp2/ar_avy_shd_itm.sql",
+  "pic": "Fresher 4"
+ },
+ {
+  "object": "PG_SILVER.Saoke_GIAINGAN",
+  "model": "saoke_giaingan",
+  "group": "WAVE_2_SILVER_TEMP2",
+  "waiting": [
+   "PG_BRONZE.SMY_STMT_DAILY",
+   "PG_BRONZE.SOURCE_SAOKE_CRB",
+   "PG_BRONZE.SOURCE_SAOKE_MVMT",
+   "PG_BRONZE.T24CORE_COMPANY",
+   "PG_BRONZE.T24CORE_CUSTOMER"
+  ],
+  "status": "ACTIVE",
+  "schedule": "30 1 * * *",
+  "sql": "sql/silver_temp2/saoke_giaingan.sql",
+  "pic": "Fresher 4"
+ },
+ {
+  "object": "PG_SILVER.PST_ENTR",
+  "model": "pst_entr",
+  "group": "WAVE_2_SILVER_TEMP2",
+  "waiting": [
+   "PG_BRONZE.T24CORE_STMT_ENTRY",
+   "PG_BRONZE.T24CORE_LD_LOANS_AND_DEPOSITS",
+   "PG_BRONZE.T24CORE_PD_PAYMENT_DUE_MV"
+  ],
+  "status": "ACTIVE",
+  "schedule": "30 1 * * *",
+  "sql": "sql/silver_temp2/pst_entr.sql",
+  "pic": "Fresher 5"
+ },
+ {
+  "object": "PG_SILVER.SAOKE_TINDUNG",
+  "model": "saoke_tindung",
+  "group": "WAVE_2_SILVER_TEMP2",
+  "waiting": [
+   "PG_BRONZE.T24CORE_LD_LOANS_AND_DEPOSITS",
+   "PG_BRONZE.T24CORE_CUSTOMER",
+   "PG_BRONZE.T24CORE_DEPT_ACCT_OFFICER"
+  ],
+  "status": "ACTIVE",
+  "schedule": "30 1 * * *",
+  "sql": "sql/silver_temp2/saoke_tindung.sql",
+  "pic": "Fresher 5"
+ },
+ {
+  "object": "PG_SILVER.AR_BAL",
+  "model": "ar_bal",
+  "group": "WAVE_2_SILVER_TEMP2",
+  "waiting": [
+   "PG_BRONZE.SOURCE_SAOKE_CRB"
+  ],
+  "status": "ACTIVE",
+  "schedule": "30 1 * * *",
+  "sql": "sql/silver_temp2/ar_bal.sql",
+  "pic": "Fresher 6"
+ },
+ {
+  "object": "PG_SILVER.AR_DLQ_SMY",
+  "model": "ar_dlq_smy",
+  "group": "WAVE_2_SILVER_TEMP2",
+  "waiting": [
+   "PG_BRONZE.T24CORE_PD_PAYMENT_DUE_HIS_MV",
+   "PG_BRONZE.T24CORE_PD_PAYMENT_DUE"
+  ],
+  "status": "ACTIVE",
+  "schedule": "30 1 * * *",
+  "sql": "sql/silver_temp2/ar_dlq_smy.sql",
+  "pic": "Fresher 6"
+ },
+ {
+  "object": "PG_SILVER.AR_TVR_SMY",
+  "model": "ar_tvr_smy",
+  "group": "WAVE_2_SILVER_TEMP2",
+  "waiting": [
+   "PG_BRONZE.SOURCE_SAOKE_CRB",
+   "PG_SILVER.PST_ENTR",
+   "PG_SILVER.AR_DLQ_SMY",
+   "PG_SILVER.LOAN_AR"
+  ],
+  "status": "ACTIVE",
+  "schedule": "45 1 * * *",
+  "sql": "sql/silver_temp2/ar_tvr_smy.sql",
+  "pic": "Fresher 6"
+ },
+ {
+  "object": "PG_SILVER.AST_AR_INT_SMY",
+  "model": "ast_ar_int_smy",
+  "group": "WAVE_2_SILVER_TEMP2",
+  "waiting": [
+   "PG_BRONZE.SOURCE_SAOKE_CRB",
+   "PG_BRONZE.T24CORE_STMT_ENTRY"
+  ],
+  "status": "ACTIVE",
+  "schedule": "30 1 * * *",
+  "sql": "sql/silver_temp2/ast_ar_int_smy.sql",
+  "pic": "Fresher 6"
+ },
+ {
+  "object": "PG_GOLD.DIM_LOAN_AR",
+  "model": "dim_loan_ar",
+  "group": "WAVE_3_GOLD_DIM",
+  "waiting": [
+   "PG_SILVER.LOAN_AR",
+   "PG_SILVER.LOAN_AR_PRFL"
+  ],
+  "status": "ACTIVE",
+  "schedule": "0 2 * * *",
+  "sql": "sql/gold/dim_loan_ar.sql",
+  "pic": "Fresher 2"
+ },
+ {
+  "object": "PG_GOLD.DIM_CCY",
+  "model": "dim_ccy",
+  "group": "WAVE_3_GOLD_DIM",
+  "waiting": [
+   "PG_SILVER.CCY"
+  ],
+  "status": "ACTIVE",
+  "schedule": "0 2 * * *",
+  "sql": "sql/gold/dim_ccy.sql",
+  "pic": "Fresher 3"
+ },
+ {
+  "object": "PG_GOLD.DIM_PD",
+  "model": "dim_pd",
+  "group": "WAVE_3_GOLD_DIM",
+  "waiting": [
+   "PG_SILVER.PD"
+  ],
+  "status": "ACTIVE",
+  "schedule": "0 2 * * *",
+  "sql": "sql/gold/dim_pd.sql",
+  "pic": "Fresher 3"
+ },
+ {
+  "object": "PG_GOLD.DIM_OU",
+  "model": "dim_ou",
+  "group": "WAVE_3_GOLD_DIM",
+  "waiting": [
+   "PG_SILVER.OU"
+  ],
+  "status": "ACTIVE",
+  "schedule": "0 2 * * *",
+  "sql": "sql/gold/dim_ou.sql",
+  "pic": "Fresher 3"
+ },
+ {
+  "object": "PG_GOLD.DIM_LMT",
+  "model": "dim_lmt",
+  "group": "WAVE_3_GOLD_DIM",
+  "waiting": [
+   "PG_SILVER.LMT"
+  ],
+  "status": "ACTIVE",
+  "schedule": "0 2 * * *",
+  "sql": "sql/gold/dim_lmt.sql",
+  "pic": "Fresher 3"
+ },
+ {
+  "object": "PG_GOLD.DIM_RSTC_TP",
+  "model": "dim_rstc_tp",
+  "group": "WAVE_3_GOLD_DIM",
+  "waiting": [
+   "PG_SILVER.CV"
+  ],
+  "status": "ACTIVE",
+  "schedule": "0 2 * * *",
+  "sql": "sql/gold/dim_rstc_tp.sql",
+  "pic": "Fresher 3"
+ },
+ {
+  "object": "PG_GOLD.DIM_FNC_ST",
+  "model": "dim_fnc_st",
+  "group": "WAVE_3_GOLD_DIM",
+  "waiting": [
+   "PG_SILVER.CV"
+  ],
+  "status": "ACTIVE",
+  "schedule": "0 2 * * *",
+  "sql": "sql/gold/dim_fnc_st.sql",
+  "pic": "Fresher 3"
+ },
+ {
+  "object": "PG_GOLD.DIM_CST",
+  "model": "dim_cst",
+  "group": "WAVE_3_GOLD_DIM",
+  "waiting": [
+   "PG_SILVER.CST",
+   "PG_SILVER.IDV_PRFL",
+   "PG_SILVER.ORG_PRFL"
+  ],
+  "status": "ACTIVE",
+  "schedule": "0 2 * * *",
+  "sql": "sql/gold/dim_cst.sql",
+  "pic": "Fresher 7"
+ },
+ {
+  "object": "PG_GOLD.INF_CST",
+  "model": "inf_cst",
+  "group": "WAVE_4_GOLD_INTERFACE",
+  "waiting": [
+   "PG_SILVER.CST",
+   "PG_SILVER.IDV_PRFL",
+   "PG_SILVER.IDV_EMP_ST",
+   "PG_SILVER.ORG_PRFL",
+   "PG_SILVER.IP_ALT_IDENTN",
+   "PG_SILVER.IP_ELC_ADR",
+   "PG_SILVER.IP_PST_ADR"
+  ],
+  "status": "ACTIVE",
+  "schedule": "15 2 * * *",
+  "sql": "sql/gold/inf_cst.sql",
+  "pic": "Fresher 1"
+ },
+ {
+  "object": "PG_GOLD.INTF_LOAN_AR",
+  "model": "intf_loan_ar",
+  "group": "WAVE_4_GOLD_INTERFACE",
+  "waiting": [
+   "PG_SILVER.AR_BAL",
+   "PG_SILVER.LOAN_AR",
+   "PG_SILVER.LOAN_AR_PRFL",
+   "PG_SILVER.AR_RATE_HIST",
+   "PG_SILVER.AR_DLQ_SMY",
+   "PG_SILVER.EXG_RATE",
+   "PG_SILVER.OU",
+   "PG_SILVER.AST_AR_INT_SMY",
+   "PG_GOLD.INF_CST",
+   "PG_SILVER.AR_AVY_SHD_ITM"
+  ],
+  "status": "ACTIVE",
+  "schedule": "30 2 * * *",
+  "sql": "sql/gold/intf_loan_ar.sql",
+  "pic": "Fresher 2"
+ },
+ {
+  "object": "PG_GOLD.INTF_LOAN_DSBR",
+  "model": "intf_loan_dsbr",
+  "group": "WAVE_4_GOLD_INTERFACE",
+  "waiting": [
+   "PG_SILVER.LOAN_AR",
+   "PG_SILVER.LOAN_AR_PRFL",
+   "PG_SILVER.AR_X_IP_RLTNP",
+   "PG_SILVER.EMPE",
+   "PG_SILVER.AR_RATE_HIST",
+   "PG_SILVER.PD"
+  ],
+  "status": "ACTIVE",
+  "schedule": "30 2 * * *",
+  "sql": "sql/gold/intf_loan_dsbr.sql",
+  "pic": "Fresher 4"
+ },
+ {
+  "object": "PG_GOLD.INTF_LOAN_REPYMT_SHD",
+  "model": "intf_loan_repymt_shd",
+  "group": "WAVE_4_GOLD_INTERFACE",
+  "waiting": [
+   "PG_SILVER.AR_AVY_SHD_ITM",
+   "PG_SILVER.LOAN_AR",
+   "PG_SILVER.LOAN_AR_PRFL",
+   "PG_SILVER.CST",
+   "PG_SILVER.IDV_PRFL",
+   "PG_SILVER.ORG_PRFL"
+  ],
+  "status": "ACTIVE",
+  "schedule": "30 2 * * *",
+  "sql": "sql/gold/intf_loan_repymt_shd.sql",
+  "pic": "Fresher 4"
+ },
+ {
+  "object": "PG_GOLD.FCT_LOAN_AR",
+  "model": "fct_loan_ar",
+  "group": "WAVE_4_GOLD_FACT",
+  "waiting": [
+   "PG_SILVER.LOAN_AR",
+   "PG_SILVER.AR_BAL",
+   "PG_SILVER.LOAN_AR_PRFL",
+   "PG_SILVER.AR_RATE_HIST",
+   "PG_SILVER.AR_DLQ_SMY",
+   "PG_SILVER.EXG_RATE",
+   "PG_SILVER.AST_AR_INT_SMY",
+   "PG_SILVER.AR_TVR_SMY",
+   "PG_SILVER.IDV_PRFL",
+   "PG_SILVER.ORG_PRFL",
+   "PG_GOLD.DIM_LOAN_AR",
+   "PG_GOLD.DIM_CST",
+   "PG_GOLD.DIM_PD",
+   "PG_GOLD.DIM_OU",
+   "PG_GOLD.DIM_CCY",
+   "PG_GOLD.DIM_LMT",
+   "PG_GOLD.DIM_RSTC_TP",
+   "PG_GOLD.DIM_FNC_ST"
+  ],
+  "status": "ACTIVE",
+  "schedule": "45 2 * * *",
+  "sql": "sql/gold/fct_loan_ar.sql",
+  "pic": "Fresher 7"
+ }
+]

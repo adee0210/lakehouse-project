@@ -1,0 +1,60 @@
+-- Wave 1 | PG_SILVER.sk_lich_tra_no – SNAPSHOT (Silver Temp 1 - Technical Schedule Staging)
+-- Sheet 'sk_lich_tra_no' + Map_SRC2TRG: __NCOLS__ cột, main = T24CORE_PD_PAYMENT_DUE_MV (pdmv), 10 bảng phụ.
+-- Grain: 1 dòng / dòng pdmv x bút toán stmt phát sinh trong ngày của hợp đồng.
+-- Các bảng lịch sử (pdhmv, pdh, ldh, sch) lấy bản ghi mới nhất để tránh fan-out N x M.
+-- Cột ETL_DATE bổ sung làm khoá phân vùng snapshot (ghi đè theo ngày chạy).
+{{ config(materialized='incremental', incremental_strategy='append', partition_by=['ETL_DATE'],
+          pre_hook="{{ delete_partition('ETL_DATE') }}", alias='sk_lich_tra_no') }}
+
+with pdmv as (
+    select * from {{ bz('t24core_pd_payment_due_mv') }} where nvl(FLAG_STATUS, '_') <> 'DELETE'
+),
+pd as (select * from {{ bz('t24core_pd_payment_due') }}),
+pdhmv as (
+    select * from (
+        select h.*, row_number() over (partition by h.RECID, h.PAY_TYPE order by cast(h.CURR_NO as int) desc, h.DATE_TIME desc) as rn
+        from {{ bz('t24core_pd_payment_due_his_mv') }} h
+        where h.FLAG_STATUS = 'LIVE' and cast(h.PAY_AMT_OUTS as decimal(25,5)) > 0
+    ) where rn = 1
+),
+pdh as (
+    select * from (
+        select h.*, row_number() over (partition by h.RECID order by cast(h.CURR_NO as int) desc) as rn
+        from {{ bz('t24core_pd_payment_due_his') }} h
+    ) where rn = 1
+),
+sch as (
+    select * from (
+        select s.*, row_number() over (partition by s.CONTRACT_ID order by {{ t24_date('s.PREV_SCHED_DATE') }} desc) as rn
+        from {{ bz('t24core_ld_schedule_define_mv') }} s
+        where {{ t24_date('s.PREV_SCHED_DATE') }} <= {{ etl_date() }}
+    ) where rn = 1
+),
+ld as (select * from {{ bz('t24core_ld_loans_and_deposits') }}),
+ldh as (
+    select * from (
+        select h.*, row_number() over (partition by substr(h.RECID, 1, instr(h.RECID, ';') - 1) order by cast(h.CURR_NO as int) desc) as rn
+        from {{ bz('t24core_ld_loans_and_deposits_his') }} h
+    ) where rn = 1
+),
+mg as (select * from {{ bz('t24core_mb_mg_saving_multi') }}),
+cus as (select * from {{ bz('t24core_customer') }}),
+sec as (select * from {{ bz('t24core_sector') }}),
+stmt as (
+    select * from {{ bz('t24core_stmt_entry') }}
+    where {{ t24_date('BOOKING_DATE') }} = {{ etl_date() }} and nvl(COMMIT_ACTION, '_') <> 'D'
+)
+select
+__SELECT_LIST__,
+    {{ etl_date() }} as ETL_DATE
+from pdmv
+left join pd    on pdmv.RECID = pd.RECID
+left join pdhmv on pdmv.RECID = pdhmv.RECID and pdmv.PAY_TYPE = pdhmv.PAY_TYPE
+left join pdh   on pdmv.RECID = pdh.RECID
+left join sch   on substr(pdmv.RECID, 3) = sch.CONTRACT_ID
+left join ld    on substr(pdmv.RECID, 3, 12) = ld.RECID
+left join ldh   on substr(pdmv.RECID, 3, 12) = substr(ldh.RECID, 1, instr(ldh.RECID, ';') - 1)
+left join mg    on ld.RECID = mg.LD_ID
+left join cus   on coalesce(pdmv.CUSTOMER, pd.CUSTOMER, ld.CUSTOMER_ID) = cus.RECID
+left join sec   on cus.SECTOR = sec.RECID
+left join stmt  on substr(pdmv.RECID, 3) = substr(stmt.OUR_REFERENCE, 3)

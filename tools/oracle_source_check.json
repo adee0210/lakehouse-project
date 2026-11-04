@@ -1,0 +1,2536 @@
+{
+ "EBANKING_COL_UDF_VALUE": {
+  "owner": "PG_EBANKING",
+  "table": "COL_UDF_VALUE",
+  "exists": true,
+  "rows": 57975,
+  "missing_cols": [],
+  "extra_cols": [],
+  "types": {
+   "COL_REF": [
+    "VARCHAR2",
+    512,
+    null,
+    null
+   ],
+   "FUNCTION_CODE": [
+    "VARCHAR2",
+    512,
+    null,
+    null
+   ],
+   "UDF_ID": [
+    "VARCHAR2",
+    512,
+    null,
+    null
+   ],
+   "UDF_VALUE": [
+    "VARCHAR2",
+    512,
+    null,
+    null
+   ]
+  }
+ },
+ "FLEXBO_PGBLD_CONTRACT_UDFIELD_HIST": {
+  "owner": "PG_FLEXBO",
+  "table": "PGBLD_CONTRACT_UDFIELD_HIST",
+  "exists": true,
+  "rows": 0,
+  "missing_cols": [],
+  "extra_cols": [],
+  "types": {
+   "CONTRACT_REF_NO": [
+    "VARCHAR2",
+    50,
+    null,
+    null
+   ],
+   "CTKM2": [
+    "VARCHAR2",
+    50,
+    null,
+    null
+   ],
+   "CT_KHUYEN_MAI_CHO_VAY": [
+    "NUMBER",
+    22,
+    null,
+    0
+   ],
+   "MOV_DATE": [
+    "VARCHAR2",
+    50,
+    null,
+    null
+   ]
+  }
+ },
+ "FLEXBO_PGBLD_RT_CONTRACT_UDFIELD_HIST": {
+  "owner": "PG_FLEXBO",
+  "table": "PGBLD_RT_CONTRACT_UDFIELD_HIST",
+  "exists": true,
+  "rows": 166019,
+  "missing_cols": [],
+  "extra_cols": [
+   "MOV_DATE"
+  ],
+  "types": {
+   "CONTRACT_REF_NO": [
+    "VARCHAR2",
+    50,
+    null,
+    null
+   ],
+   "CO_CAU_NO": [
+    "NUMBER",
+    22,
+    null,
+    0
+   ],
+   "NGAY_HET_COVID19": [
+    "VARCHAR2",
+    50,
+    null,
+    null
+   ]
+  }
+ },
+ "FLEXBO_PGB_CONTRACT_UDF_MAP": {
+  "owner": "PG_FLEXBO",
+  "table": "PGB_CONTRACT_UDF_MAP",
+  "exists": true,
+  "rows": 57336,
+  "missing_cols": [],
+  "extra_cols": [],
+  "types": {
+   "CONTRACT_REF_NO": [
+    "VARCHAR2",
+    50,
+    null,
+    null
+   ],
+   "FIELD_NAME": [
+    "VARCHAR2",
+    50,
+    null,
+    null
+   ],
+   "FIELD_VAL": [
+    "VARCHAR2",
+    50,
+    null,
+    null
+   ]
+  }
+ },
+ "FLEXBO_PGB_LDTB_CONTRACT_MASTER": {
+  "owner": "PG_FLEXBO",
+  "table": "PGB_LDTB_CONTRACT_MASTER",
+  "exists": true,
+  "rows": 90444,
+  "missing_cols": [],
+  "extra_cols": [],
+  "types": {
+   "BOOKING_DATE": [
+    "VARCHAR2",
+    50,
+    null,
+    null
+   ],
+   "CONTRACT_REF_NO": [
+    "VARCHAR2",
+    50,
+    null,
+    null
+   ],
+   "VERSION_NO": [
+    "NUMBER",
+    22,
+    null,
+    0
+   ]
+  }
+ },
+ "FLEXBO_PGB_LOS_CONTRACT_FIELDS_TDATE": {
+  "owner": "PG_FLEXBO",
+  "table": "PGB_LOS_CONTRACT_FIELDS_TDATE",
+  "exists": true,
+  "rows": 90010,
+  "missing_cols": [],
+  "extra_cols": [
+   "CT_KHUYEN_MAI_CHO_VAY",
+   "CTKM2",
+   "LOAI_CHUNG_KHOAN"
+  ],
+  "types": {
+   "BDS_TT11": [
+    "VARCHAR2",
+    50,
+    null,
+    null
+   ],
+   "BIEN_DO_THAY_DOI_LS_THEO_HDTD": [
+    "NUMBER",
+    22,
+    null,
+    null
+   ],
+   "CAN_BO_DE_XUAT_GN": [
+    "VARCHAR2",
+    50,
+    null,
+    null
+   ],
+   "CAP_PHE_DUYET_GNTL": [
+    "VARCHAR2",
+    50,
+    null,
+    null
+   ],
+   "CAR_APPLICATION_CODE": [
+    "VARCHAR2",
+    50,
+    null,
+    null
+   ],
+   "CBTD_QL_KHOAN_VAY": [
+    "VARCHAR2",
+    50,
+    null,
+    null
+   ],
+   "CONTRACT_REF_NO": [
+    "VARCHAR2",
+    50,
+    null,
+    null
+   ],
+   "CO_CAU_NO_MIEN_GIAM_LAI": [
+    "VARCHAR2",
+    50,
+    null,
+    null
+   ],
+   "LOS_CONTRACT_CODE": [
+    "VARCHAR2",
+    50,
+    null,
+    null
+   ],
+   "LOS_CONTRACT_ID": [
+    "NUMBER",
+    22,
+    null,
+    null
+   ],
+   "MDVAY_NKT": [
+    "VARCHAR2",
+    50,
+    null,
+    null
+   ],
+   "MDVAY_SP": [
+    "VARCHAR2",
+    50,
+    null,
+    null
+   ],
+   "MOV_DATE": [
+    "VARCHAR2",
+    50,
+    null,
+    null
+   ],
+   "SAN_PHAM_CHO_VAY_KHCN": [
+    "VARCHAR2",
+    50,
+    null,
+    null
+   ],
+   "SAN_PHAM_CHO_VAY_KHDN": [
+    "VARCHAR2",
+    50,
+    null,
+    null
+   ],
+   "SO_LAN_CO_CAU": [
+    "NUMBER",
+    22,
+    null,
+    null
+   ],
+   "TP_PP_QL_KHOAN_VAY": [
+    "VARCHAR2",
+    50,
+    null,
+    null
+   ],
+   "TT_PP_DE_XUAT_GN": [
+    "VARCHAR2",
+    50,
+    null,
+    null
+   ]
+  }
+ },
+ "LOS_APP_FACILITY": {
+  "owner": "PG_LOS_APP",
+  "table": "FACILITY",
+  "exists": true,
+  "rows": 464431,
+  "missing_cols": [],
+  "extra_cols": [],
+  "types": {
+   "ID": [
+    "NUMBER",
+    22,
+    null,
+    0
+   ],
+   "PRODUCT_ID": [
+    "NUMBER",
+    22,
+    null,
+    0
+   ]
+  }
+ },
+ "LOS_APP_LOAN_DISBURSEMENT": {
+  "owner": "PG_LOS_APP",
+  "table": "LOAN_DISBURSEMENT",
+  "exists": true,
+  "rows": 47,
+  "missing_cols": [],
+  "extra_cols": [],
+  "types": {
+   "AMND_STATE": [
+    "VARCHAR2",
+    50,
+    null,
+    null
+   ],
+   "BOOKING_DATE": [
+    "VARCHAR2",
+    50,
+    null,
+    null
+   ],
+   "EXT_REF_NO_1": [
+    "VARCHAR2",
+    50,
+    null,
+    null
+   ],
+   "FACILITY_ID": [
+    "NUMBER",
+    22,
+    null,
+    0
+   ],
+   "STATUS": [
+    "VARCHAR2",
+    50,
+    null,
+    null
+   ]
+  }
+ },
+ "LOS_APP_PRODUCT": {
+  "owner": "PG_LOS_APP",
+  "table": "PRODUCT",
+  "exists": true,
+  "rows": 844,
+  "missing_cols": [
+   "RECID"
+  ],
+  "extra_cols": [],
+  "types": {
+   "ID": [
+    "NUMBER",
+    22,
+    38,
+    0
+   ],
+   "PRODUCT_CODE": [
+    "VARCHAR2",
+    50,
+    null,
+    null
+   ],
+   "PRODUCT_NAME": [
+    "VARCHAR2",
+    200,
+    null,
+    null
+   ]
+  }
+ },
+ "SMY_STMT_DAILY": {
+  "owner": "PG_SMY",
+  "table": "STMT_ENTRY_LOAN_GRA",
+  "exists": true,
+  "rows": 18066,
+  "missing_cols": [],
+  "extra_cols": [
+   "CO_CODE_LD",
+   "COMPONENT",
+   "TXN_TYPE",
+   "OUR_REFERENCE_1",
+   "COMPONENT_1",
+   "FIN_MAT_DATE",
+   "INTEREST_RATE",
+   "OUTSTANDING_AMT_CRB",
+   "PRIN_LIQ_ACCT",
+   "INT_LIQ_ACCT",
+   "DRAWDOWN_NET_AMT",
+   "ORIG_VAL_DATE",
+   "INT_RATE_TYPE",
+   "REAL_RATE",
+   "REPAYMENT_ACCT",
+   "OUTSTANDING_LCY_CRB",
+   "OUTSTANDING_CUR_CRB",
+   "CREDIT_STATUS",
+   "PRE_CREDIT_STATUS",
+   "APPROVE_AMOUNT",
+   "INTEREST_SPREAD",
+   "INTEREST_RATE_PD",
+   "ACC_FCC"
+  ],
+  "types": {
+   "ACCOUNT": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "ACCOUNTING_DATE": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "ACCOUNT_ID": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "ACCOUNT_NUM": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "ACCOUNT_NUMBER": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "ACCT_ID": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "AMOUNT_FCY": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "AMOUNT_LCY": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "BALANCE_TYPE": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "BOOKING_DATE": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "CARD_NUMBER": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "COMMIT_ACTION": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "COMMIT_TS": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "COMPANY_CODE": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "CONSOL_KEY": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "CONTRACT_BAL_ID": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "CO_CODE": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "CRF_PROD_CAT": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "CRF_TYPE": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "CURRENCY": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "CURR_NO": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "CUSTOMER_ID": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "CYCLE_FORWARD": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "DATE_TIME": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "DEPARTMENT_CODE": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "DRAWN_ACCOUNT": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "EXCHANGE_RATE": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "INTERNAL_CATEGORY": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "LOCAL_REF": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "NARRATIVE": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "ORIGINAL_ACCT": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "ORIGINAL_AMOUNT": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "ORIGINAL_CCY": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "ORIGINAL_EXCH_RATE": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "ORIG_AMOUNT_LCY": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "OUR_REFERENCE": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "OUTSTANDING_BAL": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "OVERRIDE": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "PROCESSING_DATE": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "PROCESS_FORWARD": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "PRODUCT_CATEGORY": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "RECID": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "RECORD_STATUS": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "REPAYMENT_AMT": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "REPAYMENT_DATE": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "REPAYMENT_TYPE": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "STMT_ENTRY_ID": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "STMT_NO": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "SUSPENSE_CATEGORY": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "SUSPNSE_VALUE_DATE": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "SYSTEM_ID": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "THEIR_REFERENCE": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "TRANSACTION_CODE": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "TRANS_REFERENCE": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "TXN_DATE": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "VALUE_DATE": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ]
+  }
+ },
+ "SOURCE_SAOKE_CRB": {
+  "owner": "PG_SOURCE",
+  "table": "SAOKE_CRB",
+  "exists": true,
+  "rows": 101904,
+  "missing_cols": [
+   "DATE"
+  ],
+  "extra_cols": [],
+  "types": {
+   "ACC_FCC": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "AMOUNT_CUR": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "AMOUNT_LCY": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "APP_CODE": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "APP_ID": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "ASSET_TYPE": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "CATEG_CODE": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "CO_CODE": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "CURR": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "CUS_ID": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "LOC_TERM": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "MAT_DATE": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "SBV_CODE": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "SUB_PRO": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "TXN_DATE": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "VAL_DATE": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ]
+  }
+ },
+ "SOURCE_SAOKE_MVMT": {
+  "owner": "PG_SOURCE",
+  "table": "SAOKE_MVMT",
+  "exists": true,
+  "rows": 391,
+  "missing_cols": [],
+  "extra_cols": [],
+  "types": {
+   "SBV_CODE": [
+    "NUMBER",
+    22,
+    null,
+    0
+   ],
+   "TRANS_REF": [
+    "VARCHAR2",
+    50,
+    null,
+    null
+   ],
+   "TXN_DATE": [
+    "VARCHAR2",
+    50,
+    null,
+    null
+   ]
+  }
+ },
+ "T24CORE_COMPANY": {
+  "owner": "PG_T24CORE",
+  "table": "COMPANY",
+  "exists": true,
+  "rows": 142,
+  "missing_cols": [],
+  "extra_cols": [],
+  "types": {
+   "COMPANY_NAME": [
+    "VARCHAR2",
+    50,
+    null,
+    null
+   ],
+   "RECID": [
+    "VARCHAR2",
+    50,
+    null,
+    null
+   ]
+  }
+ },
+ "T24CORE_CURRENCY": {
+  "owner": "PG_T24CORE",
+  "table": "CURRENCY",
+  "exists": true,
+  "rows": 35,
+  "missing_cols": [],
+  "extra_cols": [
+   "RECORD_COMMITED_TIME",
+   "REPLICAT_TS",
+   "TIMESTAMP_",
+   "OP_TYPE",
+   "CURRENCY_CODE",
+   "RANK",
+   "NO_OF_DECIMALS",
+   "QUOTATION_CODE",
+   "QUOTATION_PIPS",
+   "DAYS_DELIVERY",
+   "DAYS_FORWARD",
+   "INTEREST_DAY_BASIS",
+   "RATE_ALLOWANCE",
+   "FIXING_DATE",
+   "MIN_ROUND_AMOUNT",
+   "CASH_ONLY_ROUNDING",
+   "MIN_ROUND_TYPE",
+   "CASH_ROUND_TYPE",
+   "PRECIOUS_METAL",
+   "COUNTRY_CODE",
+   "FIXED_RATE",
+   "FIXED_CCY",
+   "FIXED_START_DATE",
+   "BASE_CCY_RANK",
+   "AVAILABLE_DATE",
+   "BLOCKED_DATE",
+   "CUT_OFF_TIME",
+   "CLS_CCY",
+   "RESERVED14",
+   "RESERVED13",
+   "RESERVED12",
+   "RESERVED11",
+   "RESERVED10",
+   "RESERVED9",
+   "RESERVED8",
+   "RESERVED7",
+   "RESERVED6",
+   "RESERVED5",
+   "RESERVED4",
+   "RESERVED3",
+   "RESERVED2",
+   "RESERVED1",
+   "RECORD_STATUS",
+   "AUTHORISER",
+   "CO_CODE",
+   "DEPT_CODE",
+   "AUDITOR_CODE",
+   "AUDIT_DATE_TIME",
+   "TYGIA_SAN",
+   "TYGIA_TRAN",
+   "RATE_CHANGE",
+   "TY_GIA_NAM",
+   "CURRENCY_MARKET",
+   "QUOTATION_SUSP",
+   "DEFAULT_SPREAD",
+   "BUY_RATE",
+   "SELL_RATE",
+   "UPTO_SMALL_AMT",
+   "TRSY_SMALL_SPRD",
+   "CUST_SMALL_SPRD",
+   "NEGOTIABLE_AMT",
+   "TRSY_MED_SPREAD",
+   "CUST_MED_SPREAD",
+   "REVAL_RATE",
+   "TRSY_LIMIT_AMT",
+   "EQUIVALENT_CCYS",
+   "OVERRIDE",
+   "INPUTTER",
+   "TRANSACTION_DATE",
+   "TYGIA_SBV",
+   "COMMIT_SCN",
+   "RECID"
+  ],
+  "types": {
+   "CCY_NAME": [
+    "VARCHAR2",
+    50,
+    null,
+    null
+   ],
+   "CURR_NO": [
+    "NUMBER",
+    22,
+    null,
+    0
+   ],
+   "DATE_TIME": [
+    "NUMBER",
+    22,
+    null,
+    0
+   ],
+   "ID": [
+    "VARCHAR2",
+    50,
+    null,
+    null
+   ],
+   "MID_REVAL_RATE": [
+    "VARCHAR2",
+    50,
+    null,
+    null
+   ],
+   "NUMERIC_CCY_CODE": [
+    "NUMBER",
+    22,
+    null,
+    0
+   ]
+  }
+ },
+ "T24CORE_CURRENCY_HIS": {
+  "owner": "PG_T24CORE",
+  "table": "CURRENCY_HIS",
+  "exists": true,
+  "rows": 5000,
+  "missing_cols": [],
+  "extra_cols": [
+   "RECORD_COMMITED_TIME",
+   "REPLICAT_TS",
+   "TIMESTAMP_",
+   "OP_TYPE",
+   "CURRENCY_CODE",
+   "CUST_MEDIUM_SPRD_PERC",
+   "RANK",
+   "NUMERIC_CCY_CODE",
+   "CCY_NAME",
+   "NO_OF_DECIMALS",
+   "QUOTATION_CODE",
+   "QUOTATION_PIPS",
+   "DAYS_DELIVERY",
+   "DAYS_FORWARD",
+   "INTEREST_DAY_BASIS",
+   "RATE_ALLOWANCE",
+   "FIXING_DATE",
+   "CURRENCY_MARKET",
+   "QUOTATION_SUSP",
+   "DEFAULT_SPREAD",
+   "BUY_RATE",
+   "SELL_RATE",
+   "UPTO_SMALL_AMT",
+   "TRSY_SMALL_SPRD",
+   "CUST_SMALL_SPRD",
+   "NEGOTIABLE_AMT",
+   "TRSY_MED_SPREAD",
+   "CUST_MED_SPREAD",
+   "TRSY_LIMIT_AMT",
+   "OVERRIDE",
+   "RECORD_STATUS",
+   "INPUTTER",
+   "AUTHORISER",
+   "CO_CODE",
+   "DEPT_CODE",
+   "AUDITOR_CODE",
+   "AUDIT_DATE_TIME",
+   "MIN_ROUND_AMOUNT",
+   "CASH_ONLY_ROUNDING",
+   "MIN_ROUND_TYPE",
+   "CASH_ROUND_TYPE",
+   "PRECIOUS_METAL",
+   "RESERVED2",
+   "RESERVED1",
+   "EQUIVALENT_CCYS",
+   "COUNTRY_CODE",
+   "FIXED_RATE",
+   "FIXED_CCY",
+   "FIXED_START_DATE",
+   "BASE_CCY_RANK",
+   "AVAILABLE_DATE",
+   "BLOCKED_DATE",
+   "RESERVED14",
+   "RESERVED13",
+   "RESERVED12",
+   "RESERVED11",
+   "RESERVED10",
+   "RESERVED9",
+   "RESERVED8",
+   "RESERVED7",
+   "RESERVED6",
+   "RESERVED5",
+   "RESERVED4",
+   "RESERVED3",
+   "REVAL_RATE",
+   "CLS_CCY",
+   "CUT_OFF_TIME",
+   "DEFAULT_SPREAD_PERC",
+   "TRSY_SMALL_SPRD_PERC",
+   "CUST_SMALL_SPRD_PERC",
+   "TRSY_MEDIUM_SPRD_PERC",
+   "TYGIA_SBV",
+   "RECID"
+  ],
+  "types": {
+   "CURR_NO": [
+    "NUMBER",
+    22,
+    null,
+    0
+   ],
+   "DATE_TIME": [
+    "NUMBER",
+    22,
+    null,
+    0
+   ],
+   "ID": [
+    "VARCHAR2",
+    50,
+    null,
+    null
+   ],
+   "MID_REVAL_RATE": [
+    "NUMBER",
+    22,
+    null,
+    0
+   ]
+  }
+ },
+ "T24CORE_CUSTOMER": {
+  "owner": "PG_T24CORE",
+  "table": "CUSTOMER",
+  "exists": true,
+  "rows": 36346,
+  "missing_cols": [
+   "ACCOUNT_OFFICER",
+   "ACTIVE_STATUS",
+   "AML_CHECK",
+   "AML_RESULT",
+   "BDATE_LEGAL",
+   "BDAY_DIRECTOR",
+   "BIRTH_INCORP_DATE",
+   "COMPANY_BOOK",
+   "CONTACT_DATE",
+   "CONTACT_PERSON",
+   "COUNTRY",
+   "CO_CODE",
+   "CUSTOMER_STATUS",
+   "CU_EFF_DATE",
+   "DATE_TIME",
+   "EMAIL_ADDRESS",
+   "EMPLOYMENT_STATUS",
+   "ESTAB_LIC_CODE",
+   "FFB_TYPE",
+   "GEN_DIR_PLC",
+   "HOME_NUMBER",
+   "INDUSTRY",
+   "INTERNET_BANKING_SERVICE",
+   "KYC_CHANNEL",
+   "MAU_HD",
+   "MA_BHXH",
+   "MB_CR_STT",
+   "MB_RM_BANCHEO",
+   "MOBILE_BANKING_SERVICE",
+   "NATIONALITY",
+   "NATIONAL_ID",
+   "NAT_ID_EXP_DATE",
+   "NAT_ID_ISS_DATE",
+   "NAT_ID_ISS_PLC",
+   "NAT_ID_TYPE",
+   "NET_MONTHLY_IN",
+   "NO_LIEN_DOI",
+   "OCCUPATION",
+   "OPEN_COMPANY",
+   "PHONE_CONT_PER",
+   "REFERRED_BY",
+   "RESIDENCE",
+   "RESID_PROVINCE",
+   "SECOND_OFFICER",
+   "SHORT_NAME",
+   "STREET",
+   "TARGET",
+   "TAX_SERIAL",
+   "TXN_DATE",
+   "VAT_INV_DATE",
+   "VAT_INV_SERIAL",
+   "VIP_CUSTOMER",
+   "VN_GENDER",
+   "VN_STREET",
+   "VN_TOWN"
+  ],
+  "extra_cols": [
+   "COMMIT_ACTION",
+   "TPKT"
+  ],
+  "types": {
+   "ASSET_CLASS": [
+    "NUMBER",
+    22,
+    null,
+    null
+   ],
+   "CUS_IND_PARENT": [
+    "NUMBER",
+    22,
+    null,
+    null
+   ],
+   "KHOI": [
+    "VARCHAR2",
+    50,
+    null,
+    null
+   ],
+   "MB_INDUSTRY": [
+    "VARCHAR2",
+    50,
+    null,
+    null
+   ],
+   "MOBILE_NUMBER": [
+    "VARCHAR2",
+    50,
+    null,
+    null
+   ],
+   "RECID": [
+    "NUMBER",
+    22,
+    null,
+    0
+   ],
+   "SECTOR": [
+    "NUMBER",
+    22,
+    null,
+    null
+   ],
+   "VN_FULL_NAME": [
+    "VARCHAR2",
+    50,
+    null,
+    null
+   ]
+  }
+ },
+ "T24CORE_DEPT_ACCT_OFFICER": {
+  "owner": "PG_T24CORE",
+  "table": "DEPT_ACCT_OFFICER",
+  "exists": true,
+  "rows": 2119,
+  "missing_cols": [],
+  "extra_cols": [],
+  "types": {
+   "NAME": [
+    "VARCHAR2",
+    50,
+    null,
+    null
+   ],
+   "RECID": [
+    "NUMBER",
+    22,
+    null,
+    0
+   ]
+  }
+ },
+ "T24CORE_LD_LOANS_AND_DEPOSITS": {
+  "owner": "PG_T24CORE",
+  "table": "LD_LOANS_AND_DEPOSITS",
+  "exists": true,
+  "rows": 48195,
+  "missing_cols": [
+   "ID"
+  ],
+  "extra_cols": [
+   "ORIGINAL_MAT"
+  ],
+  "types": {
+   "ACC_FCC": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "AMOUNT": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "APPROVE_AMOUNT": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "AUTHORISER": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "CATEGORY": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "COMMIT_ACTION": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "CO_CODE": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "CRA_LD": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "CURRENCY": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "CURR_NO": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "CUSTOMER_ID": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "DATE_TIME": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "DRAWDOWN_NET_AMT": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "EXCG_RATE": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "FCC_LIMIT": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "FIN_MAT_DATE": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "INPUTTER": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "INTEREST_RATE": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "INTEREST_SPREAD": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "INT_LIQ_ACCT": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "INT_RATE_TYPE": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "INT_VALUE_DATE": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "LIMIT_REFERENCE": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "LOC_TERM": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "LOS_FAC_CODE": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "MB_RM_BANCHEO": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "ORIG_VAL_DATE": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "PE_RATE": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "PRIN_LIQ_ACCT": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "PRODUCTGR_CODE": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "PS_RATE": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "REAL_RATE": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "RECID": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "RECORD_STATUS": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "STATUS": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "USE_OF_LOAN": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "USE_OF_LOAN_CHA": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "VALUE_DATE": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ]
+  }
+ },
+ "T24CORE_LD_LOANS_AND_DEPOSITS_HIS": {
+  "owner": "PG_T24CORE",
+  "table": "LD_LOANS_AND_DEPOSITS_HIS",
+  "exists": true,
+  "rows": 32529,
+  "missing_cols": [
+   "COMMIT_ACTION"
+  ],
+  "extra_cols": [],
+  "types": {
+   "ACC_FCC": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "AMOUNT": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "APPROVE_AMOUNT": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "CATEGORY": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "CO_CODE": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "CRA_LD": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "CURRENCY": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "CURR_NO": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "CUSTOMER_ID": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "DATE_TIME": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "DRAWDOWN_NET_AMT": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "EXCG_RATE": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "FIN_MAT_DATE": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "INTEREST_RATE": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "INTEREST_SPREAD": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "INT_LIQ_ACCT": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "INT_RATE_TYPE": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "INT_VALUE_DATE": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "LOC_TERM": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "MB_RM_BANCHEO": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "ORIG_VAL_DATE": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "PRIN_LIQ_ACCT": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "REAL_RATE": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "RECID": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "RECORD_STATUS": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "USE_OF_LOAN": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "USE_OF_LOAN_CHA": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "VALUE_DATE": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ]
+  }
+ },
+ "T24CORE_LD_SCHEDULE_DEFINE_MV": {
+  "owner": "PG_T24CORE",
+  "table": "LD_SCHEDULE_DEFINE_MV",
+  "exists": true,
+  "rows": 26277,
+  "missing_cols": [],
+  "extra_cols": [],
+  "types": {
+   "CONTRACT_ID": [
+    "VARCHAR2",
+    50,
+    null,
+    null
+   ],
+   "PREV_SCHED_DATE": [
+    "NUMBER",
+    22,
+    null,
+    0
+   ]
+  }
+ },
+ "T24CORE_LIMIT": {
+  "owner": "PG_T24CORE",
+  "table": "LIMIT",
+  "exists": true,
+  "rows": 18873,
+  "missing_cols": [
+   "EXPIRY_DATE",
+   "INTERNAL_AMOUNT",
+   "LIMIT_PRODUCT",
+   "MAXIMUM_TOTAL",
+   "ONLINE_LIMIT_DATE"
+  ],
+  "extra_cols": [
+   "FCC_LIMIT"
+  ],
+  "types": {
+   "RECID": [
+    "VARCHAR2",
+    50,
+    null,
+    null
+   ]
+  }
+ },
+ "T24CORE_MB_MG_SAVING_MULTI": {
+  "owner": "PG_T24CORE",
+  "table": "MB_MG_SAVING_MULTI",
+  "exists": true,
+  "rows": 127,
+  "missing_cols": [],
+  "extra_cols": [],
+  "types": {
+   "LD_ID": [
+    "VARCHAR2",
+    50,
+    null,
+    null
+   ],
+   "MB_LD_TYPE": [
+    "VARCHAR2",
+    50,
+    null,
+    null
+   ],
+   "PRODUCTGR_CODE": [
+    "VARCHAR2",
+    50,
+    null,
+    null
+   ]
+  }
+ },
+ "T24CORE_PD_PAYMENT_DUE": {
+  "owner": "PG_T24CORE",
+  "table": "PD_PAYMENT_DUE",
+  "exists": true,
+  "rows": 8038,
+  "missing_cols": [
+   "FLAG_STATUS"
+  ],
+  "extra_cols": [
+   "NGAY_AN_HAN"
+  ],
+  "types": {
+   "AUTHORISER": [
+    "VARCHAR2",
+    200,
+    null,
+    null
+   ],
+   "CRA_LD": [
+    "VARCHAR2",
+    200,
+    null,
+    null
+   ],
+   "CREDIT_STATUS": [
+    "NUMBER",
+    22,
+    null,
+    0
+   ],
+   "CURR_NO": [
+    "NUMBER",
+    22,
+    null,
+    0
+   ],
+   "CUSTOMER": [
+    "NUMBER",
+    22,
+    null,
+    0
+   ],
+   "INPUTTER": [
+    "VARCHAR2",
+    200,
+    null,
+    null
+   ],
+   "LIMIT_REFERENCE": [
+    "FLOAT",
+    22,
+    126,
+    null
+   ],
+   "LOS_FAC_CODE": [
+    "VARCHAR2",
+    200,
+    null,
+    null
+   ],
+   "ORIGINAL_MAT": [
+    "NUMBER",
+    22,
+    null,
+    0
+   ],
+   "PAYMENT_DTE_DUE": [
+    "VARCHAR2",
+    200,
+    null,
+    null
+   ],
+   "PD_TYPE": [
+    "NUMBER",
+    22,
+    null,
+    0
+   ],
+   "PENALTY_RATE": [
+    "FLOAT",
+    22,
+    126,
+    null
+   ],
+   "PE_RATE": [
+    "NUMBER",
+    22,
+    null,
+    0
+   ],
+   "PS_RATE": [
+    "NUMBER",
+    22,
+    null,
+    0
+   ],
+   "RECID": [
+    "VARCHAR2",
+    200,
+    null,
+    null
+   ],
+   "REPAYMENT_ACCT": [
+    "VARCHAR2",
+    200,
+    null,
+    null
+   ],
+   "SNQH_CHUYENDOI": [
+    "NUMBER",
+    22,
+    null,
+    0
+   ],
+   "STATUS": [
+    "VARCHAR2",
+    200,
+    null,
+    null
+   ],
+   "USE_OF_LOAN": [
+    "NUMBER",
+    22,
+    null,
+    0
+   ],
+   "USE_OF_LOAN_CHA": [
+    "NUMBER",
+    22,
+    null,
+    0
+   ]
+  }
+ },
+ "T24CORE_PD_PAYMENT_DUE_HIS": {
+  "owner": "PG_T24CORE",
+  "table": "PD_PAYMENT_DUE_HIS",
+  "exists": true,
+  "rows": 100000,
+  "missing_cols": [],
+  "extra_cols": [],
+  "types": {
+   "CURR_NO": [
+    "NUMBER",
+    22,
+    null,
+    0
+   ],
+   "PD_TYPE": [
+    "NUMBER",
+    22,
+    null,
+    0
+   ],
+   "RECID": [
+    "VARCHAR2",
+    50,
+    null,
+    null
+   ]
+  }
+ },
+ "T24CORE_PD_PAYMENT_DUE_HIS_MV": {
+  "owner": "PG_T24CORE",
+  "table": "PD_PAYMENT_DUE_HIS_MV",
+  "exists": true,
+  "rows": 56159,
+  "missing_cols": [],
+  "extra_cols": [
+   "REPAID_AMT"
+  ],
+  "types": {
+   "ACC_FCC": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "APPROVE_AMOUNT": [
+    "VARCHAR2",
+    40,
+    null,
+    null
+   ],
+   "CATEGORY": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "CO_CODE": [
+    "VARCHAR2",
+    50,
+    null,
+    null
+   ],
+   "CREDIT_STATUS": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "CURR_NO": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "CUSTOMER": [
+    "VARCHAR2",
+    40,
+    null,
+    null
+   ],
+   "DATE_TIME": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "FINAL_DUE_DATE": [
+    "VARCHAR2",
+    40,
+    null,
+    null
+   ],
+   "FLAG_STATUS": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "ORIGINAL_MAT": [
+    "VARCHAR2",
+    40,
+    null,
+    null
+   ],
+   "PAY_TYPE": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "PD_TYPE": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "PENALTY_RATE": [
+    "VARCHAR2",
+    40,
+    null,
+    null
+   ],
+   "PE_RATE": [
+    "VARCHAR2",
+    40,
+    null,
+    null
+   ],
+   "RECID": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "RECORD_STATUS": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "REPAYMENT_ACCT": [
+    "VARCHAR2",
+    50,
+    null,
+    null
+   ],
+   "PAYMENT_DTE_DUE": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "PAY_AMT_OUTS": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ]
+  }
+ },
+ "T24CORE_PD_PAYMENT_DUE_MV": {
+  "owner": "PG_T24CORE",
+  "table": "PD_PAYMENT_DUE_MV",
+  "exists": true,
+  "rows": 267,
+  "missing_cols": [
+   "COMMIT_ACTION",
+   "ID"
+  ],
+  "extra_cols": [
+   "NGAY_AN_HAN"
+  ],
+  "types": {
+   "ACC_FCC": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "APPROVE_AMOUNT": [
+    "VARCHAR2",
+    40,
+    null,
+    null
+   ],
+   "CATEGORY": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "CO_CODE": [
+    "VARCHAR2",
+    50,
+    null,
+    null
+   ],
+   "CREDIT_STATUS": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "CURR_NO": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "CUSTOMER": [
+    "VARCHAR2",
+    40,
+    null,
+    null
+   ],
+   "DATE_TIME": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "FINAL_DUE_DATE": [
+    "VARCHAR2",
+    40,
+    null,
+    null
+   ],
+   "FLAG_STATUS": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "ORIGINAL_MAT": [
+    "VARCHAR2",
+    40,
+    null,
+    null
+   ],
+   "PAYMENT_DTE_DUE": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "PAY_AMT_OUTS": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "PAY_TYPE": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "PD_TYPE": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "PENALTY_RATE": [
+    "VARCHAR2",
+    40,
+    null,
+    null
+   ],
+   "PE_RATE": [
+    "VARCHAR2",
+    40,
+    null,
+    null
+   ],
+   "RECID": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "RECORD_STATUS": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "REPAID_AMT": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "REPAYMENT_ACCT": [
+    "VARCHAR2",
+    50,
+    null,
+    null
+   ]
+  }
+ },
+ "T24CORE_SECTOR": {
+  "owner": "PG_T24CORE",
+  "table": "SECTOR",
+  "exists": true,
+  "rows": 117,
+  "missing_cols": [],
+  "extra_cols": [
+   "KHOI",
+   "AUDIT_DATE_TIME",
+   "RESERVED_4",
+   "SHORT_NAME",
+   "CO_CODE",
+   "RESERVED_3",
+   "RISK_EXPO_TYPE",
+   "DESCRIPTION",
+   "SECTOR",
+   "RESERVED_1",
+   "CURR_NO",
+   "AUTHORISER",
+   "RECORD_STATUS",
+   "LOCAL_REF",
+   "INPUTTER",
+   "AUDITOR_CODE",
+   "SECTOR_CODE",
+   "DEPT_CODE",
+   "DATE_TIME",
+   "COMMIT_SCN",
+   "COMMIT_ACTION",
+   "COMMIT_TS",
+   "REPLICAT_TS",
+   "STREAM_TS",
+   "TIME_UPDATE",
+   "ID"
+  ],
+  "types": {
+   "CUSTOMER_TYPE": [
+    "VARCHAR2",
+    50,
+    null,
+    null
+   ],
+   "RECID": [
+    "NUMBER",
+    22,
+    null,
+    0
+   ]
+  }
+ },
+ "T24CORE_STMT_ENTRY": {
+  "owner": "PG_T24CORE",
+  "table": "STMT_ENTRY",
+  "exists": true,
+  "rows": 89869,
+  "missing_cols": [],
+  "extra_cols": [
+   "ACCOUNT_ID",
+   "THEIR_REFERENCE",
+   "STMT_NO",
+   "STMT_ENTRY_ID",
+   "TRANS_REFERENCE",
+   "CONTRACT_BAL_ID",
+   "ACCOUNT",
+   "ACCOUNT_NUM",
+   "PROCESSING_DATE",
+   "CO_CODE",
+   "NGAY_AN_HAN"
+  ],
+  "types": {
+   "ACCOUNTING_DATE": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "ACCOUNT_NUMBER": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "ACCT_ID": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "AMOUNT_FCY": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "AMOUNT_LCY": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "BALANCE_TYPE": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "BOOKING_DATE": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "CARD_NUMBER": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "COMMIT_ACTION": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "COMMIT_TS": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "COMPANY_CODE": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "CONSOL_KEY": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "CRF_PROD_CAT": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "CRF_TYPE": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "CURRENCY": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "CURR_NO": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "CUSTOMER_ID": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "CYCLE_FORWARD": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "DATE_TIME": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "DEPARTMENT_CODE": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "DRAWN_ACCOUNT": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "EXCHANGE_RATE": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "INTERNAL_CATEGORY": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "LOCAL_REF": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "NARRATIVE": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "ORIGINAL_ACCT": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "ORIGINAL_AMOUNT": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "ORIGINAL_CCY": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "ORIGINAL_EXCH_RATE": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "ORIG_AMOUNT_LCY": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "OUR_REFERENCE": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "OUTSTANDING_BAL": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "OVERRIDE": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "PROCESS_FORWARD": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "PRODUCT_CATEGORY": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "RECID": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "RECORD_STATUS": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "REPAYMENT_AMT": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "REPAYMENT_DATE": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "REPAYMENT_TYPE": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "SUSPENSE_CATEGORY": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "SUSPNSE_VALUE_DATE": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "SYSTEM_ID": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "TRANSACTION_CODE": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ],
+   "VALUE_DATE": [
+    "VARCHAR2",
+    100,
+    null,
+    null
+   ]
+  }
+ }
+}

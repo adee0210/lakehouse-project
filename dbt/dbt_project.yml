@@ -1,0 +1,53 @@
+name: lakehouse
+version: "1.0.0"
+config-version: 2
+profile: lakehouse
+
+model-paths: ["models"]
+macro-paths: ["macros"]
+test-paths: ["tests"]
+target-path: target
+clean-targets: [target, dbt_packages]
+
+vars:
+  etl_date: "2025-10-07"     # ${ETL_DATE} (ngày nghiệp vụ có dữ liệu trên Oracle) – override: --vars '{etl_date: YYYY-MM-DD}'
+  source_mode: oracle        # oracle (Oracle thật qua JDBC) | mock (giả lập offline)
+
+models:
+  lakehouse:
+    +file_format: iceberg
+    # Iceberg: format v2 (MERGE/DELETE row-level), giữ tối đa 10 metadata.json cũ, tự dọn file metadata
+    +tblproperties:
+      format-version: "2"
+      write.metadata.previous-versions-max: "10"
+      write.metadata.delete-after-commit.enabled: "true"
+      write.merge.mode: copy-on-write
+      write.delete.mode: copy-on-write
+    +persist_docs:
+      relation: true
+      columns: true
+    # ---------------- Wave 0: Source -> PG_BRONZE (1:1 + audit), phân vùng ETL_DATE
+    bronze:
+      +schema: pg_bronze
+      +location_root: s3://bronze
+      +materialized: incremental
+      +incremental_strategy: append
+      +partition_by: [ETL_DATE]
+      +pre-hook: "{{ delete_partition('ETL_DATE') }}"
+      +tags: [wave0, bronze]
+    silver:
+      +schema: pg_silver
+      +location_root: s3://silver
+      temp1:
+        +tags: [wave1, silver_temp1]
+      temp2:
+        +tags: [wave2, silver_temp2]
+    gold:
+      +schema: pg_gold
+      +location_root: s3://gold
+      dim:
+        +tags: [wave3, gold_dim]
+      interface:
+        +tags: [wave4, gold_interface]
+      fact:
+        +tags: [wave4, gold_fact]

@@ -1,0 +1,17 @@
+-- Wave 2 | PG_SILVER.SAOKE_TINDUNG – SNAPSHOT (Business Credit Statement)
+-- Sheet 'SAOKE_TINDUNG': __NCOLS__ cột. main = T24CORE_LD_LOANS_AND_DEPOSITS (ld) + CUSTOMER (cus) + DEPT_ACCT_OFFICER (dao)
+-- Grain: 1 dòng / hợp đồng LD (khác REVE) tại ${ETL_DATE}.
+{{ config(materialized='incremental', incremental_strategy='append', partition_by=['ETL_DATE'],
+          pre_hook="{{ delete_partition('ETL_DATE') }}", alias='saoke_tindung') }}
+
+with ld as (
+    select * from {{ bz('t24core_ld_loans_and_deposits') }} where nvl(RECORD_STATUS, '_') <> 'REVE'
+),
+cus as (select * from {{ bz('t24core_customer') }}),
+dao as (select * from {{ bz('t24core_dept_acct_officer') }})
+select
+__SELECT_LIST__,
+    {{ etl_date() }} as ETL_DATE
+from ld
+left join cus on ld.CUSTOMER_ID = cus.RECID
+left join dao on ld.MB_RM_BANCHEO = dao.RECID

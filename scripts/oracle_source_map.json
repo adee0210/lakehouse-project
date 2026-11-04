@@ -1,0 +1,4 @@
+{
+  "_comment": "Bảng nguồn Oracle = 'PG_' + Source Schema + '.' + Source Table (bỏ DB link @...). Override cho bảng sai tên trong sheet (đã kiểm chứng trên Oracle DBPDB, tools/check_oracle_sources.py).",
+  "SMY_STMT_DAILY": "PG_SMY.STMT_ENTRY_LOAN_GRA"
+}

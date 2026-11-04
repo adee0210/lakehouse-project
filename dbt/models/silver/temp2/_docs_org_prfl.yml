@@ -1,0 +1,76 @@
+version: 2
+
+models:
+  - name: org_prfl
+    description: "PG_SILVER.ORG_PRFL – sheet 'Organization Profile'"
+    data_tests:
+      - column_contract:
+          expected: [CST_ID, CST_CODE, CST_LCS_CODE, CST_FNC_ST_CODE, ESTB_DT, OU_CODE, CST_ST_CODE, IDY_CL_CODE, INN_BNKG_F, MBL_BNKG_F, JNT_LBY_F, TAX_IDENTN_NBR, VIP_F, IDY_LV1_CL_CODE, IDY_LV2_CL_CODE, BSN_RGST_NBR, BSN_RGST_EFF_DT, VIP_TP_CODE, VIP_EFF_DT, KYC_CNL_CODE, GEN_DIR_PLC, DIR_DOB, CNTCT_PRSN, CNTCT_PRSN_PHN, AML_RSLT, AML_CHK_F, MB_CR_ST, SYS_EFF_DT, SYS_EXP_DT, SYS_UDT_DT]
+      - unique_key:
+          columns: [CST_ID, SYS_EFF_DT]
+      - scd2_single_current:
+          columns: [CST_ID]
+      - scd2_valid_period
+    columns:
+      - name: cst_id
+        description: "Unique key trên DWH"
+        data_tests:
+          - is_md5
+      - name: cst_code
+        description: "Mã CIF"
+      - name: cst_lcs_code
+        description: "Trạng thái bản ghi"
+      - name: cst_fnc_st_code
+        description: "Nhóm nợ khách hàng Core tính"
+      - name: estb_dt
+        description: "Ngày thành lập doanh nghiệp"
+      - name: ou_code
+        description: "Mã chi nhánh quản lý khách hàng"
+      - name: cst_st_code
+        description: "Trạng thái hiện tại của khách hàng"
+      - name: idy_cl_code
+        description: "Mã ngành nghề đăng ký kinh doanh"
+      - name: inn_bnkg_f
+        description: "Dịch vụ Internet banking khách hàng giao tiếp"
+      - name: mbl_bnkg_f
+        description: "Dịch vụ sử dụng sản phẩm mobile banking"
+      - name: jnt_lby_f
+        description: "Nợ liên đới"
+      - name: tax_identn_nbr
+        description: "Mã số thuế"
+      - name: vip_f
+        description: "Đánh dấu khách hàng ưu tiên"
+      - name: idy_lv1_cl_code
+        description: "Mã ngành nghê kinh tế cha"
+      - name: idy_lv2_cl_code
+        description: "Ngành nghề kinh tế"
+      - name: bsn_rgst_nbr
+        description: "Số giấy phép đăng ký kinh doanh"
+      - name: bsn_rgst_eff_dt
+        description: "Ngày cấp giấy phép ĐKKD / phát hành hóa đơn"
+      - name: vip_tp_code
+        description: "Phân hạng khách hàng ưu tiên (VIP)"
+      - name: vip_eff_dt
+        description: "Ngày hiệu lực phân hạng khách hàng VIP"
+      - name: kyc_cnl_code
+        description: "Kênh thực hiện KYC"
+      - name: gen_dir_plc
+        description: "Nơi sinh Tổng giám đốc / người đại diện pháp luật"
+      - name: dir_dob
+        description: "Ngày sinh Giám đốc / người đại diện pháp luật"
+      - name: cntct_prsn
+        description: "Họ tên người liên hệ chính KHDN"
+      - name: cntct_prsn_phn
+        description: "Số điện thoại người liên hệ chính KHDN"
+      - name: aml_rslt
+        description: "Kết quả sàng lọc phòng chống rửa tiền (AML)"
+      - name: aml_chk_f
+        description: "Cờ kiểm tra phòng chống rửa tiền (AML)"
+      - name: mb_cr_st
+        description: "Trạng thái quan hệ tín dụng MB"
+      - name: sys_eff_dt
+        description: "Ngày bản ghi lần đầu tiên vào hệ thống"
+      - name: sys_exp_dt
+        description: "Ngày hết hạn của bản ghi"
+      - name: sys_udt_dt
+        description: "Ngày update dữ liệu gần nhất"

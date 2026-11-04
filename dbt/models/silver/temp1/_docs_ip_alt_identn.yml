@@ -1,0 +1,36 @@
+version: 2
+
+models:
+  - name: ip_alt_identn
+    description: "PG_SILVER.IP_ALT_IDENTN – sheet 'Involved Party Alternative Iden'"
+    data_tests:
+      - column_contract:
+          expected: [CST_ID, CST_CODE, IDENTN_TP_CODE, IDENTN_ISSU_DT, IDENTN_EXPIRY_DT, ISSU_PLC_CODE, IDENTN_NBR, SYS_EFF_DT, SYS_EXP_DT, SYS_UDT_DT]
+      - unique_key:
+          columns: [CST_ID, SYS_EFF_DT]
+      - scd2_single_current:
+          columns: [CST_ID]
+      - scd2_valid_period
+    columns:
+      - name: cst_id
+        description: "Unique key trên DWH"
+        data_tests:
+          - is_md5
+      - name: cst_code
+        description: "Mã CIF"
+      - name: identn_tp_code
+        description: "Loại giấy tờ"
+      - name: identn_issu_dt
+        description: "Ngày cấp giấy tờ"
+      - name: identn_expiry_dt
+        description: "Ngày hêt hạn giấy tờ"
+      - name: issu_plc_code
+        description: "Nơi cấp giấy tờ"
+      - name: identn_nbr
+        description: "Mã giấy tờ"
+      - name: sys_eff_dt
+        description: "Ngày bản ghi lần đầu tiên vào hệ thống"
+      - name: sys_exp_dt
+        description: "Ngày hết hạn của bản ghi"
+      - name: sys_udt_dt
+        description: "Ngày update dữ liệu gần nhất"

@@ -1,0 +1,25 @@
+version: 2
+
+models:
+  - name: empe
+    description: "PG_SILVER.EMPE – sheet 'Employee'"
+    data_tests:
+      - column_contract:
+          expected: [EMPE_ID, EMPE_CODE, EMPE_NM, SYS_EFF_DT, SYS_EXP_DT, SYS_UDT_DT]
+      - unique_key:
+          columns: [EMPE_ID]
+    columns:
+      - name: empe_id
+        description: "Unique key trên DWH"
+        data_tests:
+          - is_md5
+      - name: empe_code
+        description: "Mã NHÂN VIÊN"
+      - name: empe_nm
+        description: "Tên NHÂN VIÊN"
+      - name: sys_eff_dt
+        description: "Ngày bản ghi lần đầu tiên vào hệ thống"
+      - name: sys_exp_dt
+        description: "Ngày hết hạn của bản ghi"
+      - name: sys_udt_dt
+        description: "Ngày update dữ liệu gần nhất"

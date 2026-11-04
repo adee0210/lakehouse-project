@@ -1,0 +1,27 @@
+version: 2
+
+models:
+  - name: pd
+    description: "PG_SILVER.PD – sheet 'Product'"
+    data_tests:
+      - column_contract:
+          expected: [PD_ID, PD_CODE, PD_NM, SRC_STM_CODE, SYS_EFF_DT, SYS_EXP_DT, SYS_UDT_DT]
+      - unique_key:
+          columns: [PD_ID]
+    columns:
+      - name: pd_id
+        description: "Unique key trên DWH"
+        data_tests:
+          - is_md5
+      - name: pd_code
+        description: "Mã sản phẩm"
+      - name: pd_nm
+        description: "Tên sản phẩm"
+      - name: src_stm_code
+        description: "Mã nguồn dữ liệu"
+      - name: sys_eff_dt
+        description: "Ngày hiệu lực bản ghi"
+      - name: sys_exp_dt
+        description: "Ngày hết hiệu lực bản ghi"
+      - name: sys_udt_dt
+        description: "Ngày cập nhật bản ghi"

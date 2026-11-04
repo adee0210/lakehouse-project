@@ -1,0 +1,30 @@
+version: 2
+
+models:
+  - name: ip_elc_adr
+    description: "PG_SILVER.IP_ELC_ADR – sheet 'Involved Party Electronic Addre'"
+    data_tests:
+      - column_contract:
+          expected: [CST_ID, CST_CODE, ELC_ADR_TP, ELC_ADR_VAL, SYS_EFF_DT, SYS_EXP_DT, SYS_UDT_DT]
+      - unique_key:
+          columns: [CST_ID, ELC_ADR_TP, SYS_EFF_DT]
+      - scd2_single_current:
+          columns: [CST_ID, ELC_ADR_TP]
+      - scd2_valid_period
+    columns:
+      - name: cst_id
+        description: "Unique key khách hàng trên DWH"
+        data_tests:
+          - is_md5
+      - name: cst_code
+        description: "Mã khách hàng (CIF)"
+      - name: elc_adr_tp
+        description: "Loại địa chỉ điện tử (EMAIL / HOME_NUMBER / MOBILE_NUMBER)"
+      - name: elc_adr_val
+        description: "Giá trị địa chỉ liên lạc điện tử"
+      - name: sys_eff_dt
+        description: "Ngày hiệu lực bản ghi SCD2"
+      - name: sys_exp_dt
+        description: "Ngày hết hiệu lực bản ghi SCD2"
+      - name: sys_udt_dt
+        description: "Ngày cập nhật bản ghi"

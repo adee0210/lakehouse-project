@@ -1,0 +1,145 @@
+version: 2
+
+models:
+  - name: saoke_tindung
+    description: "PG_SILVER.SAOKE_TINDUNG – sheet 'SAOKE_TINDUNG'"
+    data_tests:
+      - column_contract:
+          expected: [INTERNET_BANKING_SERVICE, KHOI, KYC_CHANNEL, MA_BHXH, MAU_HD, MB_CR_STT, MB_INDUSTRY, MB_RM_BANCHEO, MOBILE_BANKING_SERVICE, MOBILE_NUMBER, NAT_ID_EXP_DATE, NAT_ID_ISS_DATE, NAT_ID_ISS_PLC, NAT_ID_TYPE, NATIONAL_ID, NATIONALITY, NET_MONTHLY_IN, NO_LIEN_DOI, OCCUPATION, OPEN_COMPANY, PHONE_CONT_PER, CUS_RECID, REFERRED_BY, RESID_PROVINCE, RESIDENCE, SECOND_OFFICER, SECTOR, SHORT_NAME, STREET, TARGET, TAX_SERIAL, TXN_DATE, VAT_INV_DATE, VAT_INV_SERIAL, VIP_CUSTOMER, VN_FULL_NAME, VN_GENDER, VN_STREET, VN_TOWN, NAME, DAO_RECID, ACC_FCC, AMOUNT, APPROVE_AMOUNT, AUTHORISER, CATEGORY, CO_CODE, COMMIT_ACTION, CRA_LD, CURR_NO, CURRENCY, CUSTOMER_ID, DATE_TIME, DRAWDOWN_NET_AMT, EXCG_RATE, FCC_LIMIT, FIN_MAT_DATE, ID, INPUTTER, INT_LIQ_ACCT, INT_RATE_TYPE, INT_VALUE_DATE, INTEREST_RATE, INTEREST_SPREAD, LIMIT_REFERENCE, LOC_TERM, LOS_FAC_CODE, ETL_DATE]
+      - has_rows:
+          where: "ETL_DATE = DATE'{{ var('etl_date') }}'"
+    columns:
+      - name: internet_banking_service
+        description: "Dịch vụ Internet banking khách hàng giao tiếp"
+      - name: khoi
+        description: "mã Khối quản lý khách hàng"
+      - name: kyc_channel
+        description: "Kênh thực hiện KYC"
+      - name: ma_bhxh
+        description: "Mã bảo hiểm xã hội"
+      - name: mau_hd
+        description: "Mã biểu mẫu hợp đồng chuẩn áp dụng cho khách hàng"
+      - name: mb_cr_stt
+        description: "Trạng thái quan hệ tín dụng của khách hàng tại ngân hàng"
+      - name: mb_industry
+        description: "Ngành nghề kinh tế"
+      - name: mb_rm_bancheo
+        description: "Mã nhân sự bán chéo sản phẩm"
+      - name: mobile_banking_service
+        description: "Dịch vụ sử dụng sản phẩm mobile banking"
+      - name: mobile_number
+        description: "Số điện thoại di động"
+      - name: nat_id_exp_date
+        description: "Ngày hêt hạn CC"
+      - name: nat_id_iss_date
+        description: "Ngày cấp Căn cước"
+      - name: nat_id_iss_plc
+        description: "Nơi cấp Căn cước"
+      - name: nat_id_type
+        description: "Loại căn cước"
+      - name: national_id
+        description: "Số giấy tờ định danh quốc gia (CCCD/CMND)"
+      - name: nationality
+        description: "Quốc tịch"
+      - name: net_monthly_in
+        description: "Thu nhập theo tháng"
+      - name: no_lien_doi
+        description: "Nợ liên đới"
+      - name: occupation
+        description: "Nghề nghiệp của khách hàng"
+      - name: open_company
+        description: "Chi nhánh mở"
+      - name: phone_cont_per
+        description: "Số điện thoại của người liên hệ chính - KH tổ chức"
+      - name: cus_recid
+        description: "Mã CIF"
+      - name: referred_by
+        description: "Mã người tham chiếu/giới thiệu"
+      - name: resid_province
+        description: "Tỉnh/thành phố nơi cư trú"
+      - name: residence
+        description: "Quốc gia cư trú"
+      - name: second_officer
+        description: "Mã nhân viên hạch toán thứ 2"
+      - name: sector
+        description: "Mã phân loại hình khách hàng"
+      - name: short_name
+        description: "Tên viết tắt khách hàng"
+      - name: street
+        description: "Tên đường theo địa chỉ"
+      - name: target
+        description: "Mã phân khúc đối tượng khách hàng mục tiêu (Target Code)"
+      - name: tax_serial
+        description: "Mã số thuế"
+      - name: txn_date
+        description: "Ngày giao dịch / ngày cập nhật dữ liệu khách hàng"
+      - name: vat_inv_date
+        description: "Ngày phát hành hóa đơn"
+      - name: vat_inv_serial
+        description: "Số seri hóa đơn"
+      - name: vip_customer
+        description: "Đánh dấu khách hàng ưu tiên"
+      - name: vn_full_name
+        description: "Tên khách hàng đầy đủ"
+      - name: vn_gender
+        description: "Giới tính"
+      - name: vn_street
+        description: "Tên đường theo địa chỉ"
+      - name: vn_town
+        description: "Tên thành phố theo địa chỉ"
+      - name: name
+        description: "Tên nhân viên hạch toán"
+      - name: dao_recid
+        description: "Mã nhân viên hạch toán thứ 2"
+      - name: acc_fcc
+        description: "Mã hợp đồng FlexCube"
+      - name: amount
+        description: "Dự nợ hợp đồng"
+      - name: approve_amount
+        description: "Giá trị phê duyệt"
+      - name: authoriser
+        description: "Mã người phê duyệt"
+      - name: category
+        description: "Mã phân loại sản phẩm"
+      - name: co_code
+        description: "Mã chi nhánh quản lý hiện tại"
+      - name: commit_action
+        description: "Trường COMMIT_ACTION của bảng nguồn T24CORE.LD_LOANS_AND_DEPOSITS"
+      - name: cra_ld
+        description: "Số hồ sơ giải ngân"
+      - name: curr_no
+        description: "Version bản ghi hiện tại"
+      - name: currency
+        description: "Loại tiền"
+      - name: customer_id
+        description: "Mã khách hàng"
+      - name: date_time
+        description: "Ngày nhập liệu Core"
+      - name: drawdown_net_amt
+        description: "Số tiền thực tế giải ngân"
+      - name: excg_rate
+        description: "Tỷ giá quy đổi"
+      - name: fcc_limit
+        description: "Mã hạn mức trên Flexcube"
+      - name: fin_mat_date
+        description: "Ngày đáo hạn hợp đồng"
+      - name: id
+        description: "Thay = trường RECID"
+      - name: inputter
+        description: "ID người nhập liệu"
+      - name: int_liq_acct
+        description: "Tài khoản thanh toán lãi"
+      - name: int_rate_type
+        description: "Loại lãi suất : Fix , float"
+      - name: int_value_date
+        description: "Ngày hiệu lực lãi suất"
+      - name: interest_rate
+        description: "Giá trị lãi suất"
+      - name: interest_spread
+        description: "Biên độ lãi suất"
+      - name: limit_reference
+        description: "Mã tham chiếu hạn mức"
+      - name: loc_term
+        description: "Kỳ hạn"
+      - name: los_fac_code
+        description: "Số hồ sơ"

@@ -1,0 +1,38 @@
+version: 2
+
+models:
+  - name: ast_ar_int_smy
+    description: "PG_SILVER.AST_AR_INT_SMY – sheet 'Asset Arrangement Interest Summ'"
+    data_tests:
+      - column_contract:
+          expected: [CDR_DT, SRC_STM_CODE, AR_ID, AR_CODE, ORIG_AR_ID, ORIG_AR_CODE, TOT_ACR_INT_AMT_FCY, TOT_INT_PAID_AMT_FCY, TOT_INT_DUE_AMT_FCY, TOT_INT_ODUE_AMT_FCY]
+      - unique_key:
+          columns: [CDR_DT, AR_ID]
+          where: "CDR_DT = DATE'{{ var('etl_date') }}'"
+      - has_rows:
+          where: "CDR_DT = DATE'{{ var('etl_date') }}'"
+    columns:
+      - name: cdr_dt
+        description: "Ngày dữ liệu"
+      - name: src_stm_code
+        description: "Mã nguồn dữ liệu"
+      - name: ar_id
+        description: "ID hợp đồng"
+        data_tests:
+          - is_md5
+      - name: ar_code
+        description: "Mã hợp đồng"
+      - name: orig_ar_id
+        description: "ID hợp đồng gốc"
+        data_tests:
+          - is_md5
+      - name: orig_ar_code
+        description: "Mã hợp đồng gốc"
+      - name: tot_acr_int_amt_fcy
+        description: "Lãi dự thu"
+      - name: tot_int_paid_amt_fcy
+        description: "Lãi đã trả"
+      - name: tot_int_due_amt_fcy
+        description: "Lãi phải trả đến hạn"
+      - name: tot_int_odue_amt_fcy
+        description: "Lãi phải trả quá hạn"

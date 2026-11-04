@@ -1,0 +1,25 @@
+version: 2
+
+models:
+  - name: ou
+    description: "PG_SILVER.OU – sheet 'Organization Unit'"
+    data_tests:
+      - column_contract:
+          expected: [OU_ID, OU_CODE, OU_NM, SYS_EFF_DT, SYS_EXP_DT, SYS_UDT_DT]
+      - unique_key:
+          columns: [OU_ID]
+    columns:
+      - name: ou_id
+        description: "Unique key trên DWH"
+        data_tests:
+          - is_md5
+      - name: ou_code
+        description: "Mã chi nhánh"
+      - name: ou_nm
+        description: "Tên chi nhánh"
+      - name: sys_eff_dt
+        description: "Ngày bản ghi lần đầu tiên vào hệ thống"
+      - name: sys_exp_dt
+        description: "Ngày hết hạn của bản ghi"
+      - name: sys_udt_dt
+        description: "Ngày update dữ liệu gần nhất"

@@ -1,16 +1,15 @@
 lakehouse:
   target: dev
-
   outputs:
     dev:
       type: spark
       method: thrift
-      host: spark
+      host: "{{ env_var('DBT_SPARK_HOST', 'localhost') }}"
       port: 10000
       schema: default
-      user: airflow
       auth: NOSASL
-      threads: 4
+      user: dbt
+      threads: 2
       connect_retries: 10
       connect_timeout: 60
       retry_all: true

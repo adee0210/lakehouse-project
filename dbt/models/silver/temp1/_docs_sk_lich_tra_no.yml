@@ -1,0 +1,245 @@
+version: 2
+
+models:
+  - name: sk_lich_tra_no
+    description: "PG_SILVER.SK_LICH_TRA_NO – sheet 'sk_lich_tra_no'"
+    data_tests:
+      - column_contract:
+          expected: [LD_MB_RM_BANCHEO, LD_ORIG_VAL_DATE, LD_PE_RATE, LD_PRIN_LIQ_ACCT, LD_PRODUCTGR_CODE, PS_RATE, LD_REAL_RATE, LD_RECID, LD_RECORD_STATUS, STATUS, LD_USE_OF_LOAN, LD_USE_OF_LOAN_CHA, LD_VALUE_DATE, LDH_ACC_FCC, AMOUNT, LDH_APPROVE_AMOUNT, LDH_CATEGORY, LDH_CO_CODE, LDH_COMMIT_ACTION, CRA_LD, LDH_CURR_NO, LDH_CURRENCY, CUSTOMER_ID, LDH_DATE_TIME, DRAWDOWN_NET_AMT, EXCG_RATE, FIN_MAT_DATE, INT_LIQ_ACCT, INT_RATE_TYPE, INT_VALUE_DATE, INTEREST_RATE, INTEREST_SPREAD, LOC_TERM, LDH_MB_RM_BANCHEO, LDH_ORIG_VAL_DATE, LDH_PRIN_LIQ_ACCT, LDH_REAL_RATE, LDH_RECID, LDH_RECORD_STATUS, LDH_USE_OF_LOAN, LDH_USE_OF_LOAN_CHA, LDH_VALUE_DATE, CONTRACT_ID, PREV_SCHED_DATE, LD_ID, MG_PRODUCTGR_CODE, AUTHORISER, PD_CREDIT_STATUS, PD_CURR_NO, PD_CUSTOMER, PD_FLAG_STATUS, INPUTTER, LOS_FAC_CODE, PD_ORIGINAL_MAT, PD_PD_TYPE, PD_PE_RATE, PD_PENALTY_RATE, PD_RECID, SNQH_CHUYENDOI, PD_USE_OF_LOAN, PD_USE_OF_LOAN_CHA, PDH_CURR_NO, PDH_PD_TYPE, PDH_RECID, PDHMV_ACC_FCC, PDHMV_APPROVE_AMOUNT, PDHMV_CATEGORY, PDHMV_CO_CODE, PDHMV_CREDIT_STATUS, PDHMV_CURR_NO, PDHMV_CUSTOMER, PDHMV_DATE_TIME, PDHMV_FINAL_DUE_DATE, PDHMV_FLAG_STATUS, PDHMV_ORIGINAL_MAT, PDHMV_PAY_TYPE, PDHMV_PD_TYPE, PDHMV_PE_RATE, PDHMV_PENALTY_RATE, PDHMV_RECID, PDHMV_RECORD_STATUS, PDHMV_REPAYMENT_ACCT, ACC_FCC, APPROVE_AMOUNT, CATEGORY, CO_CODE, COMMIT_ACTION, CREDIT_STATUS, CURR_NO, CUSTOMER, DATE_TIME, FINAL_DUE_DATE, FLAG_STATUS, ID, ORIGINAL_MAT, PAY_AMT_OUTS, PAY_TYPE, PAYMENT_DTE_DUE, PD_TYPE, PE_RATE, PENALTY_RATE, RECID, RECORD_STATUS, REPAID_AMT, REPAYMENT_ACCT, CUSTOMER_TYPE, SEC_RECID, AMOUNT_FCY, AMOUNT_LCY, BOOKING_DATE, STMT_CURRENCY, OUR_REFERENCE, STMT_RECID, TRANSACTION_CODE, STMT_VALUE_DATE, PDHMV_PAYMENT_DTE_DUE, PDHMV_PAY_AMT_OUTS, ETL_DATE]
+      - has_rows:
+          where: "ETL_DATE = DATE'{{ var('etl_date') }}'"
+    columns:
+      - name: ld_mb_rm_bancheo
+        description: "ID nhân viên giới thiệu"
+      - name: ld_orig_val_date
+        description: "Ngày hiệu lực đầu tiên của hợp đồng"
+      - name: ld_pe_rate
+        description: "Lãi phạt penalty rate"
+      - name: ld_prin_liq_acct
+        description: "Tài khoản thanh toán gốc"
+      - name: ld_productgr_code
+        description: "Mã nhóm sản phẩm"
+      - name: ps_rate
+        description: "Lãi suất cho quá hạn"
+      - name: ld_real_rate
+        description: "Lãi suât thực tế"
+      - name: ld_recid
+        description: "Mã hợp đồng"
+      - name: ld_record_status
+        description: "Trạng thái bản ghi"
+      - name: status
+        description: "Trạng thái"
+      - name: ld_use_of_loan
+        description: "Mã mục đích vay"
+      - name: ld_use_of_loan_cha
+        description: "Mã nhóm mục đích vay"
+      - name: ld_value_date
+        description: "Ngày hiệu lực hợp đồng"
+      - name: ldh_acc_fcc
+        description: "Mã hợp đồng FlexCube"
+      - name: amount
+        description: "Dự nợ hợp đồng"
+      - name: ldh_approve_amount
+        description: "Giá trị giải ngân"
+      - name: ldh_category
+        description: "Mã phân loại sản phẩm"
+      - name: ldh_co_code
+        description: "Mã chi nhánh"
+      - name: ldh_commit_action
+        description: "Trường COMMIT_ACTION của bảng nguồn T24CORE.LD_LOANS_AND_DEPOSITS_HIS"
+      - name: cra_ld
+        description: "Mã hồ sơ"
+      - name: ldh_curr_no
+        description: "Version của bản ghi"
+      - name: ldh_currency
+        description: "Mã loại tiền"
+      - name: customer_id
+        description: "Mã khách hành"
+      - name: ldh_date_time
+        description: "Ngày nhập liệu Core"
+      - name: drawdown_net_amt
+        description: "Số tiền thực tế giải ngân"
+      - name: excg_rate
+        description: "Tỷ giá quy đổi"
+      - name: fin_mat_date
+        description: "Ngày đáo hạn"
+      - name: int_liq_acct
+        description: "Tài khoản thanh toán lãi"
+      - name: int_rate_type
+        description: "Loại lãi suất: cố định, thả nổi"
+      - name: int_value_date
+        description: "Ngày thu lãi"
+      - name: interest_rate
+        description: "Giá trị lãi suất"
+      - name: interest_spread
+        description: "Biên độ lãi suất"
+      - name: loc_term
+        description: "Kỳ hạn"
+      - name: ldh_mb_rm_bancheo
+        description: "ID nhân viên giới thiệu"
+      - name: ldh_orig_val_date
+        description: "Ngày hiệu lực đầu tiên của hợp đồng"
+      - name: ldh_prin_liq_acct
+        description: "tài khoản thanh toán gốc"
+      - name: ldh_real_rate
+        description: "Lãi suâất thực tế"
+      - name: ldh_recid
+        description: "Mã Hợp đồng"
+      - name: ldh_record_status
+        description: "Trạng thái bản ghi"
+      - name: ldh_use_of_loan
+        description: "Mã Mục đích vay"
+      - name: ldh_use_of_loan_cha
+        description: "Mã nhóm mục đích vay"
+      - name: ldh_value_date
+        description: "Ngày hiệu lực hợp đồng"
+      - name: contract_id
+        description: "Mã Hợp đồng"
+      - name: prev_sched_date
+        description: "Ngày thanh toán gần nhất"
+      - name: ld_id
+        description: "Mã Hợp đồng"
+      - name: mg_productgr_code
+        description: "Mã sản phẩm"
+      - name: authoriser
+        description: "ID người phê duyệt"
+      - name: pd_credit_status
+        description: "Tình trạng tín dụng"
+      - name: pd_curr_no
+        description: "Version hiện tại của bản ghi"
+      - name: pd_customer
+        description: "Mã Khách hàng"
+      - name: pd_flag_status
+        description: "Trường FLAG_STATUS của bảng nguồn T24CORE.PD_PAYMENT_DUE"
+      - name: inputter
+        description: "ID người nhập liệu"
+      - name: los_fac_code
+        description: "Số hồ sơ"
+      - name: pd_original_mat
+        description: "Kỳ hạn gốc"
+      - name: pd_pd_type
+        description: "Pd_type = 1 là các khoản phạt gốc quá hạn, lãi quá hạn đc migrate sang thành phần IN Null là gốc, lãi quá hạn"
+      - name: pd_pe_rate
+        description: "Lãi phạt penalty rate"
+      - name: pd_penalty_rate
+        description: "Lãi suất phạt quá hạn danh nghĩa (Penalty Rate)"
+      - name: pd_recid
+        description: "Mã hợp đồng"
+      - name: snqh_chuyendoi
+        description: "Số ngày quá hạn chuyển đổi"
+      - name: pd_use_of_loan
+        description: "Mã mục đích vay"
+      - name: pd_use_of_loan_cha
+        description: "Mã nhóm mục đích vay"
+      - name: pdh_curr_no
+        description: "Trường CURR_NO của bảng nguồn T24CORE.PD_PAYMENT_DUE_HIS"
+      - name: pdh_pd_type
+        description: "Loại sản phẩm"
+      - name: pdh_recid
+        description: "Số hồ sơ"
+      - name: pdhmv_acc_fcc
+        description: "Mã hợp đồng FlexCube"
+      - name: pdhmv_approve_amount
+        description: "Giá trị giải ngân"
+      - name: pdhmv_category
+        description: "Mã phân loại sản phẩm vay"
+      - name: pdhmv_co_code
+        description: "Mã chi nhánh"
+      - name: pdhmv_credit_status
+        description: "Nhóm nợ hợp đồng"
+      - name: pdhmv_curr_no
+        description: "Version hiện tại của bản ghi"
+      - name: pdhmv_customer
+        description: "Mã khách hàng"
+      - name: pdhmv_date_time
+        description: "Trường DATE_TIME của bảng nguồn T24CORE.PD_PAYMENT_DUE_HIS_MV"
+      - name: pdhmv_final_due_date
+        description: "Ngày trả nơ cuối khi quá hạn"
+      - name: pdhmv_flag_status
+        description: "Cờ đánh dấu trạng thái bản ghi"
+      - name: pdhmv_original_mat
+        description: "Ngày đáo hạn gốc"
+      - name: pdhmv_pay_type
+        description: "Loại hình thanh toán"
+      - name: pdhmv_pd_type
+        description: "Loại sản phẩm"
+      - name: pdhmv_pe_rate
+        description: "Lãi phạt penalty rate"
+      - name: pdhmv_penalty_rate
+        description: "Lãi suất phạt quá hạn danh nghĩa lịch sử"
+      - name: pdhmv_recid
+        description: "Key bản ghi"
+      - name: pdhmv_record_status
+        description: "Trạng thái bản ghi"
+      - name: pdhmv_repayment_acct
+        description: "Số tài khoản thanh toán"
+      - name: acc_fcc
+        description: "Mã hợp đồng FlexCube"
+      - name: approve_amount
+        description: "Giá trị giải ngân"
+      - name: category
+        description: "Mã phân loại sản phẩm vay"
+      - name: co_code
+        description: "Mã chi nhánh"
+      - name: commit_action
+        description: "Trường COMMIT_ACTION của bảng nguồn T24CORE.PD_PAYMENT_DUE_MV"
+      - name: credit_status
+        description: "Nhóm nợ hợp đồng"
+      - name: curr_no
+        description: "Version hiện tại của bản ghi"
+      - name: customer
+        description: "Mã khách hàng"
+      - name: date_time
+        description: "Trường DATE_TIME của bảng nguồn T24CORE.PD_PAYMENT_DUE_MV"
+      - name: final_due_date
+        description: "Ngày trả nơ cuối khi quá hạn"
+      - name: flag_status
+        description: "Cờ đánh dấu trạng thái bản ghi"
+      - name: id
+        description: "Mã hợp đồng"
+      - name: original_mat
+        description: "Ngày đáo hạn gốc"
+      - name: pay_amt_outs
+        description: "Số tiền còn lại chưa thanh toán"
+      - name: pay_type
+        description: "Loại hình thanh toán"
+      - name: payment_dte_due
+        description: "Hạn thanh toán"
+      - name: pd_type
+        description: "Loại sản phẩm"
+      - name: pe_rate
+        description: "Lãi phạt penalty rate"
+      - name: penalty_rate
+        description: "Lãi suất phạt quá hạn danh nghĩa (Multi-value)"
+      - name: recid
+        description: "Key bản ghi"
+      - name: record_status
+        description: "Trạng thái bản ghi"
+      - name: repaid_amt
+        description: "Số tiền đã trả"
+      - name: repayment_acct
+        description: "Số tài khoản thanh toán"
+      - name: customer_type
+        description: "Loại khách hàng"
+      - name: sec_recid
+        description: "Mã định danh"
+      - name: amount_fcy
+        description: "Dư nợ nguyên tệ"
+      - name: amount_lcy
+        description: "Dư nợ quy đổi"
+      - name: booking_date
+        description: "Ngay but toan ghi nhan vao he thong"
+      - name: stmt_currency
+        description: "Loai tien but toan"
+      - name: our_reference
+        description: "Ma tham chieu"
+      - name: stmt_recid
+        description: "Mã giao dịch, Unique ID"
+      - name: transaction_code
+        description: "Mã giao dịch"
+      - name: stmt_value_date
+        description: "Ngay Hieu luc but toan"
+      - name: pdhmv_payment_dte_due
+        description: "Hạn thanh toán lịch sử quá hạn"
+      - name: pdhmv_pay_amt_outs
+        description: "Số tiền quá hạn còn lại chưa thanh toán"

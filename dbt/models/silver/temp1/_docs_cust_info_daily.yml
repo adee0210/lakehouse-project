@@ -1,0 +1,137 @@
+version: 2
+
+models:
+  - name: cust_info_daily
+    description: "PG_SILVER.CUST_INFO_DAILY – sheet 'CUST_INFO_DAILY'"
+    data_tests:
+      - column_contract:
+          expected: [COL_REF, FUNCTION_CODE, UDF_VALUE, UDF_MAP_CONTRACT_REF_NO, FIELD_NAME, FIELD_VAL, FCC_BOOKING_DATE, FCC_CONTRACT_REF_NO, VERSION_NO, CAN_BO_DE_XUAT_GN, CAR_APPLICATION_CODE, LOS_TD_CONTRACT_REF_NO, LOS_CONTRACT_CODE, MDVAY_NKT, MDVAY_SP, LOS_TD_MOV_DATE, TT_PP_DE_XUAT_GN, UDFH_CONTRACT_REF_NO, CT_KHUYEN_MAI_CHO_VAY, CTKM2, UDFH_MOV_DATE, CO_CAU_NO, RTH_CONTRACT_REF_NO, NGAY_HET_COVID19, FAC_ID, PRODUCT_ID, AMND_STATE, LOS_DSBR_BOOKING_DATE, EXT_REF_NO_1, FACILITY_ID, STATUS, PROD_ID, PRODUCT_CODE, PRODUCT_NAME, ACCOUNT, ACCOUNT_ID, ACCOUNT_NUM, ACCOUNT_NUMBER, ACCOUNTING_DATE, ACCT_ID, AMOUNT_FCY, AMOUNT_LCY, BALANCE_TYPE, BOOKING_DATE, CARD_NUMBER, CO_CODE, COMMIT_ACTION, COMMIT_TS, COMPANY_CODE, CONSOL_KEY, CONTRACT_BAL_ID, CRF_PROD_CAT, CRF_TYPE, CURR_NO, CURRENCY, CUSTOMER_ID, CYCLE_FORWARD, DATE_TIME, DEPARTMENT_CODE, DRAWN_ACCOUNT, EXCHANGE_RATE, INTERNAL_CATEGORY, LOCAL_REF, ETL_DATE]
+      - has_rows:
+          where: "ETL_DATE = DATE'{{ var('etl_date') }}'"
+    columns:
+      - name: col_ref
+        description: "Cột Tham chiếu"
+      - name: function_code
+        description: "Mã chức năng"
+      - name: udf_value
+        description: "Giá trị UDF"
+      - name: udf_map_contract_ref_no
+        description: "Mã HĐ tham chiếu"
+      - name: field_name
+        description: "Tên trường"
+      - name: field_val
+        description: "Giá trị tương ứng với từng trường"
+      - name: fcc_booking_date
+        description: "Ngày ghi nhận"
+      - name: fcc_contract_ref_no
+        description: "Mã Hợp đồng"
+      - name: version_no
+        description: "Version của bản ghi"
+      - name: can_bo_de_xuat_gn
+        description: "Cán bộ đề xuất giải ngân"
+      - name: car_application_code
+        description: "Mã hồ sơ đăng kí vay vốn"
+      - name: los_td_contract_ref_no
+        description: "Mã hợp đồng giải ngân"
+      - name: los_contract_code
+        description: "mã hợp đồng vay"
+      - name: mdvay_nkt
+        description: "Mục đích vay theo ngành kinh tế"
+      - name: mdvay_sp
+        description: "Mục đích vay theo sản phẩm"
+      - name: los_td_mov_date
+        description: "Ngày dữ liệu"
+      - name: tt_pp_de_xuat_gn
+        description: "Người đề xuất giải ngân"
+      - name: udfh_contract_ref_no
+        description: "Mã hợp đồng"
+      - name: ct_khuyen_mai_cho_vay
+        description: "Mã chương trình KM cho vay"
+      - name: ctkm2
+        description: "Mã CTKM2"
+      - name: udfh_mov_date
+        description: "Ngày phát sinh"
+      - name: co_cau_no
+        description: "Cơ cấu nợ"
+      - name: rth_contract_ref_no
+        description: "Mã Hợp đồng"
+      - name: ngay_het_covid19
+        description: "Ngày hết covid/ Ngày hết hạn cơ cấu"
+      - name: fac_id
+        description: "Key của bản ghi"
+      - name: product_id
+        description: "Mã sản phẩm"
+      - name: amnd_state
+        description: "Trạng thái Hợp đồng"
+      - name: los_dsbr_booking_date
+        description: "Ngày ghi nhận"
+      - name: ext_ref_no_1
+        description: "Số tham chiếu bên ngoài"
+      - name: facility_id
+        description: "Mã định danh hạn mức tín dụng"
+      - name: status
+        description: "Trạng thái tín dụng"
+      - name: prod_id
+        description: "Key của bản ghi"
+      - name: product_code
+        description: "Mã sản phẩm"
+      - name: product_name
+        description: "Tên sản phẩm"
+      - name: account
+        description: "Trường ACCOUNT của bảng nguồn SMY.STMT_DAILY"
+      - name: account_id
+        description: "Trường ACCOUNT_ID của bảng nguồn SMY.STMT_DAILY"
+      - name: account_num
+        description: "Trường ACCOUNT_NUM của bảng nguồn SMY.STMT_DAILY"
+      - name: account_number
+        description: "Số tài khoản liên quan"
+      - name: accounting_date
+        description: "Ngày hạch toán"
+      - name: acct_id
+        description: "Maã định danh tài khoản"
+      - name: amount_fcy
+        description: "Dư nợ nguyên tệ"
+      - name: amount_lcy
+        description: "Dư nợ quy đổi"
+      - name: balance_type
+        description: "Loại bút toán"
+      - name: booking_date
+        description: "Ngay but toan ghi nhan vao he thong"
+      - name: card_number
+        description: "Số thẻ"
+      - name: co_code
+        description: "Trường CO_CODE của bảng nguồn SMY.STMT_DAILY"
+      - name: commit_action
+        description: "Trường kỹ thuật đánh dấu bản ghi IUD"
+      - name: commit_ts
+        description: "Thời điểm ghi nhận commit giao dịch trên Core T24"
+      - name: company_code
+        description: "Mã chi nhánh hạch toán"
+      - name: consol_key
+        description: "Consol key của bút toán STMT"
+      - name: contract_bal_id
+        description: "Trường CONTRACT_BAL_ID của bảng nguồn SMY.STMT_DAILY"
+      - name: crf_prod_cat
+        description: "Mã Category phân loại bút toán"
+      - name: crf_type
+        description: "Cờ đánh dấu ghi nợ/ghi có"
+      - name: curr_no
+        description: "Trường kỹ thuật, đánh dấu version thay đổi bút toán"
+      - name: currency
+        description: "Loai tien but toan"
+      - name: customer_id
+        description: "Mã khách hàng ứng với Account_number"
+      - name: cycle_forward
+        description: "Cờ kết chuyển chu kỳ hạch toán (Cycle Forward)"
+      - name: date_time
+        description: "Trường kỹ thuật, ghi nhận thời gian sửa đổi"
+      - name: department_code
+        description: "Mã đơn vị hạch toán"
+      - name: drawn_account
+        description: "Tài khoản ghi nhận số tiền rút"
+      - name: exchange_rate
+        description: "Tỷ giá quy đổi"
+      - name: internal_category
+        description: "Mã Category nội bộ"
+      - name: local_ref
+        description: "Trường multivalue - đa nghĩa của T24"

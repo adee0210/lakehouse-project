@@ -1,0 +1,25 @@
+version: 2
+
+models:
+  - name: dim_rstc_tp
+    description: "PG_GOLD.DIM_RSTC_TP – sheet 'Dimension Loan Restructure Type'"
+    data_tests:
+      - column_contract:
+          expected: [DIM_KEY, RSTC_TP_ID, RSTC_TP_CODE, RSTC_TP_DSC, SYS_EFF_DT, SYS_EXP_DT]
+      - unique_key:
+          columns: [DIM_KEY]
+      - scd2_single_current:
+          columns: [RSTC_TP_ID]
+    columns:
+      - name: dim_key
+        description: "Key của bảng"
+      - name: rstc_tp_id
+        description: "Mã duy nhất của loại cơ cấu trên DWH"
+      - name: rstc_tp_code
+        description: "Mã loại cơ cấu"
+      - name: rstc_tp_dsc
+        description: "Mô tả loại cơ cấu"
+      - name: sys_eff_dt
+        description: "Ngày hiệu lực bản ghi"
+      - name: sys_exp_dt
+        description: "Ngày hết hiệu lực bản ghi"

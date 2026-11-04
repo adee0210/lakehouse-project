@@ -1,0 +1,25 @@
+version: 2
+
+models:
+  - name: dim_fnc_st
+    description: "PG_GOLD.DIM_FNC_ST – sheet 'Dimension Financial Status'"
+    data_tests:
+      - column_contract:
+          expected: [DIM_KEY, FNC_ST_ID, FNC_ST_CODE, FNC_ST_DSC, SYS_EFF_DT, SYS_EXP_DT]
+      - unique_key:
+          columns: [DIM_KEY]
+      - scd2_single_current:
+          columns: [FNC_ST_ID]
+    columns:
+      - name: dim_key
+        description: "Key của bảng"
+      - name: fnc_st_id
+        description: "Mã duy nhất của nhóm nợ trên DWH"
+      - name: fnc_st_code
+        description: "Mã nhóm nợ"
+      - name: fnc_st_dsc
+        description: "Mô tả nhóm nợ"
+      - name: sys_eff_dt
+        description: "Ngày hiệu lực bản ghi"
+      - name: sys_exp_dt
+        description: "Ngày hết hiệu lực bản ghi"

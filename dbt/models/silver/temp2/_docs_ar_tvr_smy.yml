@@ -1,0 +1,66 @@
+version: 2
+
+models:
+  - name: ar_tvr_smy
+    description: "PG_SILVER.AR_TVR_SMY – sheet 'Arrangement Turnover Summary'"
+    data_tests:
+      - column_contract:
+          expected: [CDR_DT, SRC_STM_CODE, AR_ID, AR_CODE, ORIG_AR_ID, ORIG_AR_CODE, CLS_BAL_FCY, CLS_BAL_LCY, TOT_RECBL_PNP_AMT_FCY, TOT_DUE_PNP_AMT_FCY, TOT_ODUE_PNP_AMT_FCY, DSBR_AMT_LTD_FCY, DB_AMT_IN_DAY_FCY, NBR_OF_DB_IN_DAY, CR_AMT_IN_DAY_FCY, NBR_OF_CR_IN_DAY, DB_AMT_IN_MO_FCY, NBR_OF_DB_IN_MO, CR_AMT_IN_MO_FCY, NBR_OF_CR_IN_MO, DB_AMT_IN_YR_FCY, NBR_OF_DB_IN_YR, CR_AMT_IN_YR_FCY, NBR_OF_CR_IN_YR]
+      - unique_key:
+          columns: [CDR_DT, AR_ID]
+          where: "CDR_DT = DATE'{{ var('etl_date') }}'"
+      - has_rows:
+          where: "CDR_DT = DATE'{{ var('etl_date') }}'"
+    columns:
+      - name: cdr_dt
+        description: "Ngày dữ liệu"
+      - name: src_stm_code
+        description: "Mã nguồn dữ liệu"
+      - name: ar_id
+        description: "ID hợp đồng"
+        data_tests:
+          - is_md5
+      - name: ar_code
+        description: "Mã hợp đồng"
+      - name: orig_ar_id
+        description: "ID hợp đồng gốc"
+        data_tests:
+          - is_md5
+      - name: orig_ar_code
+        description: "Mã hợp đồng gốc"
+      - name: cls_bal_fcy
+        description: "Dư nợ còn lại nguyên tệ"
+      - name: cls_bal_lcy
+        description: "Dư nợ còn lại quy đổi"
+      - name: tot_recbl_pnp_amt_fcy
+        description: "Tổng dư nợ gốc có thể thu được"
+      - name: tot_due_pnp_amt_fcy
+        description: "Tổng dư nợ gốc đến hạn"
+      - name: tot_odue_pnp_amt_fcy
+        description: "Tổng dư nợ gốc quá hạn"
+      - name: dsbr_amt_ltd_fcy
+        description: "Tổng giá trị giải ngân từ trước đến nay"
+      - name: db_amt_in_day_fcy
+        description: "Số tiền ghi nợ trong ngày"
+      - name: nbr_of_db_in_day
+        description: "Số giao dịch ghi nợ trong ngày"
+      - name: cr_amt_in_day_fcy
+        description: "Số tiền ghi có trong ngày"
+      - name: nbr_of_cr_in_day
+        description: "Số giao dịch ghi có trong ngày"
+      - name: db_amt_in_mo_fcy
+        description: "Số tiền ghi nợ trong tháng"
+      - name: nbr_of_db_in_mo
+        description: "Số giao dịch ghi nợ trong tháng"
+      - name: cr_amt_in_mo_fcy
+        description: "Số tiền ghi có trong tháng"
+      - name: nbr_of_cr_in_mo
+        description: "Số giao dịch ghi có trong tháng"
+      - name: db_amt_in_yr_fcy
+        description: "Số tiền ghi nợ trong năm"
+      - name: nbr_of_db_in_yr
+        description: "Số giao dịch ghi nợ trong năm"
+      - name: cr_amt_in_yr_fcy
+        description: "Số tiền ghi có trong năm"
+      - name: nbr_of_cr_in_yr
+        description: "Số giao dịch ghi có trong năm"

@@ -1,0 +1,33 @@
+version: 2
+
+models:
+  - name: dim_cst
+    description: "PG_GOLD.DIM_CST – sheet 'Dimension Customer'"
+    data_tests:
+      - column_contract:
+          expected: [DIM_KEY, CST_ID, CST_CODE, CST_NM, SCTR_CODE, IDY_LV1_CL_CODE, IDY_LV2_CL_CODE, SYS_EFF_DT, SYS_EXP_DT]
+      - unique_key:
+          columns: [DIM_KEY]
+      - scd2_single_current:
+          columns: [CST_ID]
+    columns:
+      - name: dim_key
+        description: "Key của bảng"
+      - name: cst_id
+        description: "Unique key trên DWH"
+        data_tests:
+          - is_md5
+      - name: cst_code
+        description: "Mã khách hàng"
+      - name: cst_nm
+        description: "Tên khách hàng"
+      - name: sctr_code
+        description: "Mã phân loại hình khách hàng"
+      - name: idy_lv1_cl_code
+        description: "Mã ngành nghê kinh tế cha"
+      - name: idy_lv2_cl_code
+        description: "Ngành nghề kinh tế"
+      - name: sys_eff_dt
+        description: "Ngày hiệu lực bản ghi"
+      - name: sys_exp_dt
+        description: "Ngày hết hiệu lực bản ghi"

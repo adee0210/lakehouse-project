@@ -1,0 +1,10 @@
+data/minio/
+data/mock_source/
+airflow/logs/
+dbt/target/
+dbt/logs/
+dbt/dbt_packages/
+__pycache__/
+*.pyc
+.env
+data/*.log

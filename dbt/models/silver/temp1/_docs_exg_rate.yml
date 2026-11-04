@@ -1,0 +1,24 @@
+version: 2
+
+models:
+  - name: exg_rate
+    description: "PG_SILVER.EXG_RATE – sheet 'Exchange Rate'"
+    data_tests:
+      - column_contract:
+          expected: [SNPST_DT, SRC_STM_CODE, FRST_CCY_CODE, SCD_CCY_CODE, MID_RATE]
+      - unique_key:
+          columns: [SNPST_DT, FRST_CCY_CODE]
+          where: "SNPST_DT = DATE'{{ var('etl_date') }}'"
+      - has_rows:
+          where: "SNPST_DT = DATE'{{ var('etl_date') }}'"
+    columns:
+      - name: snpst_dt
+        description: "Ngày dữ liệu"
+      - name: src_stm_code
+        description: "Mã nguồn dữ liệu"
+      - name: frst_ccy_code
+        description: "Mã loại tiền tệ gốc"
+      - name: scd_ccy_code
+        description: "Mã loại tiền tệ tính tỷ giá"
+      - name: mid_rate
+        description: "Tỷ giá mid"

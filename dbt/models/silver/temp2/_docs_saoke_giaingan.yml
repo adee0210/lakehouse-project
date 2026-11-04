@@ -1,0 +1,157 @@
+version: 2
+
+models:
+  - name: saoke_giaingan
+    description: "PG_SILVER.SAOKE_GIAINGAN – sheet 'Saoke_GIAINGAN'"
+    data_tests:
+      - column_contract:
+          expected: [NARRATIVE, ORIG_AMOUNT_LCY, ORIGINAL_ACCT, ORIGINAL_AMOUNT, ORIGINAL_CCY, ORIGINAL_EXCH_RATE, OUR_REFERENCE, OUTSTANDING_BAL, OVERRIDE, PROCESS_FORWARD, PROCESSING_DATE, PRODUCT_CATEGORY, STMT_RECID, RECORD_STATUS, REPAYMENT_AMT, REPAYMENT_DATE, REPAYMENT_TYPE, STMT_ENTRY_ID, STMT_NO, SUSPENSE_CATEGORY, SUSPNSE_VALUE_DATE, SYSTEM_ID, THEIR_REFERENCE, TRANS_REFERENCE, TRANSACTION_CODE, STMT_TXN_DATE, VALUE_DATE, ACC_FCC, AMOUNT_CUR, AMOUNT_LCY, APP_CODE, APP_ID, ASSET_CLASS, ASSET_TYPE, CATEG_CODE, CO_CODE, CURR, CUS_ID, DATE, LOC_TERM, MAT_DATE, SBV_CODE, SUB_PRO, TXN_DATE, VAL_DATE, MVMT_SBV_CODE, TRANS_REF, MVMT_TXN_DATE, COMPANY_NAME, COMP_RECID, ACCOUNT_OFFICER, ACTIVE_STATUS, AML_CHECK, AML_RESULT, BDATE_LEGAL, BDAY_DIRECTOR, BIRTH_INCORP_DATE, CUS_CO_CODE, COMPANY_BOOK, CONTACT_DATE, CONTACT_PERSON, COUNTRY, CU_EFF_DATE, CUS_IND_PARENT, CUSTOMER_STATUS, DATE_TIME, EMAIL_ADDRESS, EMPLOYMENT_STATUS, ESTAB_LIC_CODE, FFB_TYPE, GEN_DIR_PLC, HOME_NUMBER, INDUSTRY, ETL_DATE]
+      - has_rows:
+          where: "ETL_DATE = DATE'{{ var('etl_date') }}'"
+    columns:
+      - name: narrative
+        description: "Mô tả bút toán"
+      - name: orig_amount_lcy
+        description: "Giá trị hạch toán ban đầu quy đổi"
+      - name: original_acct
+        description: "Số tài khoản hạch toán ban đầu"
+      - name: original_amount
+        description: "Giá trị hạch toán ban đầu nguyên tệ"
+      - name: original_ccy
+        description: "Loại tiền giao dịch ban đầu"
+      - name: original_exch_rate
+        description: "Tỷ giá quy đổi cho loại tiền ban đầu"
+      - name: our_reference
+        description: "Ma tham chieu"
+      - name: outstanding_bal
+        description: "Dư nợ tín dụng của hợp đồng ( OUR_REFERENCE)"
+      - name: override
+        description: "Cờ cảnh báo"
+      - name: process_forward
+        description: "Cờ xử lý chuyển tiếp bút toán hạch toán (Process Forward)"
+      - name: processing_date
+        description: "Trường PROCESSING_DATE của bảng nguồn SMY.STMT_DAILY"
+      - name: product_category
+        description: "Loại sản phẩm hạch toán"
+      - name: stmt_recid
+        description: "Mã giao dịch, Unique ID"
+      - name: record_status
+        description: "Trạng Thái bản ghi"
+      - name: repayment_amt
+        description: "Số tiền thu nợ"
+      - name: repayment_date
+        description: "Ngày thu"
+      - name: repayment_type
+        description: "Loại thu nợ"
+      - name: stmt_entry_id
+        description: "Trường STMT_ENTRY_ID của bảng nguồn SMY.STMT_DAILY"
+      - name: stmt_no
+        description: "Trường STMT_NO của bảng nguồn SMY.STMT_DAILY"
+      - name: suspense_category
+        description: "Mã Category phân loại bút toán bị treo"
+      - name: suspnse_value_date
+        description: "Ngày bút toán treo"
+      - name: system_id
+        description: "Mã phân hệ"
+      - name: their_reference
+        description: "Trường THEIR_REFERENCE của bảng nguồn SMY.STMT_DAILY"
+      - name: trans_reference
+        description: "Trường TRANS_REFERENCE của bảng nguồn SMY.STMT_DAILY"
+      - name: transaction_code
+        description: "Mã giao dịch"
+      - name: stmt_txn_date
+        description: "Trường TXN_DATE của bảng nguồn SMY.STMT_DAILY"
+      - name: value_date
+        description: "Ngay Hieu luc but toan"
+      - name: acc_fcc
+        description: "Mã hợp đồng FlexCube"
+      - name: amount_cur
+        description: "Số tiền dự thu"
+      - name: amount_lcy
+        description: "Dư Nợ quy đổi"
+      - name: app_code
+        description: "Mã phân hệ: LD, MD, AC, PD"
+      - name: app_id
+        description: "Mã hợp đồng"
+      - name: asset_class
+        description: "Nhóm nợ khách hàng Core tính"
+      - name: asset_type
+        description: "Loại dư nợ, hạch toán"
+      - name: categ_code
+        description: "Mã phân loại sản phẩm"
+      - name: co_code
+        description: "Mã chi nhánh hạch toán"
+      - name: curr
+        description: "Loại tiền"
+      - name: cus_id
+        description: "Mã khách hàng"
+      - name: date
+        description: "Ngày giao dịch YYYYMMDD"
+      - name: loc_term
+        description: "Trường LOC_TERM của bảng nguồn SOURCE.SAOKE_CRB"
+      - name: mat_date
+        description: "Ngày đáo hạn hợp đồng"
+      - name: sbv_code
+        description: "Mã hạch toán theo SBV"
+      - name: sub_pro
+        description: "Mã sản phẩm con"
+      - name: txn_date
+        description: "Ngày giao dịch"
+      - name: val_date
+        description: "Ngày hiệu lực hợp đồng"
+      - name: mvmt_sbv_code
+        description: "Mã hạch toán theo SBV"
+      - name: trans_ref
+        description: "Mã tham chiếu giao dịch"
+      - name: mvmt_txn_date
+        description: "Ngày thực hiện giao dịch"
+      - name: company_name
+        description: "Tên chi nhánh"
+      - name: comp_recid
+        description: "Mã chi nhánh"
+      - name: account_officer
+        description: "Mã nhân viên hạch toán"
+      - name: active_status
+        description: "Trạng thái bản ghi"
+      - name: aml_check
+        description: "Liên quan tới hệ thống Phòng Chống rửa tiền"
+      - name: aml_result
+        description: "Liên quan tới hệ thống Phòng Chống rửa tiền"
+      - name: bdate_legal
+        description: "Ngày sinh của người đại diện theo pháp luật"
+      - name: bday_director
+        description: "Ngày sinh giám đốc công ty"
+      - name: birth_incorp_date
+        description: "Ngày thành lập doanh nghiệp"
+      - name: cus_co_code
+        description: "Mã chi nhánh quản lý khách hàng"
+      - name: company_book
+        description: "Mã chi nhánh mở CIF"
+      - name: contact_date
+        description: "Ngày khách hàng liên hệ/mở CIF"
+      - name: contact_person
+        description: "Họ tên người liên hệ của khách hàng doanh nghiệp"
+      - name: country
+        description: "Tên quốc gia nơi cư trú / đặt trụ sở"
+      - name: cu_eff_date
+        description: "Ngày hiệu lực phân hạng khách hàng VIP"
+      - name: cus_ind_parent
+        description: "Mã ngành nghê kinh tế cha"
+      - name: customer_status
+        description: "Trạng thái hiện tại của khách hàng"
+      - name: date_time
+        description: "Ngày giờ bản ghi nhập liệu"
+      - name: email_address
+        description: "Địa chỉ emai"
+      - name: employment_status
+        description: "Mã tình trạng việc làm của khách hàng cá nhân"
+      - name: estab_lic_code
+        description: "Số giấy phép thành lập / đăng ký kinh doanh"
+      - name: ffb_type
+        description: "Phân hạng khách hàng ưu tiên (VIP Type)"
+      - name: gen_dir_plc
+        description: "Nơi sinh / quốc tịch của Tổng giám đốc / người đại diện"
+      - name: home_number
+        description: "Số điện thoại nhà tiêng"
+      - name: industry
+        description: "Mã ngành nghề đăng ký kinh doanh"

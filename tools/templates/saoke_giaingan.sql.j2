@@ -1,0 +1,35 @@
+-- Wave 2 | PG_SILVER.Saoke_GIAINGAN – SNAPSHOT (Business Disbursement Statement)
+-- Sheet 'Saoke_GIAINGAN': __NCOLS__ cột. main = SOURCE_SAOKE_CRB (crb, APP_CODE LD/PD, TXN_DATE = ${ETL_DATE})
+-- + SMY_STMT_DAILY (giao dịch giải ngân 402 trong ngày) + SAOKE_MVMT + CUSTOMER + COMPANY.
+-- Grain: 1 dòng / dòng số dư crb (APP_ID x SBV_CODE). stmt/mvmt khử trùng 1 dòng / hợp đồng để không nhân bản số dư.
+{{ config(materialized='incremental', incremental_strategy='append', partition_by=['ETL_DATE'],
+          pre_hook="{{ delete_partition('ETL_DATE') }}", alias='saoke_giaingan') }}
+
+with crb as (
+    select * from {{ bz('source_saoke_crb') }}
+    where APP_CODE in ('LD', 'PD') and {{ t24_date('TXN_DATE') }} = {{ etl_date() }}
+),
+stmt as (
+    select * from (
+        select s.*, row_number() over (partition by s.OUR_REFERENCE order by s.RECID desc) as rn
+        from {{ bz('smy_stmt_daily') }} s
+        where s.TRANSACTION_CODE = '402' and {{ t24_date('s.BOOKING_DATE') }} = {{ etl_date() }}
+    ) where rn = 1
+),
+mvmt as (
+    select * from (
+        select m.*, row_number() over (partition by m.TRANS_REF order by m.SBV_CODE) as rn
+        from {{ bz('source_saoke_mvmt') }} m
+        where {{ t24_date('m.TXN_DATE') }} = {{ etl_date() }}
+    ) where rn = 1
+),
+cus as (select * from {{ bz('t24core_customer') }}),
+comp as (select * from {{ bz('t24core_company') }})
+select
+__SELECT_LIST__,
+    {{ etl_date() }} as ETL_DATE
+from crb
+left join stmt on crb.APP_ID = stmt.OUR_REFERENCE
+left join mvmt on crb.APP_ID = mvmt.TRANS_REF
+left join cus  on crb.CUS_ID = cus.RECID
+left join comp on crb.CO_CODE = comp.RECID

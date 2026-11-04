@@ -1,0 +1,70 @@
+version: 2
+
+models:
+  - name: idv_prfl
+    description: "PG_SILVER.IDV_PRFL – sheet 'Individual Profile'"
+    data_tests:
+      - column_contract:
+          expected: [CST_ID, CST_CODE, CST_LCS_CODE, AML_CHK_F, AML_RSLT, CST_FNC_ST_CODE, OU_CODE, CST_ST_CODE, INN_BNKG_F, KYC_CNL_CODE, VSS_CODE, MBL_BNKG_F, CTY_OF_CTZN_CODE, JNT_LBY_F, TAX_IDENTN_NBR, VIP_F, GND, IDY_LV1_CL_CODE, IDY_LV2_CL_CODE, DOB, VIP_TP_CODE, VIP_EFF_DT, BSN_RGST_EFF_DT, MB_CR_ST, SYS_EFF_DT, SYS_EXP_DT, SYS_UDT_DT]
+      - unique_key:
+          columns: [CST_ID, SYS_EFF_DT]
+      - scd2_single_current:
+          columns: [CST_ID]
+      - scd2_valid_period
+    columns:
+      - name: cst_id
+        description: "Unique key trên DWH"
+        data_tests:
+          - is_md5
+      - name: cst_code
+        description: "Mã CIF"
+      - name: cst_lcs_code
+        description: "Trạng thái bản ghi"
+      - name: aml_chk_f
+        description: "Liên quan tới hệ thống Phòng Chống rửa tiền"
+      - name: aml_rslt
+        description: "Liên quan tới hệ thống Phòng Chống rửa tiền"
+      - name: cst_fnc_st_code
+        description: "Nhóm nợ khách hàng Core tính"
+      - name: ou_code
+        description: "Mã chi nhánh quản lý khách hàng"
+      - name: cst_st_code
+        description: "Trạng thái hiện tại của khách hàng"
+      - name: inn_bnkg_f
+        description: "Dịch vụ Internet banking khách hàng giao tiếp"
+      - name: kyc_cnl_code
+        description: "Kênh thực hiện KYC"
+      - name: vss_code
+        description: "Mã bảo hiểm xã hội"
+      - name: mbl_bnkg_f
+        description: "Dịch vụ sử dụng sản phẩm mobile banking"
+      - name: cty_of_ctzn_code
+        description: "Quốc tịch"
+      - name: jnt_lby_f
+        description: "Nợ liên đới"
+      - name: tax_identn_nbr
+        description: "Mã số thuế"
+      - name: vip_f
+        description: "Đánh dấu khách hàng ưu tiên"
+      - name: gnd
+        description: "Giới tính"
+      - name: idy_lv1_cl_code
+        description: "Mã ngành nghê kinh tế cha"
+      - name: idy_lv2_cl_code
+        description: "Ngành nghề kinh tế"
+      - name: dob
+        description: "Ngày sinh khách hàng cá nhân"
+      - name: vip_tp_code
+        description: "Phân hạng khách hàng ưu tiên (VIP)"
+      - name: vip_eff_dt
+        description: "Ngày hiệu lực phân hạng khách hàng VIP"
+      - name: bsn_rgst_eff_dt
+        description: "Ngày phát hành hóa đơn"
+      - name: mb_cr_st
+        description: "Trạng thái quan hệ tín dụng MB"
+      - name: sys_eff_dt
+        description: "Ngày bản ghi lần đầu tiên vào hệ thống"
+      - name: sys_exp_dt
+        description: "Ngày hết hạn của bản ghi"
+      - name: sys_udt_dt
+        description: "Ngày update dữ liệu gần nhất"

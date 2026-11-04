@@ -1,0 +1,97 @@
+version: 2
+
+models:
+  - name: loan_ar_prfl
+    description: "PG_SILVER.LOAN_AR_PRFL – sheet 'Loan Arrangement Profile'"
+    data_tests:
+      - column_contract:
+          expected: [SRC_STM_CODE, AR_ID, AR_CODE, INT_LQD_AR_CODE, INT_LQD_AR_ID, PNP_LQD_AR_CODE, PNP_LQD_AR_ID, AR_LCS_TP_CODE, OU_CODE, MAND_REPYMT, NBR_OF_DBT_RSTC, SCR_TP, CAR_AP_CODE, LOS_CTR_CODE, LOS_CTR_ID, DBT_WVR_F, AR_PPS_BY_IDY, AR_PPS_BY_PD, DSBR_PRPSL_OFCR, DSBR_PRPSL_MGR, MGT_OFCR, MGT_MGR, APRV_AHR, CHKER_OFCR, MAKER_OFCR, REFRRER_OFCR, PROM_PRGM, PROM_PRGM_2, DBT_RSTC_TP_CODE, COVID19_RSTC_COMPL_DT, GL_ITM_CODE, GL_ITM_ID, FNC_ST_CODE, BDS_TT11, SYS_EFF_DT, SYS_EXP_DT, SYS_UDT_DT]
+      - unique_key:
+          columns: [AR_ID, SYS_EFF_DT]
+      - scd2_single_current:
+          columns: [AR_ID]
+      - scd2_valid_period
+    columns:
+      - name: src_stm_code
+        description: "Mã hệ thống nguồn dữ liệu"
+      - name: ar_id
+        description: "Unique key trên DWH"
+        data_tests:
+          - is_md5
+          - hash_match_rate:
+              to: "ref('loan_ar')"
+              field: AR_ID
+              where: "SYS_EXP_DT is null"
+              to_where: "SYS_EXP_DT is null"
+      - name: ar_code
+        description: "Mã hợp đồng"
+      - name: int_lqd_ar_code
+        description: "Tài khoản thanh toán lãi"
+      - name: int_lqd_ar_id
+        description: "ID Tài khoản thanh toán lãi"
+      - name: pnp_lqd_ar_code
+        description: "Tài khoản thanh toán gốc"
+      - name: pnp_lqd_ar_id
+        description: "ID Tài khoản thanh toán gốc"
+      - name: ar_lcs_tp_code
+        description: "Trạng thái"
+      - name: ou_code
+        description: "Mã chi nhánh quản lý hiện tại"
+      - name: mand_repymt
+        description: "Giá trị UDF"
+      - name: nbr_of_dbt_rstc
+        description: "Giá trị tương ứng với từng trường"
+      - name: scr_tp
+        description: "Giá trị tương ứng với từng trường"
+      - name: car_ap_code
+        description: "Mã hồ sơ đăng ký vay vốn"
+      - name: los_ctr_code
+        description: "mã hợp đồng vay"
+      - name: los_ctr_id
+        description: "mã hồ sơ trên LOS"
+      - name: dbt_wvr_f
+        description: "Đánh dấu cơ cấu miễn giảm"
+      - name: ar_pps_by_idy
+        description: "Mục đích vay theo ngành kinh tế"
+      - name: ar_pps_by_pd
+        description: "Mục đích vay theo sản phẩm"
+      - name: dsbr_prpsl_ofcr
+        description: "Cán bộ đề xuất giải ngân"
+      - name: dsbr_prpsl_mgr
+        description: "Người đề xuất giải ngân"
+      - name: mgt_ofcr
+        description: "Cán bộ quản lý khoản vay"
+      - name: mgt_mgr
+        description: "Người quản lý khoản vay"
+      - name: aprv_ahr
+        description: "Cấp phê duyệt giải ngân"
+      - name: chker_ofcr
+        description: "Mã người phê duyệt"
+      - name: maker_ofcr
+        description: "ID người nhập liệu"
+      - name: refrrer_ofcr
+        description: "ID nhân viên giới thiệu"
+      - name: prom_prgm
+        description: "Mã chương trình KM cho vay"
+      - name: prom_prgm_2
+        description: "Mã CTKM2"
+      - name: dbt_rstc_tp_code
+        description: "Cơ cấu nợ"
+      - name: covid19_rstc_compl_dt
+        description: "Ngày hết covid/ Ngày hết hạn cơ cấu"
+      - name: gl_itm_code
+        description: "Mã hạch toán theo SBV"
+      - name: gl_itm_id
+        description: "ID Mã hạch toán theo SBV"
+        data_tests:
+          - is_md5
+      - name: fnc_st_code
+        description: "Nhóm nợ hợp đồng"
+      - name: bds_tt11
+        description: "Phân loại bất động sản theo Thông tư 11"
+      - name: sys_eff_dt
+        description: "Ngày bản ghi lần đầu tiên vào hệ thống"
+      - name: sys_exp_dt
+        description: "Ngày hết hạn của bản ghi"
+      - name: sys_udt_dt
+        description: "Ngày update dữ liệu gần nhất"

@@ -1,0 +1,1149 @@
+version: 2
+
+sources:
+  - name: ebanking
+    description: Hệ thống nguồn EBANKING (Oracle) – mock/oracle tuỳ var source_mode
+    schema: "{{ 'spark_catalog.ora_ebanking' if var('source_mode', 'mock') == 'oracle' else 'src_ebanking' }}"
+    tables:
+      - name: col_udf_value
+        description: "EBANKING.COL_UDF_VALUE@PGDB"
+  - name: flexbo
+    description: Hệ thống nguồn FLEXBO (Oracle) – mock/oracle tuỳ var source_mode
+    schema: "{{ 'spark_catalog.ora_flexbo' if var('source_mode', 'mock') == 'oracle' else 'src_flexbo' }}"
+    tables:
+      - name: pgbld_contract_udfield_hist
+        description: "FLEXBO.PGBLD_CONTRACT_UDFIELD_HIST"
+      - name: pgbld_rt_contract_udfield_hist
+        description: "FLEXBO.PGBLD_RT_CONTRACT_UDFIELD_HIST"
+      - name: pgb_contract_udf_map
+        description: "FLEXBO.PGB_CONTRACT_UDF_MAP"
+      - name: pgb_ldtb_contract_master
+        description: "FLEXBO.PGB_LDTB_CONTRACT_MASTER"
+      - name: pgb_los_contract_fields_tdate
+        description: "FLEXBO.PGB_LOS_CONTRACT_FIELDS_TDATE"
+  - name: los_app
+    description: Hệ thống nguồn LOS_APP (Oracle) – mock/oracle tuỳ var source_mode
+    schema: "{{ 'spark_catalog.ora_los_app' if var('source_mode', 'mock') == 'oracle' else 'src_los_app' }}"
+    tables:
+      - name: facility
+        description: "LOS_APP.FACILITY@TO_LOS"
+      - name: loan_disbursement
+        description: "LOS_APP.LOAN_DISBURSEMENT@TO_LOS"
+      - name: product
+        description: "LOS_APP.PRODUCT@TO_LOS"
+  - name: smy
+    description: Hệ thống nguồn SMY (Oracle) – mock/oracle tuỳ var source_mode
+    schema: "{{ 'spark_catalog.ora_smy' if var('source_mode', 'mock') == 'oracle' else 'src_smy' }}"
+    tables:
+      - name: stmt_daily
+        description: "SMY.STMT_DAILY"
+  - name: source
+    description: Hệ thống nguồn SOURCE (Oracle) – mock/oracle tuỳ var source_mode
+    schema: "{{ 'spark_catalog.ora_source' if var('source_mode', 'mock') == 'oracle' else 'src_source' }}"
+    tables:
+      - name: saoke_crb
+        description: "SOURCE.SAOKE_CRB"
+      - name: saoke_mvmt
+        description: "SOURCE.SAOKE_MVMT"
+  - name: t24core
+    description: Hệ thống nguồn T24CORE (Oracle) – mock/oracle tuỳ var source_mode
+    schema: "{{ 'spark_catalog.ora_t24core' if var('source_mode', 'mock') == 'oracle' else 'src_t24core' }}"
+    tables:
+      - name: company
+        description: "T24CORE.COMPANY"
+      - name: currency
+        description: "T24CORE.CURRENCY"
+      - name: currency_his
+        description: "T24CORE.CURRENCY_HIS"
+      - name: customer
+        description: "T24CORE.CUSTOMER"
+      - name: dept_acct_officer
+        description: "T24CORE.DEPT_ACCT_OFFICER"
+      - name: ld_loans_and_deposits
+        description: "T24CORE.LD_LOANS_AND_DEPOSITS"
+      - name: ld_loans_and_deposits_his
+        description: "T24CORE.LD_LOANS_AND_DEPOSITS_HIS"
+      - name: ld_schedule_define_mv
+        description: "T24CORE.LD_SCHEDULE_DEFINE_MV"
+      - name: limit
+        description: "T24CORE.LIMIT"
+      - name: mb_mg_saving_multi
+        description: "T24CORE.MB_MG_SAVING_MULTI"
+      - name: pd_payment_due
+        description: "T24CORE.PD_PAYMENT_DUE"
+      - name: pd_payment_due_his
+        description: "T24CORE.PD_PAYMENT_DUE_HIS"
+      - name: pd_payment_due_his_mv
+        description: "T24CORE.PD_PAYMENT_DUE_HIS_MV"
+      - name: pd_payment_due_mv
+        description: "T24CORE.PD_PAYMENT_DUE_MV"
+      - name: sector
+        description: "T24CORE.SECTOR"
+      - name: stmt_entry
+        description: "T24CORE.STMT_ENTRY"
+
+models:
+  - name: ebanking_col_udf_value
+    description: "Bronze 1:1 từ EBANKING.COL_UDF_VALUE@PGDB (4 cột + 3 audit)"
+    columns:
+      - name: col_ref
+        description: "Cột Tham chiếu (VARCHAR2 100)"
+      - name: function_code
+        description: "Mã chức năng (VARCHAR2 100)"
+      - name: udf_id
+        description: "Mã UDF (VARCHAR2 100)"
+      - name: udf_value
+        description: "Giá trị UDF (VARCHAR2 100)"
+      - name: etl_date
+        description: "Ngày dữ liệu ETL (audit)"
+        tests: [not_null]
+      - name: ingest_tms
+        description: "Thời điểm ingest (audit)"
+      - name: src_stm_code
+        description: "Mã bảng nguồn Bronze (audit)"
+  - name: flexbo_pgbld_contract_udfield_hist
+    description: "Bronze 1:1 từ FLEXBO.PGBLD_CONTRACT_UDFIELD_HIST (4 cột + 3 audit)"
+    columns:
+      - name: contract_ref_no
+        description: "Mã hợp đồng (VARCHAR2 100)"
+      - name: ctkm2
+        description: "Mã CTKM2 (VARCHAR2 100)"
+      - name: ct_khuyen_mai_cho_vay
+        description: "Mã chương trình KM cho vay (VARCHAR2 100)"
+      - name: mov_date
+        description: "Ngày phát sinh (DATE 8)"
+      - name: etl_date
+        description: "Ngày dữ liệu ETL (audit)"
+        tests: [not_null]
+      - name: ingest_tms
+        description: "Thời điểm ingest (audit)"
+      - name: src_stm_code
+        description: "Mã bảng nguồn Bronze (audit)"
+  - name: flexbo_pgbld_rt_contract_udfield_hist
+    description: "Bronze 1:1 từ FLEXBO.PGBLD_RT_CONTRACT_UDFIELD_HIST (3 cột + 3 audit)"
+    columns:
+      - name: contract_ref_no
+        description: "Mã Hợp đồng (VARCHAR2 100)"
+      - name: co_cau_no
+        description: "Cơ cấu nợ (VARCHAR2 100)"
+      - name: ngay_het_covid19
+        description: "Ngày hết covid/ Ngày hết hạn cơ cấu (DATE 8)"
+      - name: etl_date
+        description: "Ngày dữ liệu ETL (audit)"
+        tests: [not_null]
+      - name: ingest_tms
+        description: "Thời điểm ingest (audit)"
+      - name: src_stm_code
+        description: "Mã bảng nguồn Bronze (audit)"
+  - name: flexbo_pgb_contract_udf_map
+    description: "Bronze 1:1 từ FLEXBO.PGB_CONTRACT_UDF_MAP (3 cột + 3 audit)"
+    columns:
+      - name: contract_ref_no
+        description: "Mã HĐ tham chiếu (VARCHAR2 100)"
+      - name: field_name
+        description: "Tên trường (VARCHAR2 255)"
+      - name: field_val
+        description: "Giá trị tương ứng với từng trường (VARCHAR2 100)"
+      - name: etl_date
+        description: "Ngày dữ liệu ETL (audit)"
+        tests: [not_null]
+      - name: ingest_tms
+        description: "Thời điểm ingest (audit)"
+      - name: src_stm_code
+        description: "Mã bảng nguồn Bronze (audit)"
+  - name: flexbo_pgb_ldtb_contract_master
+    description: "Bronze 1:1 từ FLEXBO.PGB_LDTB_CONTRACT_MASTER (3 cột + 3 audit)"
+    columns:
+      - name: booking_date
+        description: "Ngày ghi nhận (DATE 8)"
+      - name: contract_ref_no
+        description: "Mã Hợp đồng (VARCHAR2 100)"
+      - name: version_no
+        description: "Version của bản ghi (NUMBER 10)"
+      - name: etl_date
+        description: "Ngày dữ liệu ETL (audit)"
+        tests: [not_null]
+      - name: ingest_tms
+        description: "Thời điểm ingest (audit)"
+      - name: src_stm_code
+        description: "Mã bảng nguồn Bronze (audit)"
+  - name: flexbo_pgb_los_contract_fields_tdate
+    description: "Bronze 1:1 từ FLEXBO.PGB_LOS_CONTRACT_FIELDS_TDATE (18 cột + 3 audit)"
+    columns:
+      - name: bds_tt11
+        description: "Phân loại theo thông tư 11 (VARCHAR2 100)"
+      - name: bien_do_thay_doi_ls_theo_hdtd
+        description: "Biên độ thay đổi lãi suất (NUMBER 10.5)"
+      - name: can_bo_de_xuat_gn
+        description: "Cán bộ đề xuất giải ngân (VARCHAR2 100)"
+      - name: cap_phe_duyet_gntl
+        description: "Cấp phê duyệt giải ngân / trả lời tín dụng (VARCHAR2 100)"
+      - name: car_application_code
+        description: "Mã hồ sơ đăng kí vay vốn (VARCHAR2 100)"
+      - name: cbtd_ql_khoan_vay
+        description: "Mã cán bộ tín dụng quản lý khoản vay (VARCHAR2 100)"
+      - name: contract_ref_no
+        description: "Mã hợp đồng giải ngân (VARCHAR2 100)"
+      - name: co_cau_no_mien_giam_lai
+        description: "Cờ đánh dấu cơ cấu nợ miễn giảm lãi (VARCHAR2 100)"
+      - name: los_contract_code
+        description: "mã hợp đồng vay (VARCHAR2 100)"
+      - name: los_contract_id
+        description: "mã hồ sơ trên LOS (VARCHAR2 100)"
+      - name: mdvay_nkt
+        description: "Mục đích vay theo ngành kinh tế (VARCHAR2 100)"
+      - name: mdvay_sp
+        description: "Mục đích vay theo sản phẩm (VARCHAR2 100)"
+      - name: mov_date
+        description: "Ngày dữ liệu (DATE 8)"
+      - name: san_pham_cho_vay_khcn
+        description: "Sản phẩm vay KHCN (VARCHAR2 100)"
+      - name: san_pham_cho_vay_khdn
+        description: "Sản phẩm vay KHdn (VARCHAR2 100)"
+      - name: so_lan_co_cau
+        description: "Số lần cơ cấu nợ (NUMBER 20)"
+      - name: tp_pp_ql_khoan_vay
+        description: "Mã Trưởng/Phó phòng quản lý khoản vay (VARCHAR2 100)"
+      - name: tt_pp_de_xuat_gn
+        description: "Người đề xuất giải ngân (VARCHAR2 100)"
+      - name: etl_date
+        description: "Ngày dữ liệu ETL (audit)"
+        tests: [not_null]
+      - name: ingest_tms
+        description: "Thời điểm ingest (audit)"
+      - name: src_stm_code
+        description: "Mã bảng nguồn Bronze (audit)"
+  - name: los_app_facility
+    description: "Bronze 1:1 từ LOS_APP.FACILITY@TO_LOS (2 cột + 3 audit)"
+    columns:
+      - name: id
+        description: "Key của bản ghi (VARCHAR2 100)"
+      - name: product_id
+        description: "Mã sản phẩm (VARCHAR2 100)"
+      - name: etl_date
+        description: "Ngày dữ liệu ETL (audit)"
+        tests: [not_null]
+      - name: ingest_tms
+        description: "Thời điểm ingest (audit)"
+      - name: src_stm_code
+        description: "Mã bảng nguồn Bronze (audit)"
+  - name: los_app_loan_disbursement
+    description: "Bronze 1:1 từ LOS_APP.LOAN_DISBURSEMENT@TO_LOS (5 cột + 3 audit)"
+    columns:
+      - name: amnd_state
+        description: "Trạng thái Hợp đồng (VARCHAR2 100)"
+      - name: booking_date
+        description: "Ngày ghi nhận (DATE 8)"
+      - name: ext_ref_no_1
+        description: "Số tham chiếu bên ngoài (VARCHAR2 100)"
+      - name: facility_id
+        description: "Mã định danh hạn mức tín dụng (VARCHAR2 100)"
+      - name: status
+        description: "Trạng thái tín dụng (VARCHAR2 100)"
+      - name: etl_date
+        description: "Ngày dữ liệu ETL (audit)"
+        tests: [not_null]
+      - name: ingest_tms
+        description: "Thời điểm ingest (audit)"
+      - name: src_stm_code
+        description: "Mã bảng nguồn Bronze (audit)"
+  - name: los_app_product
+    description: "Bronze 1:1 từ LOS_APP.PRODUCT@TO_LOS (4 cột + 3 audit)"
+    columns:
+      - name: id
+        description: "Key của bản ghi (VARCHAR2 100)"
+      - name: product_code
+        description: "Mã sản phẩm (VARCHAR2 100)"
+      - name: product_name
+        description: "Tên sản phẩm (VARCHAR2 255)"
+      - name: recid
+        description: "Khóa bản ghi danh mục sản phẩm trên LOS (VARCHAR2 100)"
+      - name: etl_date
+        description: "Ngày dữ liệu ETL (audit)"
+        tests: [not_null]
+      - name: ingest_tms
+        description: "Thời điểm ingest (audit)"
+      - name: src_stm_code
+        description: "Mã bảng nguồn Bronze (audit)"
+  - name: smy_stmt_daily
+    description: "Bronze 1:1 từ SMY.STMT_DAILY (56 cột + 3 audit)"
+    columns:
+      - name: account
+        description: "Trường ACCOUNT của bảng nguồn SMY.STMT_DAILY (VARCHAR2 100)"
+      - name: accounting_date
+        description: "Ngày hạch toán (DATE 8)"
+      - name: account_id
+        description: "Trường ACCOUNT_ID của bảng nguồn SMY.STMT_DAILY (VARCHAR2 100)"
+      - name: account_num
+        description: "Trường ACCOUNT_NUM của bảng nguồn SMY.STMT_DAILY (VARCHAR2 100)"
+      - name: account_number
+        description: "Số tài khoản liên quan (VARCHAR2 100)"
+      - name: acct_id
+        description: "Maã định danh tài khoản (VARCHAR2 100)"
+      - name: amount_fcy
+        description: "Dư nợ nguyên tệ (NUMBER 25.5)"
+      - name: amount_lcy
+        description: "Dư nợ quy đổi (NUMBER 25.5)"
+      - name: balance_type
+        description: "Loại bút toán (VARCHAR2 20)"
+      - name: booking_date
+        description: "Ngay but toan ghi nhan vao he thong (DATE 8)"
+      - name: card_number
+        description: "Số thẻ (VARCHAR2 100)"
+      - name: commit_action
+        description: "Trường kỹ thuật đánh dấu bản ghi IUD (VARCHAR2 100)"
+      - name: commit_ts
+        description: "Thời điểm ghi nhận commit giao dịch trên Core T24 (TIMESTAMP 11)"
+      - name: company_code
+        description: "Mã chi nhánh hạch toán (VARCHAR2 100)"
+      - name: consol_key
+        description: "Consol key của bút toán STMT (VARCHAR2 100)"
+      - name: contract_bal_id
+        description: "Trường CONTRACT_BAL_ID của bảng nguồn SMY.STMT_DAILY (VARCHAR2 40)"
+      - name: co_code
+        description: "Trường CO_CODE của bảng nguồn SMY.STMT_DAILY (VARCHAR2 100)"
+      - name: crf_prod_cat
+        description: "Mã Category phân loại bút toán (VARCHAR2 100)"
+      - name: crf_type
+        description: "Cờ đánh dấu ghi nợ/ghi có (VARCHAR2 100)"
+      - name: currency
+        description: "Loai tien but toan (VARCHAR2 100)"
+      - name: curr_no
+        description: "Trường kỹ thuật, đánh dấu version thay đổi bút toán (NUMBER 10)"
+      - name: customer_id
+        description: "Mã khách hàng ứng với Account_number (VARCHAR2 100)"
+      - name: cycle_forward
+        description: "Cờ kết chuyển chu kỳ hạch toán (Cycle Forward) (DATE )"
+      - name: date_time
+        description: "Trường kỹ thuật, ghi nhận thời gian sửa đổi (DATE 8)"
+      - name: department_code
+        description: "Mã đơn vị hạch toán (VARCHAR2 100)"
+      - name: drawn_account
+        description: "Tài khoản ghi nhận số tiền rút (VARCHAR2 100)"
+      - name: exchange_rate
+        description: "Tỷ giá quy đổi (NUMBER 13.7)"
+      - name: internal_category
+        description: "Mã Category nội bộ (VARCHAR2 100)"
+      - name: local_ref
+        description: "Trường multivalue - đa nghĩa của T24 (VARCHAR2 100)"
+      - name: narrative
+        description: "Mô tả bút toán (VARCHAR2 255)"
+      - name: original_acct
+        description: "Số tài khoản hạch toán ban đầu (VARCHAR2 100)"
+      - name: original_amount
+        description: "Giá trị hạch toán ban đầu nguyên tệ (NUMBER 25.5)"
+      - name: original_ccy
+        description: "Loại tiền giao dịch ban đầu (VARCHAR2 100)"
+      - name: original_exch_rate
+        description: "Tỷ giá quy đổi cho loại tiền ban đầu (NUMBER 13.7)"
+      - name: orig_amount_lcy
+        description: "Giá trị hạch toán ban đầu quy đổi (NUMBER 25.5)"
+      - name: our_reference
+        description: "Ma tham chieu (VARCHAR2 100)"
+      - name: outstanding_bal
+        description: "Dư nợ tín dụng của hợp đồng ( OUR_REFERENCE) (NUMBER 25.5)"
+      - name: override
+        description: "Cờ cảnh báo (VARCHAR2 100)"
+      - name: processing_date
+        description: "Trường PROCESSING_DATE của bảng nguồn SMY.STMT_DAILY (DATE 8)"
+      - name: process_forward
+        description: "Cờ xử lý chuyển tiếp bút toán hạch toán (Process Forward) (VARCHAR2 100)"
+      - name: product_category
+        description: "Loại sản phẩm hạch toán (VARCHAR2 100)"
+      - name: recid
+        description: "Mã giao dịch, Unique ID (VARCHAR2 100)"
+      - name: record_status
+        description: "Trạng Thái bản ghi (VARCHAR2 100)"
+      - name: repayment_amt
+        description: "Số tiền thu nợ (NUMBER 25.5)"
+      - name: repayment_date
+        description: "Ngày thu (DATE 8)"
+      - name: repayment_type
+        description: "Loại thu nợ (VARCHAR2 100)"
+      - name: stmt_entry_id
+        description: "Trường STMT_ENTRY_ID của bảng nguồn SMY.STMT_DAILY (VARCHAR2 100)"
+      - name: stmt_no
+        description: "Trường STMT_NO của bảng nguồn SMY.STMT_DAILY (VARCHAR2 100)"
+      - name: suspense_category
+        description: "Mã Category phân loại bút toán bị treo (VARCHAR2 100)"
+      - name: suspnse_value_date
+        description: "Ngày bút toán treo (DATE 8)"
+      - name: system_id
+        description: "Mã phân hệ (VARCHAR2 100)"
+      - name: their_reference
+        description: "Trường THEIR_REFERENCE của bảng nguồn SMY.STMT_DAILY (VARCHAR2 100)"
+      - name: transaction_code
+        description: "Mã giao dịch (VARCHAR2 100)"
+      - name: trans_reference
+        description: "Trường TRANS_REFERENCE của bảng nguồn SMY.STMT_DAILY (VARCHAR2 100)"
+      - name: txn_date
+        description: "Trường TXN_DATE của bảng nguồn SMY.STMT_DAILY (DATE 8)"
+      - name: value_date
+        description: "Ngay Hieu luc but toan (DATE 8)"
+      - name: etl_date
+        description: "Ngày dữ liệu ETL (audit)"
+        tests: [not_null]
+      - name: ingest_tms
+        description: "Thời điểm ingest (audit)"
+      - name: src_stm_code
+        description: "Mã bảng nguồn Bronze (audit)"
+  - name: source_saoke_crb
+    description: "Bronze 1:1 từ SOURCE.SAOKE_CRB (17 cột + 3 audit)"
+    columns:
+      - name: acc_fcc
+        description: "Mã hợp đồng FlexCube (VARCHAR2 100)"
+      - name: amount_cur
+        description: "Số tiền dự thu (NUMBER 25.5)"
+      - name: amount_lcy
+        description: "Dư Nợ quy đổi (NUMBER 25.5)"
+      - name: app_code
+        description: "Mã phân hệ: LD, MD, AC, PD (VARCHAR2 100)"
+      - name: app_id
+        description: "Mã hợp đồng (VARCHAR2 100)"
+      - name: asset_type
+        description: "Loại dư nợ, hạch toán (VARCHAR2 100)"
+      - name: categ_code
+        description: "Mã phân loại sản phẩm (VARCHAR2 100)"
+      - name: co_code
+        description: "Mã chi nhánh hạch toán (VARCHAR2 100)"
+      - name: curr
+        description: "Loại tiền (VARCHAR2 100)"
+      - name: cus_id
+        description: "Mã khách hàng (VARCHAR2 100)"
+      - name: date
+        description: "Ngày giao dịch YYYYMMDD (DATE 8)"
+      - name: loc_term
+        description: "Trường LOC_TERM của bảng nguồn SOURCE.SAOKE_CRB (VARCHAR2 100)"
+      - name: mat_date
+        description: "Ngày đáo hạn hợp đồng (DATE 8)"
+      - name: sbv_code
+        description: "Mã hạch toán theo SBV (VARCHAR2 100)"
+      - name: sub_pro
+        description: "Mã sản phẩm con (VARCHAR2 100)"
+      - name: txn_date
+        description: "Ngày giao dịch (DATE 8)"
+      - name: val_date
+        description: "Ngày hiệu lực hợp đồng (DATE 8)"
+      - name: etl_date
+        description: "Ngày dữ liệu ETL (audit)"
+        tests: [not_null]
+      - name: ingest_tms
+        description: "Thời điểm ingest (audit)"
+      - name: src_stm_code
+        description: "Mã bảng nguồn Bronze (audit)"
+  - name: source_saoke_mvmt
+    description: "Bronze 1:1 từ SOURCE.SAOKE_MVMT (3 cột + 3 audit)"
+    columns:
+      - name: sbv_code
+        description: "Mã hạch toán theo SBV (VARCHAR2 100)"
+      - name: trans_ref
+        description: "Mã tham chiếu giao dịch (VARCHAR2 100)"
+      - name: txn_date
+        description: "Ngày thực hiện giao dịch (DATE 8)"
+      - name: etl_date
+        description: "Ngày dữ liệu ETL (audit)"
+        tests: [not_null]
+      - name: ingest_tms
+        description: "Thời điểm ingest (audit)"
+      - name: src_stm_code
+        description: "Mã bảng nguồn Bronze (audit)"
+  - name: t24core_company
+    description: "Bronze 1:1 từ T24CORE.COMPANY (2 cột + 3 audit)"
+    columns:
+      - name: company_name
+        description: "Tên chi nhánh (VARCHAR2 255)"
+      - name: recid
+        description: "Mã chi nhánh (VARCHAR2 100)"
+      - name: etl_date
+        description: "Ngày dữ liệu ETL (audit)"
+        tests: [not_null]
+      - name: ingest_tms
+        description: "Thời điểm ingest (audit)"
+      - name: src_stm_code
+        description: "Mã bảng nguồn Bronze (audit)"
+  - name: t24core_currency
+    description: "Bronze 1:1 từ T24CORE.CURRENCY (6 cột + 3 audit)"
+    columns:
+      - name: ccy_name
+        description: "Tên đầy đủ của loại tiền tệ (VARCHAR2 255)"
+      - name: curr_no
+        description: "Số thứ tự phiên bản bản ghi tiền tệ (Curr No) (NUMBER 10)"
+      - name: date_time
+        description: "Thời điểm cập nhật bản ghi tỷ giá trên Core T24 (DATE 8)"
+      - name: id
+        description: "Mã loại tiền tệ (Currency ID) (VARCHAR2 100)"
+      - name: mid_reval_rate
+        description: "Tỷ giá đánh giá lại trung bình (Mid Reval Rate) (NUMBER 13.7)"
+      - name: numeric_ccy_code
+        description: "Mã tiền tệ dạng số theo chuẩn ISO (VARCHAR2 100)"
+      - name: etl_date
+        description: "Ngày dữ liệu ETL (audit)"
+        tests: [not_null]
+      - name: ingest_tms
+        description: "Thời điểm ingest (audit)"
+      - name: src_stm_code
+        description: "Mã bảng nguồn Bronze (audit)"
+  - name: t24core_currency_his
+    description: "Bronze 1:1 từ T24CORE.CURRENCY_HIS (4 cột + 3 audit)"
+    columns:
+      - name: curr_no
+        description: "Số thứ tự phiên bản lịch sử tỷ giá (NUMBER 10)"
+      - name: date_time
+        description: "Thời điểm cập nhật tỷ giá lịch sử (DATE 8)"
+      - name: id
+        description: "Mã bản ghi lịch sử tiền tệ (ID;CURR_NO) (VARCHAR2 100)"
+      - name: mid_reval_rate
+        description: "Tỷ giá đánh giá lại trung bình lịch sử (NUMBER 13.7)"
+      - name: etl_date
+        description: "Ngày dữ liệu ETL (audit)"
+        tests: [not_null]
+      - name: ingest_tms
+        description: "Thời điểm ingest (audit)"
+      - name: src_stm_code
+        description: "Mã bảng nguồn Bronze (audit)"
+  - name: t24core_customer
+    description: "Bronze 1:1 từ T24CORE.CUSTOMER (63 cột + 3 audit)"
+    columns:
+      - name: account_officer
+        description: "Mã nhân viên hạch toán (VARCHAR2 100)"
+      - name: active_status
+        description: "Trạng thái bản ghi (VARCHAR2 100)"
+      - name: aml_check
+        description: "Liên quan tới hệ thống Phòng Chống rửa tiền (VARCHAR2 100)"
+      - name: aml_result
+        description: "Liên quan tới hệ thống Phòng Chống rửa tiền (VARCHAR2 100)"
+      - name: asset_class
+        description: "Nhóm nợ khách hàng Core tính (VARCHAR2 100)"
+      - name: bdate_legal
+        description: "Ngày sinh của người đại diện theo pháp luật (DATE 8)"
+      - name: bday_director
+        description: "Ngày sinh giám đốc công ty (DATE 8)"
+      - name: birth_incorp_date
+        description: "Ngày thành lập doanh nghiệp (DATE 8)"
+      - name: company_book
+        description: "Mã chi nhánh mở CIF (VARCHAR2 100)"
+      - name: contact_date
+        description: "Ngày khách hàng liên hệ/mở CIF (DATE 8)"
+      - name: contact_person
+        description: "Họ tên người liên hệ của khách hàng doanh nghiệp (VARCHAR2 100)"
+      - name: country
+        description: "Tên quốc gia nơi cư trú / đặt trụ sở (VARCHAR2 100)"
+      - name: co_code
+        description: "Mã chi nhánh quản lý khách hàng (VARCHAR2 100)"
+      - name: customer_status
+        description: "Trạng thái hiện tại của khách hàng (VARCHAR2 100)"
+      - name: cus_ind_parent
+        description: "Mã ngành nghê kinh tế cha (VARCHAR2 100)"
+      - name: cu_eff_date
+        description: "Ngày hiệu lực phân hạng khách hàng VIP (DATE 8)"
+      - name: date_time
+        description: "Ngày giờ bản ghi nhập liệu (DATE 8)"
+      - name: email_address
+        description: "Địa chỉ emai (VARCHAR2 255)"
+      - name: employment_status
+        description: "Mã tình trạng việc làm của khách hàng cá nhân (VARCHAR2 100)"
+      - name: estab_lic_code
+        description: "Số giấy phép thành lập / đăng ký kinh doanh (VARCHAR2 100)"
+      - name: ffb_type
+        description: "Phân hạng khách hàng ưu tiên (VIP Type) (VARCHAR2 100)"
+      - name: gen_dir_plc
+        description: "Nơi sinh / quốc tịch của Tổng giám đốc / người đại diện (VARCHAR2 100)"
+      - name: home_number
+        description: "Số điện thoại nhà tiêng (VARCHAR2 100)"
+      - name: industry
+        description: "Mã ngành nghề đăng ký kinh doanh (VARCHAR2 100)"
+      - name: internet_banking_service
+        description: "Dịch vụ Internet banking khách hàng giao tiếp (VARCHAR2 100)"
+      - name: khoi
+        description: "mã Khối quản lý khách hàng (VARCHAR2 100)"
+      - name: kyc_channel
+        description: "Kênh thực hiện KYC (VARCHAR2 100)"
+      - name: mau_hd
+        description: "Mã biểu mẫu hợp đồng chuẩn áp dụng cho khách hàng (VARCHAR2 100)"
+      - name: ma_bhxh
+        description: "Mã bảo hiểm xã hội (VARCHAR2 100)"
+      - name: mb_cr_stt
+        description: "Trạng thái quan hệ tín dụng của khách hàng tại ngân hàng (VARCHAR2 100)"
+      - name: mb_industry
+        description: "Ngành nghề kinh tế (VARCHAR2 100)"
+      - name: mb_rm_bancheo
+        description: "Mã nhân sự bán chéo sản phẩm (VARCHAR2 100)"
+      - name: mobile_banking_service
+        description: "Dịch vụ sử dụng sản phẩm mobile banking (VARCHAR2 100)"
+      - name: mobile_number
+        description: "Số điện thoại di động (VARCHAR2 100)"
+      - name: nationality
+        description: "Quốc tịch (VARCHAR2 100)"
+      - name: national_id
+        description: "Số giấy tờ định danh quốc gia (CCCD/CMND) (VARCHAR2 100)"
+      - name: nat_id_exp_date
+        description: "Ngày hêt hạn CC (DATE 8)"
+      - name: nat_id_iss_date
+        description: "Ngày cấp Căn cước (DATE 8)"
+      - name: nat_id_iss_plc
+        description: "Nơi cấp Căn cước (VARCHAR2 100)"
+      - name: nat_id_type
+        description: "Loại căn cước (VARCHAR2 100)"
+      - name: net_monthly_in
+        description: "Thu nhập theo tháng (NUMBER 25.5)"
+      - name: no_lien_doi
+        description: "Nợ liên đới (VARCHAR2 100)"
+      - name: occupation
+        description: "Nghề nghiệp của khách hàng (VARCHAR2 100)"
+      - name: open_company
+        description: "Chi nhánh mở (VARCHAR2 100)"
+      - name: phone_cont_per
+        description: "Số điện thoại của người liên hệ chính - KH tổ chức (VARCHAR2 100)"
+      - name: recid
+        description: "Mã CIF (VARCHAR2 100)"
+      - name: referred_by
+        description: "Mã người tham chiếu/giới thiệu (VARCHAR2 100)"
+      - name: residence
+        description: "Quốc gia cư trú (VARCHAR2 100)"
+      - name: resid_province
+        description: "Tỉnh/thành phố nơi cư trú (VARCHAR2 100)"
+      - name: second_officer
+        description: "Mã nhân viên hạch toán thứ 2 (VARCHAR2 100)"
+      - name: sector
+        description: "Mã phân loại hình khách hàng (VARCHAR2 100)"
+      - name: short_name
+        description: "Tên viết tắt khách hàng (VARCHAR2 255)"
+      - name: street
+        description: "Tên đường theo địa chỉ (VARCHAR2 255)"
+      - name: target
+        description: "Mã phân khúc đối tượng khách hàng mục tiêu (Target Code) (VARCHAR2 100)"
+      - name: tax_serial
+        description: "Mã số thuế (VARCHAR2 100)"
+      - name: txn_date
+        description: "Ngày giao dịch / ngày cập nhật dữ liệu khách hàng (DATE 8)"
+      - name: vat_inv_date
+        description: "Ngày phát hành hóa đơn (DATE 8)"
+      - name: vat_inv_serial
+        description: "Số seri hóa đơn (VARCHAR2 100)"
+      - name: vip_customer
+        description: "Đánh dấu khách hàng ưu tiên (VARCHAR2 100)"
+      - name: vn_full_name
+        description: "Tên khách hàng đầy đủ (VARCHAR2 255)"
+      - name: vn_gender
+        description: "Giới tính (VARCHAR2 100)"
+      - name: vn_street
+        description: "Tên đường theo địa chỉ (VARCHAR2 255)"
+      - name: vn_town
+        description: "Tên thành phố theo địa chỉ (VARCHAR2 255)"
+      - name: etl_date
+        description: "Ngày dữ liệu ETL (audit)"
+        tests: [not_null]
+      - name: ingest_tms
+        description: "Thời điểm ingest (audit)"
+      - name: src_stm_code
+        description: "Mã bảng nguồn Bronze (audit)"
+  - name: t24core_dept_acct_officer
+    description: "Bronze 1:1 từ T24CORE.DEPT_ACCT_OFFICER (2 cột + 3 audit)"
+    columns:
+      - name: name
+        description: "Tên nhân viên hạch toán (VARCHAR2 255)"
+      - name: recid
+        description: "Mã nhân viên hạch toán thứ 2 (VARCHAR2 100)"
+      - name: etl_date
+        description: "Ngày dữ liệu ETL (audit)"
+        tests: [not_null]
+      - name: ingest_tms
+        description: "Thời điểm ingest (audit)"
+      - name: src_stm_code
+        description: "Mã bảng nguồn Bronze (audit)"
+  - name: t24core_ld_loans_and_deposits
+    description: "Bronze 1:1 từ T24CORE.LD_LOANS_AND_DEPOSITS (39 cột + 3 audit)"
+    columns:
+      - name: acc_fcc
+        description: "Mã hợp đồng FlexCube (VARCHAR2 100)"
+      - name: amount
+        description: "Dự nợ hợp đồng (NUMBER 25.5)"
+      - name: approve_amount
+        description: "Giá trị phê duyệt (NUMBER 25.5)"
+      - name: authoriser
+        description: "Mã người phê duyệt (VARCHAR2 100)"
+      - name: category
+        description: "Mã phân loại sản phẩm (VARCHAR2 100)"
+      - name: commit_action
+        description: "Trường COMMIT_ACTION của bảng nguồn T24CORE.LD_LOANS_AND_DEPOSITS (VARCHAR2 100)"
+      - name: co_code
+        description: "Mã chi nhánh quản lý hiện tại (VARCHAR2 100)"
+      - name: cra_ld
+        description: "Số hồ sơ giải ngân (VARCHAR2 100)"
+      - name: currency
+        description: "Loại tiền (VARCHAR2 100)"
+      - name: curr_no
+        description: "Version bản ghi hiện tại (NUMBER 10)"
+      - name: customer_id
+        description: "Mã khách hàng (VARCHAR2 100)"
+      - name: date_time
+        description: "Ngày nhập liệu Core (DATE 8)"
+      - name: drawdown_net_amt
+        description: "Số tiền thực tế giải ngân (NUMBER 25.5)"
+      - name: excg_rate
+        description: "Tỷ giá quy đổi (NUMBER 13.7)"
+      - name: fcc_limit
+        description: "Mã hạn mức trên Flexcube (VARCHAR2 100)"
+      - name: fin_mat_date
+        description: "Ngày đáo hạn hợp đồng (DATE 8)"
+      - name: id
+        description: "Thay = trường RECID (VARCHAR2 100)"
+      - name: inputter
+        description: "ID người nhập liệu (VARCHAR2 100)"
+      - name: interest_rate
+        description: "Giá trị lãi suất (NUMBER 13.7)"
+      - name: interest_spread
+        description: "Biên độ lãi suất (NUMBER 13.7)"
+      - name: int_liq_acct
+        description: "Tài khoản thanh toán lãi (VARCHAR2 100)"
+      - name: int_rate_type
+        description: "Loại lãi suất : Fix , float (VARCHAR2 20)"
+      - name: int_value_date
+        description: "Ngày hiệu lực lãi suất (DATE 8)"
+      - name: limit_reference
+        description: "Mã tham chiếu hạn mức (VARCHAR2 100)"
+      - name: loc_term
+        description: "Kỳ hạn (VARCHAR2 100)"
+      - name: los_fac_code
+        description: "Số hồ sơ (VARCHAR2 100)"
+      - name: mb_rm_bancheo
+        description: "ID nhân viên giới thiệu (VARCHAR2 100)"
+      - name: orig_val_date
+        description: "Ngày hiệu lực đầu tiên của hợp đồng (DATE 8)"
+      - name: pe_rate
+        description: "Lãi phạt penalty rate (NUMBER 13.7)"
+      - name: prin_liq_acct
+        description: "Tài khoản thanh toán gốc (VARCHAR2 100)"
+      - name: productgr_code
+        description: "Mã nhóm sản phẩm (VARCHAR2 100)"
+      - name: ps_rate
+        description: "Lãi suất cho quá hạn (NUMBER 13.7)"
+      - name: real_rate
+        description: "Lãi suât thực tế (NUMBER 13.7)"
+      - name: recid
+        description: "Mã hợp đồng (VARCHAR2 100)"
+      - name: record_status
+        description: "Trạng thái bản ghi (VARCHAR2 100)"
+      - name: status
+        description: "Trạng thái (VARCHAR2 100)"
+      - name: use_of_loan
+        description: "Mã mục đích vay (VARCHAR2 100)"
+      - name: use_of_loan_cha
+        description: "Mã nhóm mục đích vay (VARCHAR2 100)"
+      - name: value_date
+        description: "Ngày hiệu lực hợp đồng (DATE 8)"
+      - name: etl_date
+        description: "Ngày dữ liệu ETL (audit)"
+        tests: [not_null]
+      - name: ingest_tms
+        description: "Thời điểm ingest (audit)"
+      - name: src_stm_code
+        description: "Mã bảng nguồn Bronze (audit)"
+  - name: t24core_ld_loans_and_deposits_his
+    description: "Bronze 1:1 từ T24CORE.LD_LOANS_AND_DEPOSITS_HIS (29 cột + 3 audit)"
+    columns:
+      - name: acc_fcc
+        description: "Mã hợp đồng FlexCube (VARCHAR2 100)"
+      - name: amount
+        description: "Dự nợ hợp đồng (NUMBER 25.5)"
+      - name: approve_amount
+        description: "Giá trị giải ngân (NUMBER 25.5)"
+      - name: category
+        description: "Mã phân loại sản phẩm (VARCHAR2 100)"
+      - name: commit_action
+        description: "Trường COMMIT_ACTION của bảng nguồn T24CORE.LD_LOANS_AND_DEPOSITS_HIS (VARCHAR2 100)"
+      - name: co_code
+        description: "Mã chi nhánh (VARCHAR2 100)"
+      - name: cra_ld
+        description: "Mã hồ sơ (VARCHAR2 100)"
+      - name: currency
+        description: "Mã loại tiền (VARCHAR2 100)"
+      - name: curr_no
+        description: "Version của bản ghi (NUMBER 10)"
+      - name: customer_id
+        description: "Mã khách hành (VARCHAR2 100)"
+      - name: date_time
+        description: "Ngày nhập liệu Core (DATE 8)"
+      - name: drawdown_net_amt
+        description: "Số tiền thực tế giải ngân (NUMBER 25.5)"
+      - name: excg_rate
+        description: "Tỷ giá quy đổi (NUMBER 13.7)"
+      - name: fin_mat_date
+        description: "Ngày đáo hạn (DATE 8)"
+      - name: interest_rate
+        description: "Giá trị lãi suất (NUMBER 13.7)"
+      - name: interest_spread
+        description: "Biên độ lãi suất (NUMBER 13.7)"
+      - name: int_liq_acct
+        description: "Tài khoản thanh toán lãi (VARCHAR2 100)"
+      - name: int_rate_type
+        description: "Loại lãi suất: cố định, thả nổi (VARCHAR2 20)"
+      - name: int_value_date
+        description: "Ngày thu lãi (DATE 8)"
+      - name: loc_term
+        description: "Kỳ hạn (VARCHAR2 100)"
+      - name: mb_rm_bancheo
+        description: "ID nhân viên giới thiệu (VARCHAR2 100)"
+      - name: orig_val_date
+        description: "Ngày hiệu lực đầu tiên của hợp đồng (DATE 8)"
+      - name: prin_liq_acct
+        description: "tài khoản thanh toán gốc (VARCHAR2 100)"
+      - name: real_rate
+        description: "Lãi suâất thực tế (NUMBER 13.7)"
+      - name: recid
+        description: "Mã Hợp đồng (VARCHAR2 100)"
+      - name: record_status
+        description: "Trạng thái bản ghi (VARCHAR2 100)"
+      - name: use_of_loan
+        description: "Mã Mục đích vay (VARCHAR2 100)"
+      - name: use_of_loan_cha
+        description: "Mã nhóm mục đích vay (VARCHAR2 100)"
+      - name: value_date
+        description: "Ngày hiệu lực hợp đồng (DATE 8)"
+      - name: etl_date
+        description: "Ngày dữ liệu ETL (audit)"
+        tests: [not_null]
+      - name: ingest_tms
+        description: "Thời điểm ingest (audit)"
+      - name: src_stm_code
+        description: "Mã bảng nguồn Bronze (audit)"
+  - name: t24core_ld_schedule_define_mv
+    description: "Bronze 1:1 từ T24CORE.LD_SCHEDULE_DEFINE_MV (2 cột + 3 audit)"
+    columns:
+      - name: contract_id
+        description: "Mã Hợp đồng (VARCHAR2 100)"
+      - name: prev_sched_date
+        description: "Ngày thanh toán gần nhất (DATE 8)"
+      - name: etl_date
+        description: "Ngày dữ liệu ETL (audit)"
+        tests: [not_null]
+      - name: ingest_tms
+        description: "Thời điểm ingest (audit)"
+      - name: src_stm_code
+        description: "Mã bảng nguồn Bronze (audit)"
+  - name: t24core_limit
+    description: "Bronze 1:1 từ T24CORE.LIMIT (6 cột + 3 audit)"
+    columns:
+      - name: expiry_date
+        description: "Ngày hết hạn hạn mức tín dụng (DATE 8)"
+      - name: internal_amount
+        description: "Số tiền hạn mức nội bộ được cấp (NUMBER 25.5)"
+      - name: limit_product
+        description: "Mã sản phẩm hạn mức tín dụng (VARCHAR2 100)"
+      - name: maximum_total
+        description: "Tổng hạn mức tối đa được phê duyệt (NUMBER 25.5)"
+      - name: online_limit_date
+        description: "Ngày hiệu lực hạn mức trực tuyến (DATE 8)"
+      - name: recid
+        description: "Mã định danh hạn mức tín dụng (Limit ID) (VARCHAR2 100)"
+      - name: etl_date
+        description: "Ngày dữ liệu ETL (audit)"
+        tests: [not_null]
+      - name: ingest_tms
+        description: "Thời điểm ingest (audit)"
+      - name: src_stm_code
+        description: "Mã bảng nguồn Bronze (audit)"
+  - name: t24core_mb_mg_saving_multi
+    description: "Bronze 1:1 từ T24CORE.MB_MG_SAVING_MULTI (3 cột + 3 audit)"
+    columns:
+      - name: ld_id
+        description: "Mã Hợp đồng (VARCHAR2 100)"
+      - name: mb_ld_type
+        description: "Bổ sung cho CTKM VÀ CTKM 2 (VARCHAR2 100)"
+      - name: productgr_code
+        description: "Mã sản phẩm (VARCHAR2 100)"
+      - name: etl_date
+        description: "Ngày dữ liệu ETL (audit)"
+        tests: [not_null]
+      - name: ingest_tms
+        description: "Thời điểm ingest (audit)"
+      - name: src_stm_code
+        description: "Mã bảng nguồn Bronze (audit)"
+  - name: t24core_pd_payment_due
+    description: "Bronze 1:1 từ T24CORE.PD_PAYMENT_DUE (21 cột + 3 audit)"
+    columns:
+      - name: authoriser
+        description: "ID người phê duyệt (VARCHAR2 100)"
+      - name: cra_ld
+        description: "Số hợp đồng tín dụng giấy (Paper Contract Number) (VARCHAR2 100)"
+      - name: credit_status
+        description: "Tình trạng tín dụng (VARCHAR2 100)"
+      - name: curr_no
+        description: "Version hiện tại của bản ghi (NUMBER 10)"
+      - name: customer
+        description: "Mã Khách hàng (VARCHAR2 100)"
+      - name: flag_status
+        description: "Trường FLAG_STATUS của bảng nguồn T24CORE.PD_PAYMENT_DUE (VARCHAR2 100)"
+      - name: inputter
+        description: "ID người nhập liệu (VARCHAR2 100)"
+      - name: limit_reference
+        description: "Mã tham chiếu hạn mức (VARCHAR2 100)"
+      - name: los_fac_code
+        description: "Số hồ sơ (VARCHAR2 100)"
+      - name: original_mat
+        description: "Kỳ hạn gốc (DATE 8)"
+      - name: payment_dte_due
+        description: "Hạn thanh toán (DATE 8)"
+      - name: pd_type
+        description: "Pd_type = 1 là các khoản phạt gốc quá hạn, lãi quá hạn đc migrate sang thành phần IN Null là gốc, lãi quá hạn (VARCHAR2 100)"
+      - name: penalty_rate
+        description: "Lãi suất phạt quá hạn danh nghĩa (Penalty Rate) (NUMBER 13.7)"
+      - name: pe_rate
+        description: "Lãi phạt penalty rate (NUMBER 13.7)"
+      - name: ps_rate
+        description: "Lãi suất cho quá hạn (NUMBER 13.7)"
+      - name: recid
+        description: "Mã hợp đồng (VARCHAR2 100)"
+      - name: repayment_acct
+        description: "Tài khoản thu nợ quá hạn (Repayment Account) (VARCHAR2 100)"
+      - name: snqh_chuyendoi
+        description: "Số ngày quá hạn chuyển đổi (NUMBER 10)"
+      - name: status
+        description: "Mã trạng thái vòng đời khoản vay quá hạn (PD Status) (VARCHAR2 100)"
+      - name: use_of_loan
+        description: "Mã mục đích vay (VARCHAR2 100)"
+      - name: use_of_loan_cha
+        description: "Mã nhóm mục đích vay (VARCHAR2 100)"
+      - name: etl_date
+        description: "Ngày dữ liệu ETL (audit)"
+        tests: [not_null]
+      - name: ingest_tms
+        description: "Thời điểm ingest (audit)"
+      - name: src_stm_code
+        description: "Mã bảng nguồn Bronze (audit)"
+  - name: t24core_pd_payment_due_his
+    description: "Bronze 1:1 từ T24CORE.PD_PAYMENT_DUE_HIS (3 cột + 3 audit)"
+    columns:
+      - name: curr_no
+        description: "Trường CURR_NO của bảng nguồn T24CORE.PD_PAYMENT_DUE_HIS (NUMBER 10)"
+      - name: pd_type
+        description: "Loại sản phẩm (VARCHAR2 100)"
+      - name: recid
+        description: "Số hồ sơ (VARCHAR2 100)"
+      - name: etl_date
+        description: "Ngày dữ liệu ETL (audit)"
+        tests: [not_null]
+      - name: ingest_tms
+        description: "Thời điểm ingest (audit)"
+      - name: src_stm_code
+        description: "Mã bảng nguồn Bronze (audit)"
+  - name: t24core_pd_payment_due_his_mv
+    description: "Bronze 1:1 từ T24CORE.PD_PAYMENT_DUE_HIS_MV (20 cột + 3 audit)"
+    columns:
+      - name: acc_fcc
+        description: "Mã hợp đồng FlexCube (VARCHAR2 100)"
+      - name: approve_amount
+        description: "Giá trị giải ngân (NUMBER 25.5)"
+      - name: category
+        description: "Mã phân loại sản phẩm vay (VARCHAR2 100)"
+      - name: co_code
+        description: "Mã chi nhánh (VARCHAR2 100)"
+      - name: credit_status
+        description: "Nhóm nợ hợp đồng (VARCHAR2 100)"
+      - name: curr_no
+        description: "Version hiện tại của bản ghi (NUMBER 10)"
+      - name: customer
+        description: "Mã khách hàng (VARCHAR2 100)"
+      - name: date_time
+        description: "Trường DATE_TIME của bảng nguồn T24CORE.PD_PAYMENT_DUE_HIS_MV (DATE 8)"
+      - name: final_due_date
+        description: "Ngày trả nơ cuối khi quá hạn (DATE 8)"
+      - name: flag_status
+        description: "Cờ đánh dấu trạng thái bản ghi (VARCHAR2 100)"
+      - name: original_mat
+        description: "Ngày đáo hạn gốc (DATE 8)"
+      - name: pay_type
+        description: "Loại hình thanh toán (VARCHAR2 100)"
+      - name: pd_type
+        description: "Loại sản phẩm (VARCHAR2 100)"
+      - name: penalty_rate
+        description: "Lãi suất phạt quá hạn danh nghĩa lịch sử (NUMBER 13.7)"
+      - name: pe_rate
+        description: "Lãi phạt penalty rate (NUMBER 13.7)"
+      - name: recid
+        description: "Key bản ghi (VARCHAR2 100)"
+      - name: record_status
+        description: "Trạng thái bản ghi (VARCHAR2 100)"
+      - name: repayment_acct
+        description: "Số tài khoản thanh toán (VARCHAR2 100)"
+      - name: payment_dte_due
+        description: "Hạn thanh toán lịch sử quá hạn (DATE 8)"
+      - name: pay_amt_outs
+        description: "Số tiền quá hạn còn lại chưa thanh toán (NUMBER 25.5)"
+      - name: etl_date
+        description: "Ngày dữ liệu ETL (audit)"
+        tests: [not_null]
+      - name: ingest_tms
+        description: "Thời điểm ingest (audit)"
+      - name: src_stm_code
+        description: "Mã bảng nguồn Bronze (audit)"
+  - name: t24core_pd_payment_due_mv
+    description: "Bronze 1:1 từ T24CORE.PD_PAYMENT_DUE_MV (23 cột + 3 audit)"
+    columns:
+      - name: acc_fcc
+        description: "Mã hợp đồng FlexCube (VARCHAR2 100)"
+      - name: approve_amount
+        description: "Giá trị giải ngân (NUMBER 25.5)"
+      - name: category
+        description: "Mã phân loại sản phẩm vay (VARCHAR2 100)"
+      - name: commit_action
+        description: "Trường COMMIT_ACTION của bảng nguồn T24CORE.PD_PAYMENT_DUE_MV (VARCHAR2 100)"
+      - name: co_code
+        description: "Mã chi nhánh (VARCHAR2 100)"
+      - name: credit_status
+        description: "Nhóm nợ hợp đồng (VARCHAR2 100)"
+      - name: curr_no
+        description: "Version hiện tại của bản ghi (NUMBER 10)"
+      - name: customer
+        description: "Mã khách hàng (VARCHAR2 100)"
+      - name: date_time
+        description: "Trường DATE_TIME của bảng nguồn T24CORE.PD_PAYMENT_DUE_MV (DATE 8)"
+      - name: final_due_date
+        description: "Ngày trả nơ cuối khi quá hạn (DATE 8)"
+      - name: flag_status
+        description: "Cờ đánh dấu trạng thái bản ghi (VARCHAR2 100)"
+      - name: id
+        description: "Mã hợp đồng (VARCHAR2 100)"
+      - name: original_mat
+        description: "Ngày đáo hạn gốc (DATE 8)"
+      - name: payment_dte_due
+        description: "Hạn thanh toán (DATE 8)"
+      - name: pay_amt_outs
+        description: "Số tiền còn lại chưa thanh toán (NUMBER 25.5)"
+      - name: pay_type
+        description: "Loại hình thanh toán (VARCHAR2 100)"
+      - name: pd_type
+        description: "Loại sản phẩm (VARCHAR2 100)"
+      - name: penalty_rate
+        description: "Lãi suất phạt quá hạn danh nghĩa (Multi-value) (NUMBER 13.7)"
+      - name: pe_rate
+        description: "Lãi phạt penalty rate (NUMBER 13.7)"
+      - name: recid
+        description: "Key bản ghi (VARCHAR2 100)"
+      - name: record_status
+        description: "Trạng thái bản ghi (VARCHAR2 100)"
+      - name: repaid_amt
+        description: "Số tiền đã trả (NUMBER 25.5)"
+      - name: repayment_acct
+        description: "Số tài khoản thanh toán (VARCHAR2 100)"
+      - name: etl_date
+        description: "Ngày dữ liệu ETL (audit)"
+        tests: [not_null]
+      - name: ingest_tms
+        description: "Thời điểm ingest (audit)"
+      - name: src_stm_code
+        description: "Mã bảng nguồn Bronze (audit)"
+  - name: t24core_sector
+    description: "Bronze 1:1 từ T24CORE.SECTOR (2 cột + 3 audit)"
+    columns:
+      - name: customer_type
+        description: "Loại khách hàng (VARCHAR2 100)"
+      - name: recid
+        description: "Mã định danh (VARCHAR2 100)"
+      - name: etl_date
+        description: "Ngày dữ liệu ETL (audit)"
+        tests: [not_null]
+      - name: ingest_tms
+        description: "Thời điểm ingest (audit)"
+      - name: src_stm_code
+        description: "Mã bảng nguồn Bronze (audit)"
+  - name: t24core_stmt_entry
+    description: "Bronze 1:1 từ T24CORE.STMT_ENTRY (45 cột + 3 audit)"
+    columns:
+      - name: accounting_date
+        description: "Ngày hạch toán (DATE 8)"
+      - name: account_number
+        description: "Số tài khoản liên quan (VARCHAR2 100)"
+      - name: acct_id
+        description: "Maã định danh tài khoản (VARCHAR2 100)"
+      - name: amount_fcy
+        description: "Dư nợ nguyên tệ (NUMBER 25.5)"
+      - name: amount_lcy
+        description: "Dư nợ quy đổi (NUMBER 25.5)"
+      - name: balance_type
+        description: "Loại bút toán (VARCHAR2 20)"
+      - name: booking_date
+        description: "Ngay but toan ghi nhan vao he thong (DATE 8)"
+      - name: card_number
+        description: "Số thẻ (VARCHAR2 100)"
+      - name: commit_action
+        description: "Trường kỹ thuật đánh dấu bản ghi IUD (VARCHAR2 100)"
+      - name: commit_ts
+        description: "Thời điểm ghi nhận commit giao dịch trên Core T24 (TIMESTAMP 11)"
+      - name: company_code
+        description: "Mã chi nhánh hạch toán (VARCHAR2 100)"
+      - name: consol_key
+        description: "Consol key của bút toán STMT (VARCHAR2 100)"
+      - name: crf_prod_cat
+        description: "Mã Category phân loại bút toán (VARCHAR2 100)"
+      - name: crf_type
+        description: "Cờ đánh dấu ghi nợ/ghi có (VARCHAR2 100)"
+      - name: currency
+        description: "Loai tien but toan (VARCHAR2 100)"
+      - name: curr_no
+        description: "Trường kỹ thuật, đánh dấu version thay đổi bút toán (NUMBER 10)"
+      - name: customer_id
+        description: "Mã khách hàng ứng với Account_number (VARCHAR2 100)"
+      - name: cycle_forward
+        description: "Cờ kết chuyển chu kỳ hạch toán (Cycle Forward) (DATE )"
+      - name: date_time
+        description: "Trường kỹ thuật, ghi nhận thời gian sửa đổi (DATE 8)"
+      - name: department_code
+        description: "Mã đơn vị hạch toán (VARCHAR2 100)"
+      - name: drawn_account
+        description: "Tài khoản ghi nhận số tiền rút (VARCHAR2 100)"
+      - name: exchange_rate
+        description: "Tỷ giá quy đổi (NUMBER 13.7)"
+      - name: internal_category
+        description: "Mã Category nội bộ (VARCHAR2 100)"
+      - name: local_ref
+        description: "Trường multivalue - đa nghĩa của T24 (VARCHAR2 100)"
+      - name: narrative
+        description: "Mô tả bút toán (VARCHAR2 255)"
+      - name: original_acct
+        description: "Số tài khoản hạch toán ban đầu (VARCHAR2 100)"
+      - name: original_amount
+        description: "Giá trị hạch toán ban đầu nguyên tệ (NUMBER 25.5)"
+      - name: original_ccy
+        description: "Loại tiền giao dịch ban đầu (VARCHAR2 100)"
+      - name: original_exch_rate
+        description: "Tỷ giá quy đổi cho loại tiền ban đầu (NUMBER 13.7)"
+      - name: orig_amount_lcy
+        description: "Giá trị hạch toán ban đầu quy đổi (NUMBER 25.5)"
+      - name: our_reference
+        description: "Ma tham chieu (VARCHAR2 100)"
+      - name: outstanding_bal
+        description: "Dư nợ tín dụng của hợp đồng ( OUR_REFERENCE) (NUMBER 25.5)"
+      - name: override
+        description: "Cờ cảnh báo (VARCHAR2 100)"
+      - name: process_forward
+        description: "Cờ xử lý chuyển tiếp bút toán hạch toán (Process Forward) (VARCHAR2 100)"
+      - name: product_category
+        description: "Loại sản phẩm hạch toán (VARCHAR2 100)"
+      - name: recid
+        description: "Mã giao dịch, Unique ID (VARCHAR2 100)"
+      - name: record_status
+        description: "Trạng Thái bản ghi (VARCHAR2 100)"
+      - name: repayment_amt
+        description: "Số tiền thu nợ (NUMBER 25.5)"
+      - name: repayment_date
+        description: "Ngày thu (DATE 8)"
+      - name: repayment_type
+        description: "Loại thu nợ (VARCHAR2 100)"
+      - name: suspense_category
+        description: "Mã Category phân loại bút toán bị treo (VARCHAR2 100)"
+      - name: suspnse_value_date
+        description: "Ngày bút toán treo (DATE 8)"
+      - name: system_id
+        description: "Mã phân hệ (VARCHAR2 100)"
+      - name: transaction_code
+        description: "Mã giao dịch (VARCHAR2 100)"
+      - name: value_date
+        description: "Ngay Hieu luc but toan (DATE 8)"
+      - name: etl_date
+        description: "Ngày dữ liệu ETL (audit)"
+        tests: [not_null]
+      - name: ingest_tms
+        description: "Thời điểm ingest (audit)"
+      - name: src_stm_code
+        description: "Mã bảng nguồn Bronze (audit)"

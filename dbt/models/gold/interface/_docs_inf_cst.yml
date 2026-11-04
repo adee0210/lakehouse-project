@@ -1,0 +1,142 @@
+version: 2
+
+models:
+  - name: inf_cst
+    description: "PG_GOLD.INF_CST – sheet 'Interface Customer'"
+    data_tests:
+      - column_contract:
+          expected: [CST_CODE, OPN_DT, FRST_OU_CODE, IDENTN_NBR, IDENTN_ISSU_DT, BSN_RGST_NBR, TAX_IDENTN_NBR, BSN_RGST_EFF_DT, BSN_RGST_EXPIRY_DT, GND, CHKER_OFCR, DOB, OU_CODE, VIP_TP_CODE, VIP_EFF_DT, EMPE_CODE, SHRT_NM, CST_NM, CDR_DT, SCTR_CODE, CST_GRP_CODE, MAKER_OFCR, CTY_NM, CST_ST_CODE, CTY_NM_2, CTY_OF_CTZN_CODE, OCP_CODE, EMAIL_ADRESS, VIP_F, KYC_CNL_CODE, CST_LCS_CODE, STR_NM, STR_ADDR, TRGT_CODE, IDENTN_TP_CODE, GEN_DIR_PLC, OPN_OU_CODE, MGT_OU_CODE, DIR_DOB, NAT_ID_NBR, SCD_OFCR_CODE, ISSU_PLC_CODE, CNTCT_PRSN, MBL_BNKG_F, INN_BNKG_F, AML_RSLT, AML_CHK_F, IDV_EMP_ST_CODE, JNT_LBY_F, MB_CR_ST, CST_FNC_ST_CODE, ANUL_INCM, SRC_DT_TM, PROV_NM, IDY_LV1_CL_CODE, REFR_CODE, CNTCT_PRSN_PHN, CTR_TMPL_CODE, CITY_NM, VSS_CODE, CRS_SELL_RM_CODE, HM_NBR, MBL_NBR, IDY_LV2_CL_CODE]
+      - unique_key:
+          columns: [CDR_DT, CST_CODE]
+          where: "CDR_DT = DATE'{{ var('etl_date') }}'"
+      - has_rows:
+          where: "CDR_DT = DATE'{{ var('etl_date') }}'"
+    columns:
+      - name: cst_code
+        description: "Mã khách hàng"
+      - name: opn_dt
+        description: "Ngày đăng ký"
+      - name: frst_ou_code
+        description: "CN_MO"
+      - name: identn_nbr
+        description: "SO_GTTT"
+      - name: identn_issu_dt
+        description: "Ngày cấp giấy tờ tùy thân"
+      - name: bsn_rgst_nbr
+        description: "Số giấy phép doanh nghiệp"
+      - name: tax_identn_nbr
+        description: "Số seri hóa đơn"
+      - name: bsn_rgst_eff_dt
+        description: "Ngày phát hành hóa đơn"
+      - name: bsn_rgst_expiry_dt
+        description: "Ngày hêt hạn căn cước"
+      - name: gnd
+        description: "Giới tính"
+      - name: chker_ofcr
+        description: "NHOM_KH_DH"
+      - name: dob
+        description: "Ngày sinh"
+      - name: ou_code
+        description: "CN_QL"
+      - name: vip_tp_code
+        description: "Phân hạng khách hàng vip"
+      - name: vip_eff_dt
+        description: "Ngày hiệu lực khách hàng vip"
+      - name: empe_code
+        description: "Mã nhân viên giới thiệu"
+      - name: shrt_nm
+        description: "Tên viết tắt khách hàng"
+      - name: cst_nm
+        description: "Tên khách hàng đầy đủ"
+      - name: cdr_dt
+        description: "Ngày dữ liệu"
+      - name: sctr_code
+        description: "Mã phân loại khách hàng"
+      - name: cst_grp_code
+        description: "Khối quản lý khách hàng"
+      - name: maker_ofcr
+        description: "Mã nhân viên hạch toán"
+      - name: cty_nm
+        description: "Quốc gia cư trú hiện tại"
+      - name: cst_st_code
+        description: "Trạng thái khách hàng"
+      - name: cty_nm_2
+        description: "Quốc gia thường trú"
+      - name: cty_of_ctzn_code
+        description: "Quốc tịch"
+      - name: ocp_code
+        description: "Nghề nghiệp khách hàng"
+      - name: email_adress
+        description: "Địa chỉ email"
+      - name: vip_f
+        description: "Đánh dấu khách hàng vip"
+      - name: kyc_cnl_code
+        description: "Kênh thực hiện KYC"
+      - name: cst_lcs_code
+        description: "Trạng thái hoạt động"
+      - name: str_nm
+        description: "Tên đường đầy đủ theo địa chỉ"
+      - name: str_addr
+        description: "STREET"
+      - name: trgt_code
+        description: "TARGET"
+      - name: identn_tp_code
+        description: "Loại căn cước"
+      - name: gen_dir_plc
+        description: "GEN_DIR_PLC"
+      - name: opn_ou_code
+        description: "Chi nhánh mở CIF"
+      - name: mgt_ou_code
+        description: "Chi nhánh quản lý khách hàng"
+      - name: dir_dob
+        description: "BDAY_DIRECTOR"
+      - name: nat_id_nbr
+        description: "Mã quốc gia"
+      - name: scd_ofcr_code
+        description: "Mã nhân viên hạch toán thứ 2"
+      - name: issu_plc_code
+        description: "Nơi cấp Căn cước"
+      - name: cntct_prsn
+        description: "CONTACT_PERSON"
+      - name: mbl_bnkg_f
+        description: "Đánh dấu sử dụng dịch vụ mobile banking"
+      - name: inn_bnkg_f
+        description: "Đánh dấu sử dụng dịch vụ internet banking"
+      - name: aml_rslt
+        description: "Liên quan tới hệ thống Phòng Chống rửa tiền"
+      - name: aml_chk_f
+        description: "Đánh dấu liên quan tới hệ thống Phòng Chống rửa tiền"
+      - name: idv_emp_st_code
+        description: "Tình trạng làm việc"
+      - name: jnt_lby_f
+        description: "Đánh dấu nợ liên đới"
+      - name: mb_cr_st
+        description: "MB_CR_STT"
+      - name: cst_fnc_st_code
+        description: "Nhóm nợ khách hàng Core tính"
+      - name: anul_incm
+        description: "Thu nhập theo tháng"
+      - name: src_dt_tm
+        description: "DATE_TIME"
+      - name: prov_nm
+        description: "Tỉnh/thành phố nơi cư trú"
+      - name: idy_lv1_cl_code
+        description: "Mã ngành nghê kinh tế cha"
+      - name: refr_code
+        description: "Mã người tham chiếu/giới thiệu"
+      - name: cntct_prsn_phn
+        description: "PHONE_CONT_PER"
+      - name: ctr_tmpl_code
+        description: "MAU_HD"
+      - name: city_nm
+        description: "Tên thành phố theo địa chỉ"
+      - name: vss_code
+        description: "Mã bảo hiểm xã hội"
+      - name: crs_sell_rm_code
+        description: "MB_RM_BANCHEO"
+      - name: hm_nbr
+        description: "Số điện thoại nhà riêng"
+      - name: mbl_nbr
+        description: "Số điện thoại di động"
+      - name: idy_lv2_cl_code
+        description: "Ngành nghề kinh tế"

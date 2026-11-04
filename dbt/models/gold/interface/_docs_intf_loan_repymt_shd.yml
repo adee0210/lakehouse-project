@@ -1,0 +1,56 @@
+version: 2
+
+models:
+  - name: intf_loan_repymt_shd
+    description: "PG_GOLD.INTF_LOAN_REPYMT_SHD – sheet 'Interface Loan Repayment Schedu'"
+    data_tests:
+      - column_contract:
+          expected: [CDR_DT, CST_ID, CST_CODE, AR_AVY_SHD_CODE, AR_CODE, OU_CODE, EFF_MAT_DT, CCY_CODE, PBL_AMT_TP, PBL_AMT_LCY, PBL_AMT_FCY, EXG_RATE, LND_REPYMT_TP, F_LAST_OD_DT, LAST_OD_DT, FCC_VAL_DT, MAT_DT, GL_ITM_CODE, CIC_LOAN_GRP, CST_FULL_NM]
+      - unique_key:
+          columns: [CDR_DT, AR_AVY_SHD_CODE]
+          where: "CDR_DT = DATE'{{ var('etl_date') }}'"
+      - has_rows:
+          where: "CDR_DT = DATE'{{ var('etl_date') }}'"
+    columns:
+      - name: cdr_dt
+        description: "Ngày snapshot"
+      - name: cst_id
+        description: "Mã số định danh duy nhất của khách hàng trên dwh"
+        data_tests:
+          - is_md5
+      - name: cst_code
+        description: "Mã khách hàng (CIF)"
+      - name: ar_avy_shd_code
+        description: "Mã số dòng lịch trên hệ thống nguồn"
+      - name: ar_code
+        description: "Mã tài khoản vay"
+      - name: ou_code
+        description: "Chi nhánh hạch toán"
+      - name: eff_mat_dt
+        description: "Ngày đáo hạn thực tế"
+      - name: ccy_code
+        description: "Mã loại tiền"
+      - name: pbl_amt_tp
+        description: "Phân loại tiền cần thanh toán trong kỳ bill tương ứng (PS/PE/LD,..)"
+      - name: pbl_amt_lcy
+        description: "Số tiền cần thanh toán quy đổi trong kỳ bill tương ứng"
+      - name: pbl_amt_fcy
+        description: "Số tiền cần thanh toán nguyên tệ trong kỳ bill tương ứng"
+      - name: exg_rate
+        description: "Tỷ giá thực hiện"
+      - name: lnd_repymt_tp
+        description: "Phân loại bút toán ( PAID/DUE)"
+      - name: f_last_od_dt
+        description: "Cờ hợp đồng có đang tồn tại kỳ trả nợ quá hạn gần nhất hay không"
+      - name: last_od_dt
+        description: "Ngày đến hạn của kỳ trả nợ gần nhất đã chuyển sang quá hạn"
+      - name: fcc_val_dt
+        description: "Ngày tạo bút toán ( booking_date)"
+      - name: mat_dt
+        description: "Ngày đáo hạn trên hợp đồng"
+      - name: gl_itm_code
+        description: "Mã hạch toán theo SBV"
+      - name: cic_loan_grp
+        description: "Phân loại nhóm nợ khách hàng"
+      - name: cst_full_nm
+        description: "Full tên của Khách hàng"

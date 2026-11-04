@@ -1,0 +1,35 @@
+version: 2
+
+models:
+  - name: lmt
+    description: "PG_SILVER.LMT – sheet 'Limit'"
+    data_tests:
+      - column_contract:
+          expected: [LMT_ID, LMT_CODE, LMT_DSC, INR_LMT_AMT, MAX_TOT_LMT, ONL_LMT_DT, LMT_EXP_DT, SRC_STM_CODE, SYS_EFF_DT, SYS_EXP_DT, SYS_UDT_DT]
+      - unique_key:
+          columns: [LMT_ID]
+    columns:
+      - name: lmt_id
+        description: "ID của hạn mức"
+        data_tests:
+          - is_md5
+      - name: lmt_code
+        description: "Mã hạn mức"
+      - name: lmt_dsc
+        description: "Mô tả hạn mức"
+      - name: inr_lmt_amt
+        description: "Số tiền hạn mức nội bộ được cấp"
+      - name: max_tot_lmt
+        description: "Tổng hạn mức tối đa được phê duyệt"
+      - name: onl_lmt_dt
+        description: "Ngày hiệu lực hạn mức trực tuyến"
+      - name: lmt_exp_dt
+        description: "Ngày hết hạn hạn mức tín dụng"
+      - name: src_stm_code
+        description: "Mã nguồn dữ liệu"
+      - name: sys_eff_dt
+        description: "Ngày hiệu lực bản ghi"
+      - name: sys_exp_dt
+        description: "Ngày hết hiệu lực bản ghi"
+      - name: sys_udt_dt
+        description: "Ngày cập nhật bản ghi"

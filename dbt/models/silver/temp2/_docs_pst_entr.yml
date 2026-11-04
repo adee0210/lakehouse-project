@@ -1,0 +1,124 @@
+version: 2
+
+models:
+  - name: pst_entr
+    description: "PG_SILVER.PST_ENTR – sheet 'Posting Entry'"
+    data_tests:
+      - column_contract:
+          expected: [PST_ENTR_ID, SRC_STM_CODE, PST_ENTR_NBR, TXN_ID, TXN_NBR, ACG_CR_DB_F, TXN_CODE, PST_DT, PST_ENTR_AMT_FCY, PST_ENTR_AMT_LCY, CCY_CODE, VAL_DT, EXG_RATE, OU_CODE, AC_NBR, AR_CODE, AR_ID, CST_ID, CST_NBR, ACG_PD_CGY, PST_ENTR_DSC, CONSOL_KEY, MOD_CODE, PST_ENTR_CMPT, ACG_DT, AC_ID, BAL_TP, CARD_NBR, CMMT_ACTN, CMMT_TMS, CGY_PD_CODE, CRN_NBR, CYC_FWD, DT_TM, DEPT_CODE, DRN_AC, INR_CGY, LCL_REFR, ORIG_AMT_LCY, ORIG_AC, ORIG_AMT, ORIG_CCY, ORIG_EXG_RATE, OTSND_BAL, OVRD, PCS_FWD, RCRD_ST, REPYMT_AMT, REPYMT_DT, REPYMT_TP, SUSP_CGY, SUSP_VAL_DT]
+      - unique_key:
+          columns: [PST_ENTR_ID]
+          where: "PST_DT = DATE'{{ var('etl_date') }}'"
+      - has_rows:
+          where: "PST_DT = DATE'{{ var('etl_date') }}'"
+    columns:
+      - name: pst_entr_id
+        description: "ID duy nhất của đối tượng trên DWH"
+        data_tests:
+          - is_md5
+      - name: src_stm_code
+        description: "Mã nguồn dữ liệu"
+      - name: pst_entr_nbr
+        description: "Mã bút toán hạch toán"
+      - name: txn_id
+        description: "ID của giao dịch của bút toán trên DWH"
+      - name: txn_nbr
+        description: "Số giao dịch"
+      - name: acg_cr_db_f
+        description: "Cờ đánh dấu ghi nợ/ghi có"
+      - name: txn_code
+        description: "Phân loại mã giao dịch"
+      - name: pst_dt
+        description: "Ngày phát sinh bút toán"
+      - name: pst_entr_amt_fcy
+        description: "Số tiền của bút toán nguyên tệ"
+      - name: pst_entr_amt_lcy
+        description: "Số tiền của bút toán quy đổi"
+      - name: ccy_code
+        description: "Mã loại tiền"
+      - name: val_dt
+        description: "Ngày hiệu lực của bút toán"
+      - name: exg_rate
+        description: "Tỷ giá thực hiện"
+      - name: ou_code
+        description: "Chi nhánh hạch toán"
+      - name: ac_nbr
+        description: "Số tài khoản liên quan"
+      - name: ar_code
+        description: "Số hợp đồng liên quan"
+      - name: ar_id
+        description: "ID hợp đồng duy nhất liên quan trên DWH"
+        data_tests:
+          - is_md5
+      - name: cst_id
+        description: "ID duy nhất của khách hàng liên quan trên DWH"
+        data_tests:
+          - is_md5
+      - name: cst_nbr
+        description: "Mã số khách hàng"
+      - name: acg_pd_cgy
+        description: "Loại sản phẩm hạch toán"
+      - name: pst_entr_dsc
+        description: "Mô tả bút toán"
+      - name: consol_key
+        description: "Consol key của bút toán STMT"
+      - name: mod_code
+        description: "Mã phân hệ giao dịch"
+      - name: pst_entr_cmpt
+        description: "Phân loại thành phần giao dịch bút toán"
+      - name: acg_dt
+        description: "Ngày hạch toán của bút toán"
+      - name: ac_id
+        description: "ID tài khoản hạch toán trên DWH"
+      - name: bal_tp
+        description: "Loại bút toán"
+      - name: card_nbr
+        description: "Số thẻ"
+      - name: cmmt_actn
+        description: "Trường kỹ thuật đánh dấu bản ghi IUD"
+      - name: cmmt_tms
+        description: "Thời gian ghi nhận thay đổi bản ghi trên hệ thống"
+      - name: cgy_pd_code
+        description: "Mã Category phân loại bút toán"
+      - name: crn_nbr
+        description: "Trường kỹ thuật, đánh dấu version thay đổi bút toán"
+      - name: cyc_fwd
+        description: "Chu kỳ"
+      - name: dt_tm
+        description: "Trường kỹ thuật, ghi nhận thời gian sửa đổi"
+      - name: dept_code
+        description: "Mã đơn vị hạch toán"
+      - name: drn_ac
+        description: "Tài khoản ghi nhận số tiền rút"
+      - name: inr_cgy
+        description: "Mã Category nội bộ"
+      - name: lcl_refr
+        description: "Trường multivalue - đa nghĩa của T24"
+      - name: orig_amt_lcy
+        description: "Giá trị hạch toán ban đầu quy đổi"
+      - name: orig_ac
+        description: "Số tài khoản hạch toán ban đầu"
+      - name: orig_amt
+        description: "Giá trị hạch toán ban đầu nguyên tệ"
+      - name: orig_ccy
+        description: "Loại tiền giao dịch ban đầu"
+      - name: orig_exg_rate
+        description: "Tỷ giá quy đổi cho loại tiền ban đầu"
+      - name: otsnd_bal
+        description: "Dư nợ tín dụng của hợp đồng ( OUR_REFERENCE)"
+      - name: ovrd
+        description: "Ghi đè"
+      - name: pcs_fwd
+        description: "Tiến trình"
+      - name: rcrd_st
+        description: "Trạng Thái bản ghi"
+      - name: repymt_amt
+        description: "Số tiền thu nợ"
+      - name: repymt_dt
+        description: "Ngày thu"
+      - name: repymt_tp
+        description: "Loại thu nợ"
+      - name: susp_cgy
+        description: "Mã Category phân loại bút toán bị treo"
+      - name: susp_val_dt
+        description: "Ngày bút toán treo"

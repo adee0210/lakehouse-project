@@ -1,0 +1,27 @@
+version: 2
+
+models:
+  - name: dim_lmt
+    description: "PG_GOLD.DIM_LMT – sheet 'Dimension Limit'"
+    data_tests:
+      - column_contract:
+          expected: [DIM_KEY, LMT_ID, LMT_CODE, LMT_DSC, SYS_EFF_DT, SYS_EXP_DT]
+      - unique_key:
+          columns: [DIM_KEY]
+      - scd2_single_current:
+          columns: [LMT_ID]
+    columns:
+      - name: dim_key
+        description: "Key của bảng"
+      - name: lmt_id
+        description: "ID của hạn mức"
+        data_tests:
+          - is_md5
+      - name: lmt_code
+        description: "Mã hạn mức"
+      - name: lmt_dsc
+        description: "Mô tả hạn mức"
+      - name: sys_eff_dt
+        description: "Ngày hiệu lực bản ghi"
+      - name: sys_exp_dt
+        description: "Ngày hết hiệu lực bản ghi"

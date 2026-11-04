@@ -1,0 +1,49 @@
+-- Wave 1 | PG_SILVER.CUST_INFO_DAILY – SNAPSHOT (Daily Customer & Contract Info)
+-- Sheet 'CUST_INFO_DAILY' + Map_SRC2TRG: __NCOLS__ cột. main = SMY_STMT_DAILY (stmt, BOOKING_DATE = ${ETL_DATE}) + 9 bảng phụ.
+-- Grain: 1 dòng / bút toán stmt x field UDF (udf = bảng EAV PGB_CONTRACT_UDF_MAP, giữ nguyên theo thiết kế).
+-- m: version mới nhất của hợp đồng FCC; các bảng UDF lịch sử lấy bản ghi mới nhất theo hợp đồng.
+{{ config(materialized='incremental', incremental_strategy='append', partition_by=['ETL_DATE'],
+          pre_hook="{{ delete_partition('ETL_DATE') }}", alias='cust_info_daily') }}
+
+with stmt as (
+    select * from {{ bz('smy_stmt_daily') }} where {{ t24_date('BOOKING_DATE') }} = {{ etl_date() }}
+),
+m as (
+    select * from (
+        select x.*, row_number() over (partition by x.CONTRACT_REF_NO order by x.VERSION_NO desc) as rn
+        from {{ bz('flexbo_pgb_ldtb_contract_master') }} x
+    ) where rn = 1
+),
+td as (select * from {{ bz('flexbo_pgb_los_contract_fields_tdate') }} where {{ t24_date('MOV_DATE') }} = {{ etl_date() }}),
+udf as (select * from {{ bz('flexbo_pgb_contract_udf_map') }}),
+udf_h as (
+    select * from (
+        select x.*, row_number() over (partition by x.CONTRACT_REF_NO order by x.MOV_DATE desc) as rn
+        from {{ bz('flexbo_pgbld_contract_udfield_hist') }} x
+    ) where rn = 1
+),
+rt_h as (
+    select * from (
+        select x.*, row_number() over (partition by x.CONTRACT_REF_NO order by x.NGAY_HET_COVID19 desc) as rn
+        from {{ bz('flexbo_pgbld_rt_contract_udfield_hist') }} x
+    ) where rn = 1
+),
+col_udf as (select * from {{ bz('ebanking_col_udf_value') }} where UDF_ID = 'NHANNO_BATBUOC'),
+ld_los as (
+    select * from {{ bz('los_app_loan_disbursement') }} where AMND_STATE = 'F' and STATUS in ('A', 'U')
+),
+fac as (select * from {{ bz('los_app_facility') }}),
+pd_los as (select * from {{ bz('los_app_product') }})
+select
+__SELECT_LIST__,
+    {{ etl_date() }} as ETL_DATE
+from stmt
+left join m       on stmt.OUR_REFERENCE = m.CONTRACT_REF_NO
+left join td      on stmt.OUR_REFERENCE = td.CONTRACT_REF_NO
+left join udf     on m.CONTRACT_REF_NO = udf.CONTRACT_REF_NO
+left join udf_h   on m.CONTRACT_REF_NO = udf_h.CONTRACT_REF_NO
+left join rt_h    on m.CONTRACT_REF_NO = rt_h.CONTRACT_REF_NO
+left join col_udf on m.CONTRACT_REF_NO = col_udf.COL_REF
+left join ld_los  on stmt.OUR_REFERENCE = ld_los.EXT_REF_NO_1
+left join fac     on ld_los.FACILITY_ID = fac.ID
+left join pd_los  on fac.PRODUCT_ID = pd_los.ID

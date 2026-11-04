@@ -1,0 +1,40 @@
+version: 2
+
+models:
+  - name: ar_dlq_smy
+    description: "PG_SILVER.AR_DLQ_SMY – sheet 'Arrangement Delinquency Summary'"
+    data_tests:
+      - column_contract:
+          expected: [CDR_DT, AR_ID, AR_CODE, ORIG_AR_ID, ORIG_AR_CODE, SRC_STM_CODE, PNP_PAST_DUE_DT, INT_PAST_DUE_DT, PNP_ARS, INT_ARS, ADDITION_DYS_IN_ARS]
+      - unique_key:
+          columns: [CDR_DT, AR_ID]
+          where: "CDR_DT = DATE'{{ var('etl_date') }}'"
+      - has_rows:
+          where: "CDR_DT = DATE'{{ var('etl_date') }}'"
+    columns:
+      - name: cdr_dt
+        description: "Ngày dữ liệu"
+      - name: ar_id
+        description: "ID của hợp đồng"
+        data_tests:
+          - is_md5
+      - name: ar_code
+        description: "Mã hợp đồng"
+      - name: orig_ar_id
+        description: "ID của hợp đồng gốc"
+        data_tests:
+          - is_md5
+      - name: orig_ar_code
+        description: "Mã hợp đồng gốc"
+      - name: src_stm_code
+        description: "Mã nguồn dữ liệu"
+      - name: pnp_past_due_dt
+        description: "Ngày quá hạn gốc"
+      - name: int_past_due_dt
+        description: "Ngày quá hạn lãi"
+      - name: pnp_ars
+        description: "Số tiền quá hạn gốc"
+      - name: int_ars
+        description: "Số tiền quá hạn lãi"
+      - name: addition_dys_in_ars
+        description: "Số ngày quá hạn chuyển đổi"

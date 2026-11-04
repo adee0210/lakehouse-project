@@ -1,0 +1,62 @@
+version: 2
+
+models:
+  - name: intf_loan_dsbr
+    description: "PG_GOLD.INTF_LOAN_DSBR – sheet 'Interface Loan Disbursement'"
+    data_tests:
+      - column_contract:
+          expected: [CDR_DT, AR_CODE, CST_CODE, OU_CODE, VAL_DT, EFF_DT, MAT_DT, CCY_CODE, AR_PPS_TP_CODE, PPR_CTR_NBR, PD_CGY_CODE, ORIG_AMT_FCY, EXG_RATE_TO_LCL_CCY, ORIG_AMT_LCY, EMPE_NM, EFF_RATE_PCT, AR_PPS_BY_IDY, LOS_CTR_CODE, CAR_AP_CODE, DSBR_PRPSL_OFCR, DSBR_PRPSL_MGR, PD_CODE, PD_NM, LOC_TERM]
+      - unique_key:
+          columns: [CDR_DT, AR_CODE]
+          where: "CDR_DT = DATE'{{ var('etl_date') }}'"
+      - has_rows:
+          where: "CDR_DT = DATE'{{ var('etl_date') }}'"
+    columns:
+      - name: cdr_dt
+        description: "Ngày dữ liệu"
+      - name: ar_code
+        description: "Mã hợp đồng"
+      - name: cst_code
+        description: "Mã khách hàng"
+      - name: ou_code
+        description: "Mã chi nhánh quản lý hiện tại"
+      - name: val_dt
+        description: "Ngày giải ngân"
+      - name: eff_dt
+        description: "Ngày hiệu lực hợp đồng"
+      - name: mat_dt
+        description: "Ngày hiệu lực hợp đồng"
+      - name: ccy_code
+        description: "Loại tiền"
+      - name: ar_pps_tp_code
+        description: "Mã mục đích vay"
+      - name: ppr_ctr_nbr
+        description: "Mã hồ sơ"
+      - name: pd_cgy_code
+        description: "Mã phân loại sản phẩm"
+      - name: orig_amt_fcy
+        description: "Giá trị phê duyệt"
+      - name: exg_rate_to_lcl_ccy
+        description: "Tỷ giá"
+      - name: orig_amt_lcy
+        description: "Giá trị phê duyệt quy đổi"
+      - name: empe_nm
+        description: "Tên nhân viên hạch toán"
+      - name: eff_rate_pct
+        description: "Giá trị lãi suất"
+      - name: ar_pps_by_idy
+        description: "Mục đích vay theo ngành kinh tế"
+      - name: los_ctr_code
+        description: "mã hợp đồng vay"
+      - name: car_ap_code
+        description: "Mã hồ sơ đăng ký vay vốn mua xe"
+      - name: dsbr_prpsl_ofcr
+        description: "Cán bộ đề xuất giải ngân"
+      - name: dsbr_prpsl_mgr
+        description: "Người đề xuất giải ngân"
+      - name: pd_code
+        description: "Mã nhóm sản phẩm"
+      - name: pd_nm
+        description: "Tên sản phẩm"
+      - name: loc_term
+        description: "Kỳ hạn"

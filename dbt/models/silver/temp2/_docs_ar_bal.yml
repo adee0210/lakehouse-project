@@ -1,0 +1,57 @@
+version: 2
+
+models:
+  - name: ar_bal
+    description: "PG_SILVER.AR_BAL – sheet 'Arrangement Balance'"
+    data_tests:
+      - column_contract:
+          expected: [RCVB_AMT_LCY, CLS_BAL_LCY, MUD_CODE, AR_CODE, AR_ID, AST_TP_CODE, PD_CGY_CODE, OU_CODE, CCY_CODE, CST_CODE, CST_ID, AR_TERM_TP_CODE, GL_ITM_CODE, GL_ITM_ID, SUB_PD_CODE, CDR_DT]
+      - unique_key:
+          columns: [CDR_DT, AR_ID, GL_ITM_CODE, AST_TP_CODE]
+          where: "CDR_DT = DATE'{{ var('etl_date') }}'"
+      - has_rows:
+          where: "CDR_DT = DATE'{{ var('etl_date') }}'"
+    columns:
+      - name: rcvb_amt_lcy
+        description: "Số tiền dự thu"
+      - name: cls_bal_lcy
+        description: "Dư Nợ quy đổi"
+      - name: mud_code
+        description: "Mã phân hệ: LD, MD, AC, PD"
+      - name: ar_code
+        description: "Mã hợp đồng"
+      - name: ar_id
+        description: "ID hợp đồng trên DWH"
+        data_tests:
+          - is_md5
+          - hash_match_rate:
+              to: "ref('loan_ar')"
+              field: AR_ID
+              where: "CDR_DT = DATE'{{ var('etl_date') }}'"
+              to_where: "SYS_EXP_DT is null"
+      - name: ast_tp_code
+        description: "Loại dư nợ, hạch toán"
+      - name: pd_cgy_code
+        description: "Mã phân loại sản phẩm"
+      - name: ou_code
+        description: "Mã chi nhánh hạch toán"
+      - name: ccy_code
+        description: "Loại tiền"
+      - name: cst_code
+        description: "Mã khách hàng"
+      - name: cst_id
+        description: "ID khách hàng trên DWH"
+        data_tests:
+          - is_md5
+      - name: ar_term_tp_code
+        description: "Mã nhóm kỳ hạn"
+      - name: gl_itm_code
+        description: "Mã hạch toán theo SBV"
+      - name: gl_itm_id
+        description: "ID Mã hạch toán theo SBV"
+        data_tests:
+          - is_md5
+      - name: sub_pd_code
+        description: "Mã sản phẩm con"
+      - name: cdr_dt
+        description: "Ngày giao dịch"

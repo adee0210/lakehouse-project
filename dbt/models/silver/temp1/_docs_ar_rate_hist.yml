@@ -1,0 +1,40 @@
+version: 2
+
+models:
+  - name: ar_rate_hist
+    description: "PG_SILVER.AR_RATE_HIST – sheet 'Arrangement Rate History'"
+    data_tests:
+      - column_contract:
+          expected: [AR_ID, AR_CODE, INT_RATE_VARIABLITY_TP_CODE, INT_RATE_EFF_DT, EFF_RATE_PCT, SPRD_RATE_PCT, PNY_RATE, ODUE_INT_RATE, MRGN_RATE, SYS_EFF_DT, SYS_EXP_DT, SYS_UDT_DT]
+      - unique_key:
+          columns: [AR_ID, SYS_EFF_DT]
+      - scd2_single_current:
+          columns: [AR_ID]
+      - scd2_valid_period
+    columns:
+      - name: ar_id
+        description: "Unique key trên DWH"
+        data_tests:
+          - is_md5
+      - name: ar_code
+        description: "Mã hợp đồng"
+      - name: int_rate_variablity_tp_code
+        description: "Loại lãi suất : Fix , float"
+      - name: int_rate_eff_dt
+        description: "Ngày hiệu lực lãi suất"
+      - name: eff_rate_pct
+        description: "Giá trị lãi suất"
+      - name: sprd_rate_pct
+        description: "Biên độ lãi suất"
+      - name: pny_rate
+        description: "Lãi phạt penalty rate"
+      - name: odue_int_rate
+        description: "Lãi suất cho quá hạn"
+      - name: mrgn_rate
+        description: "Biên độ thay đổi lãi suất"
+      - name: sys_eff_dt
+        description: "Ngày bản ghi lần đầu tiên vào hệ thống"
+      - name: sys_exp_dt
+        description: "Ngày hết hạn của bản ghi"
+      - name: sys_udt_dt
+        description: "Ngày update dữ liệu gần nhất"

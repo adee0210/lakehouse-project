@@ -1,0 +1,27 @@
+version: 2
+
+models:
+  - name: dim_pd
+    description: "PG_GOLD.DIM_PD – sheet 'Dimension Product'"
+    data_tests:
+      - column_contract:
+          expected: [DIM_KEY, PD_ID, PD_CODE, PD_NM, SYS_EFF_DT, SYS_EXP_DT]
+      - unique_key:
+          columns: [DIM_KEY]
+      - scd2_single_current:
+          columns: [PD_ID]
+    columns:
+      - name: dim_key
+        description: "Key của bảng"
+      - name: pd_id
+        description: "Unique key trên DWH"
+        data_tests:
+          - is_md5
+      - name: pd_code
+        description: "Mã sản phẩm"
+      - name: pd_nm
+        description: "Tên sản phẩm"
+      - name: sys_eff_dt
+        description: "Ngày hiệu lực bản ghi"
+      - name: sys_exp_dt
+        description: "Ngày hết hiệu lực bản ghi"

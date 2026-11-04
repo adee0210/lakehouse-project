@@ -1,0 +1,51 @@
+version: 2
+
+models:
+  - name: dim_loan_ar
+    description: "PG_GOLD.DIM_LOAN_AR – sheet 'Dimension Loan Arrangement'"
+    data_tests:
+      - column_contract:
+          expected: [DIM_KEY, AR_ID, AR_CODE, FCC_AR_CODE, PPR_CTR_NBR, AR_LCS_TP_CODE, AR_PPS_GRP_CODE, AR_PPS_TP_CODE, ORIG_AMT_FCY, PD_CGY_CODE, PROM_CODE, PROM_CODE_2, TERM_CODE, VAL_DT, EFF_DT, MAT_DT, SYS_EFF_DT, SYS_EXP_DT]
+      - unique_key:
+          columns: [DIM_KEY]
+      - scd2_single_current:
+          columns: [AR_ID]
+    columns:
+      - name: dim_key
+        description: "Key của bảng"
+      - name: ar_id
+        description: "Unique key trên DWH"
+        data_tests:
+          - is_md5
+      - name: ar_code
+        description: "Mã hợp đồng"
+      - name: fcc_ar_code
+        description: "Mã hợp đồng FlexCube"
+      - name: ppr_ctr_nbr
+        description: "Mã hồ sơ"
+      - name: ar_lcs_tp_code
+        description: "Trạng thái"
+      - name: ar_pps_grp_code
+        description: "Mã nhóm mục đích vay"
+      - name: ar_pps_tp_code
+        description: "Mã mụ̣c đích vay"
+      - name: orig_amt_fcy
+        description: "Giá trị phê duyệt"
+      - name: pd_cgy_code
+        description: "Mã phân loại sản phẩm"
+      - name: prom_code
+        description: "Mã chương trình KM cho vay"
+      - name: prom_code_2
+        description: "Mã CTKM2"
+      - name: term_code
+        description: "Kỳ hạn"
+      - name: val_dt
+        description: "Ngày hiệu lực đầu tiên của hợp đồng"
+      - name: eff_dt
+        description: "Ngaày hiệu lực hợp đồng"
+      - name: mat_dt
+        description: "Ngày đáo hạn hợp đồng"
+      - name: sys_eff_dt
+        description: "Ngày hiệu lực bản ghi"
+      - name: sys_exp_dt
+        description: "Ngày hết hiệu lực bản ghi"

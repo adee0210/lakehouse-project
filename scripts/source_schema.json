@@ -1,0 +1,2914 @@
+{
+  "EBANKING_COL_UDF_VALUE": {
+    "src_schema": "EBANKING",
+    "src_table": "COL_UDF_VALUE@PGDB",
+    "columns": [
+      {
+        "name": "COL_REF",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Cột Tham chiếu"
+      },
+      {
+        "name": "FUNCTION_CODE",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Mã chức năng"
+      },
+      {
+        "name": "UDF_ID",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Mã UDF"
+      },
+      {
+        "name": "UDF_VALUE",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Giá trị UDF"
+      }
+    ]
+  },
+  "FLEXBO_PGBLD_CONTRACT_UDFIELD_HIST": {
+    "src_schema": "FLEXBO",
+    "src_table": "PGBLD_CONTRACT_UDFIELD_HIST",
+    "columns": [
+      {
+        "name": "CONTRACT_REF_NO",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Mã hợp đồng"
+      },
+      {
+        "name": "CTKM2",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Mã CTKM2"
+      },
+      {
+        "name": "CT_KHUYEN_MAI_CHO_VAY",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Mã chương trình KM cho vay"
+      },
+      {
+        "name": "MOV_DATE",
+        "type": "DATE",
+        "ora_type": "DATE",
+        "length": "8",
+        "comment": "Ngày phát sinh"
+      }
+    ]
+  },
+  "FLEXBO_PGBLD_RT_CONTRACT_UDFIELD_HIST": {
+    "src_schema": "FLEXBO",
+    "src_table": "PGBLD_RT_CONTRACT_UDFIELD_HIST",
+    "columns": [
+      {
+        "name": "CONTRACT_REF_NO",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Mã Hợp đồng"
+      },
+      {
+        "name": "CO_CAU_NO",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Cơ cấu nợ"
+      },
+      {
+        "name": "NGAY_HET_COVID19",
+        "type": "DATE",
+        "ora_type": "DATE",
+        "length": "8",
+        "comment": "Ngày hết covid/ Ngày hết hạn cơ cấu"
+      }
+    ]
+  },
+  "FLEXBO_PGB_CONTRACT_UDF_MAP": {
+    "src_schema": "FLEXBO",
+    "src_table": "PGB_CONTRACT_UDF_MAP",
+    "columns": [
+      {
+        "name": "CONTRACT_REF_NO",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Mã HĐ tham chiếu"
+      },
+      {
+        "name": "FIELD_NAME",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "255",
+        "comment": "Tên trường"
+      },
+      {
+        "name": "FIELD_VAL",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Giá trị tương ứng với từng trường"
+      }
+    ]
+  },
+  "FLEXBO_PGB_LDTB_CONTRACT_MASTER": {
+    "src_schema": "FLEXBO",
+    "src_table": "PGB_LDTB_CONTRACT_MASTER",
+    "columns": [
+      {
+        "name": "BOOKING_DATE",
+        "type": "DATE",
+        "ora_type": "DATE",
+        "length": "8",
+        "comment": "Ngày ghi nhận"
+      },
+      {
+        "name": "CONTRACT_REF_NO",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Mã Hợp đồng"
+      },
+      {
+        "name": "VERSION_NO",
+        "type": "DECIMAL(10,0)",
+        "ora_type": "NUMBER",
+        "length": "10",
+        "comment": "Version của bản ghi"
+      }
+    ]
+  },
+  "FLEXBO_PGB_LOS_CONTRACT_FIELDS_TDATE": {
+    "src_schema": "FLEXBO",
+    "src_table": "PGB_LOS_CONTRACT_FIELDS_TDATE",
+    "columns": [
+      {
+        "name": "BDS_TT11",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Phân loại theo thông tư 11"
+      },
+      {
+        "name": "BIEN_DO_THAY_DOI_LS_THEO_HDTD",
+        "type": "DECIMAL(10,5)",
+        "ora_type": "NUMBER",
+        "length": "10.5",
+        "comment": "Biên độ thay đổi lãi suất"
+      },
+      {
+        "name": "CAN_BO_DE_XUAT_GN",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Cán bộ đề xuất giải ngân"
+      },
+      {
+        "name": "CAP_PHE_DUYET_GNTL",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Cấp phê duyệt giải ngân / trả lời tín dụng"
+      },
+      {
+        "name": "CAR_APPLICATION_CODE",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Mã hồ sơ đăng kí vay vốn"
+      },
+      {
+        "name": "CBTD_QL_KHOAN_VAY",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Mã cán bộ tín dụng quản lý khoản vay"
+      },
+      {
+        "name": "CONTRACT_REF_NO",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Mã hợp đồng giải ngân"
+      },
+      {
+        "name": "CO_CAU_NO_MIEN_GIAM_LAI",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Cờ đánh dấu cơ cấu nợ miễn giảm lãi"
+      },
+      {
+        "name": "LOS_CONTRACT_CODE",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "mã hợp đồng vay"
+      },
+      {
+        "name": "LOS_CONTRACT_ID",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "mã hồ sơ trên LOS"
+      },
+      {
+        "name": "MDVAY_NKT",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Mục đích vay theo ngành kinh tế"
+      },
+      {
+        "name": "MDVAY_SP",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Mục đích vay theo sản phẩm"
+      },
+      {
+        "name": "MOV_DATE",
+        "type": "DATE",
+        "ora_type": "DATE",
+        "length": "8",
+        "comment": "Ngày dữ liệu"
+      },
+      {
+        "name": "SAN_PHAM_CHO_VAY_KHCN",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Sản phẩm vay KHCN"
+      },
+      {
+        "name": "SAN_PHAM_CHO_VAY_KHDN",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Sản phẩm vay KHdn"
+      },
+      {
+        "name": "SO_LAN_CO_CAU",
+        "type": "DECIMAL(20,0)",
+        "ora_type": "NUMBER",
+        "length": "20",
+        "comment": "Số lần cơ cấu nợ"
+      },
+      {
+        "name": "TP_PP_QL_KHOAN_VAY",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Mã Trưởng/Phó phòng quản lý khoản vay"
+      },
+      {
+        "name": "TT_PP_DE_XUAT_GN",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Người đề xuất giải ngân"
+      }
+    ]
+  },
+  "LOS_APP_FACILITY": {
+    "src_schema": "LOS_APP",
+    "src_table": "FACILITY@TO_LOS",
+    "columns": [
+      {
+        "name": "ID",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Key của bản ghi"
+      },
+      {
+        "name": "PRODUCT_ID",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Mã sản phẩm"
+      }
+    ]
+  },
+  "LOS_APP_LOAN_DISBURSEMENT": {
+    "src_schema": "LOS_APP",
+    "src_table": "LOAN_DISBURSEMENT@TO_LOS",
+    "columns": [
+      {
+        "name": "AMND_STATE",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Trạng thái Hợp đồng"
+      },
+      {
+        "name": "BOOKING_DATE",
+        "type": "DATE",
+        "ora_type": "DATE",
+        "length": "8",
+        "comment": "Ngày ghi nhận"
+      },
+      {
+        "name": "EXT_REF_NO_1",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Số tham chiếu bên ngoài"
+      },
+      {
+        "name": "FACILITY_ID",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Mã định danh hạn mức tín dụng"
+      },
+      {
+        "name": "STATUS",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Trạng thái tín dụng"
+      }
+    ]
+  },
+  "LOS_APP_PRODUCT": {
+    "src_schema": "LOS_APP",
+    "src_table": "PRODUCT@TO_LOS",
+    "columns": [
+      {
+        "name": "ID",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Key của bản ghi"
+      },
+      {
+        "name": "PRODUCT_CODE",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Mã sản phẩm"
+      },
+      {
+        "name": "PRODUCT_NAME",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "255",
+        "comment": "Tên sản phẩm"
+      },
+      {
+        "name": "RECID",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Khóa bản ghi danh mục sản phẩm trên LOS"
+      }
+    ]
+  },
+  "SMY_STMT_DAILY": {
+    "src_schema": "SMY",
+    "src_table": "STMT_DAILY",
+    "columns": [
+      {
+        "name": "ACCOUNT",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Trường ACCOUNT của bảng nguồn SMY.STMT_DAILY"
+      },
+      {
+        "name": "ACCOUNTING_DATE",
+        "type": "DATE",
+        "ora_type": "DATE",
+        "length": "8",
+        "comment": "Ngày hạch toán"
+      },
+      {
+        "name": "ACCOUNT_ID",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Trường ACCOUNT_ID của bảng nguồn SMY.STMT_DAILY"
+      },
+      {
+        "name": "ACCOUNT_NUM",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Trường ACCOUNT_NUM của bảng nguồn SMY.STMT_DAILY"
+      },
+      {
+        "name": "ACCOUNT_NUMBER",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Số tài khoản liên quan"
+      },
+      {
+        "name": "ACCT_ID",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Maã định danh tài khoản"
+      },
+      {
+        "name": "AMOUNT_FCY",
+        "type": "DECIMAL(25,5)",
+        "ora_type": "NUMBER",
+        "length": "25.5",
+        "comment": "Dư nợ nguyên tệ"
+      },
+      {
+        "name": "AMOUNT_LCY",
+        "type": "DECIMAL(25,5)",
+        "ora_type": "NUMBER",
+        "length": "25.5",
+        "comment": "Dư nợ quy đổi"
+      },
+      {
+        "name": "BALANCE_TYPE",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "20",
+        "comment": "Loại bút toán"
+      },
+      {
+        "name": "BOOKING_DATE",
+        "type": "DATE",
+        "ora_type": "DATE",
+        "length": "8",
+        "comment": "Ngay but toan ghi nhan vao he thong"
+      },
+      {
+        "name": "CARD_NUMBER",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Số thẻ"
+      },
+      {
+        "name": "COMMIT_ACTION",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Trường kỹ thuật đánh dấu bản ghi IUD"
+      },
+      {
+        "name": "COMMIT_TS",
+        "type": "TIMESTAMP",
+        "ora_type": "TIMESTAMP",
+        "length": "11",
+        "comment": "Thời điểm ghi nhận commit giao dịch trên Core T24"
+      },
+      {
+        "name": "COMPANY_CODE",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Mã chi nhánh hạch toán"
+      },
+      {
+        "name": "CONSOL_KEY",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Consol key của bút toán STMT"
+      },
+      {
+        "name": "CONTRACT_BAL_ID",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "40",
+        "comment": "Trường CONTRACT_BAL_ID của bảng nguồn SMY.STMT_DAILY"
+      },
+      {
+        "name": "CO_CODE",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Trường CO_CODE của bảng nguồn SMY.STMT_DAILY"
+      },
+      {
+        "name": "CRF_PROD_CAT",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Mã Category phân loại bút toán"
+      },
+      {
+        "name": "CRF_TYPE",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Cờ đánh dấu ghi nợ/ghi có"
+      },
+      {
+        "name": "CURRENCY",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Loai tien but toan"
+      },
+      {
+        "name": "CURR_NO",
+        "type": "DECIMAL(10,0)",
+        "ora_type": "NUMBER",
+        "length": "10",
+        "comment": "Trường kỹ thuật, đánh dấu version thay đổi bút toán"
+      },
+      {
+        "name": "CUSTOMER_ID",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Mã khách hàng ứng với Account_number"
+      },
+      {
+        "name": "CYCLE_FORWARD",
+        "type": "DATE",
+        "ora_type": "DATE",
+        "length": "",
+        "comment": "Cờ kết chuyển chu kỳ hạch toán (Cycle Forward)"
+      },
+      {
+        "name": "DATE_TIME",
+        "type": "DATE",
+        "ora_type": "DATE",
+        "length": "8",
+        "comment": "Trường kỹ thuật, ghi nhận thời gian sửa đổi"
+      },
+      {
+        "name": "DEPARTMENT_CODE",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Mã đơn vị hạch toán"
+      },
+      {
+        "name": "DRAWN_ACCOUNT",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Tài khoản ghi nhận số tiền rút"
+      },
+      {
+        "name": "EXCHANGE_RATE",
+        "type": "DECIMAL(13,7)",
+        "ora_type": "NUMBER",
+        "length": "13.7",
+        "comment": "Tỷ giá quy đổi"
+      },
+      {
+        "name": "INTERNAL_CATEGORY",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Mã Category nội bộ"
+      },
+      {
+        "name": "LOCAL_REF",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Trường multivalue - đa nghĩa của T24"
+      },
+      {
+        "name": "NARRATIVE",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "255",
+        "comment": "Mô tả bút toán"
+      },
+      {
+        "name": "ORIGINAL_ACCT",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Số tài khoản hạch toán ban đầu"
+      },
+      {
+        "name": "ORIGINAL_AMOUNT",
+        "type": "DECIMAL(25,5)",
+        "ora_type": "NUMBER",
+        "length": "25.5",
+        "comment": "Giá trị hạch toán ban đầu nguyên tệ"
+      },
+      {
+        "name": "ORIGINAL_CCY",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Loại tiền giao dịch ban đầu"
+      },
+      {
+        "name": "ORIGINAL_EXCH_RATE",
+        "type": "DECIMAL(13,7)",
+        "ora_type": "NUMBER",
+        "length": "13.7",
+        "comment": "Tỷ giá quy đổi cho loại tiền ban đầu"
+      },
+      {
+        "name": "ORIG_AMOUNT_LCY",
+        "type": "DECIMAL(25,5)",
+        "ora_type": "NUMBER",
+        "length": "25.5",
+        "comment": "Giá trị hạch toán ban đầu quy đổi"
+      },
+      {
+        "name": "OUR_REFERENCE",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Ma tham chieu"
+      },
+      {
+        "name": "OUTSTANDING_BAL",
+        "type": "DECIMAL(25,5)",
+        "ora_type": "NUMBER",
+        "length": "25.5",
+        "comment": "Dư nợ tín dụng của hợp đồng ( OUR_REFERENCE)"
+      },
+      {
+        "name": "OVERRIDE",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Cờ cảnh báo"
+      },
+      {
+        "name": "PROCESSING_DATE",
+        "type": "DATE",
+        "ora_type": "DATE",
+        "length": "8",
+        "comment": "Trường PROCESSING_DATE của bảng nguồn SMY.STMT_DAILY"
+      },
+      {
+        "name": "PROCESS_FORWARD",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Cờ xử lý chuyển tiếp bút toán hạch toán (Process Forward)"
+      },
+      {
+        "name": "PRODUCT_CATEGORY",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Loại sản phẩm hạch toán"
+      },
+      {
+        "name": "RECID",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Mã giao dịch, Unique ID"
+      },
+      {
+        "name": "RECORD_STATUS",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Trạng Thái bản ghi"
+      },
+      {
+        "name": "REPAYMENT_AMT",
+        "type": "DECIMAL(25,5)",
+        "ora_type": "NUMBER",
+        "length": "25.5",
+        "comment": "Số tiền thu nợ"
+      },
+      {
+        "name": "REPAYMENT_DATE",
+        "type": "DATE",
+        "ora_type": "DATE",
+        "length": "8",
+        "comment": "Ngày thu"
+      },
+      {
+        "name": "REPAYMENT_TYPE",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Loại thu nợ"
+      },
+      {
+        "name": "STMT_ENTRY_ID",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Trường STMT_ENTRY_ID của bảng nguồn SMY.STMT_DAILY"
+      },
+      {
+        "name": "STMT_NO",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Trường STMT_NO của bảng nguồn SMY.STMT_DAILY"
+      },
+      {
+        "name": "SUSPENSE_CATEGORY",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Mã Category phân loại bút toán bị treo"
+      },
+      {
+        "name": "SUSPNSE_VALUE_DATE",
+        "type": "DATE",
+        "ora_type": "DATE",
+        "length": "8",
+        "comment": "Ngày bút toán treo"
+      },
+      {
+        "name": "SYSTEM_ID",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Mã phân hệ"
+      },
+      {
+        "name": "THEIR_REFERENCE",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Trường THEIR_REFERENCE của bảng nguồn SMY.STMT_DAILY"
+      },
+      {
+        "name": "TRANSACTION_CODE",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Mã giao dịch"
+      },
+      {
+        "name": "TRANS_REFERENCE",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Trường TRANS_REFERENCE của bảng nguồn SMY.STMT_DAILY"
+      },
+      {
+        "name": "TXN_DATE",
+        "type": "DATE",
+        "ora_type": "DATE",
+        "length": "8",
+        "comment": "Trường TXN_DATE của bảng nguồn SMY.STMT_DAILY"
+      },
+      {
+        "name": "VALUE_DATE",
+        "type": "DATE",
+        "ora_type": "DATE",
+        "length": "8",
+        "comment": "Ngay Hieu luc but toan"
+      }
+    ]
+  },
+  "SOURCE_SAOKE_CRB": {
+    "src_schema": "SOURCE",
+    "src_table": "SAOKE_CRB",
+    "columns": [
+      {
+        "name": "ACC_FCC",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Mã hợp đồng FlexCube"
+      },
+      {
+        "name": "AMOUNT_CUR",
+        "type": "DECIMAL(25,5)",
+        "ora_type": "NUMBER",
+        "length": "25.5",
+        "comment": "Số tiền dự thu"
+      },
+      {
+        "name": "AMOUNT_LCY",
+        "type": "DECIMAL(25,5)",
+        "ora_type": "NUMBER",
+        "length": "25.5",
+        "comment": "Dư Nợ quy đổi"
+      },
+      {
+        "name": "APP_CODE",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Mã phân hệ: LD, MD, AC, PD"
+      },
+      {
+        "name": "APP_ID",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Mã hợp đồng"
+      },
+      {
+        "name": "ASSET_TYPE",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Loại dư nợ, hạch toán"
+      },
+      {
+        "name": "CATEG_CODE",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Mã phân loại sản phẩm"
+      },
+      {
+        "name": "CO_CODE",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Mã chi nhánh hạch toán"
+      },
+      {
+        "name": "CURR",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Loại tiền"
+      },
+      {
+        "name": "CUS_ID",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Mã khách hàng"
+      },
+      {
+        "name": "DATE",
+        "type": "DATE",
+        "ora_type": "DATE",
+        "length": "8",
+        "comment": "Ngày giao dịch YYYYMMDD"
+      },
+      {
+        "name": "LOC_TERM",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Trường LOC_TERM của bảng nguồn SOURCE.SAOKE_CRB"
+      },
+      {
+        "name": "MAT_DATE",
+        "type": "DATE",
+        "ora_type": "DATE",
+        "length": "8",
+        "comment": "Ngày đáo hạn hợp đồng"
+      },
+      {
+        "name": "SBV_CODE",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Mã hạch toán theo SBV"
+      },
+      {
+        "name": "SUB_PRO",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Mã sản phẩm con"
+      },
+      {
+        "name": "TXN_DATE",
+        "type": "DATE",
+        "ora_type": "DATE",
+        "length": "8",
+        "comment": "Ngày giao dịch"
+      },
+      {
+        "name": "VAL_DATE",
+        "type": "DATE",
+        "ora_type": "DATE",
+        "length": "8",
+        "comment": "Ngày hiệu lực hợp đồng"
+      }
+    ]
+  },
+  "SOURCE_SAOKE_MVMT": {
+    "src_schema": "SOURCE",
+    "src_table": "SAOKE_MVMT",
+    "columns": [
+      {
+        "name": "SBV_CODE",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Mã hạch toán theo SBV"
+      },
+      {
+        "name": "TRANS_REF",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Mã tham chiếu giao dịch"
+      },
+      {
+        "name": "TXN_DATE",
+        "type": "DATE",
+        "ora_type": "DATE",
+        "length": "8",
+        "comment": "Ngày thực hiện giao dịch"
+      }
+    ]
+  },
+  "T24CORE_COMPANY": {
+    "src_schema": "T24CORE",
+    "src_table": "COMPANY",
+    "columns": [
+      {
+        "name": "COMPANY_NAME",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "255",
+        "comment": "Tên chi nhánh"
+      },
+      {
+        "name": "RECID",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Mã chi nhánh"
+      }
+    ]
+  },
+  "T24CORE_CURRENCY": {
+    "src_schema": "T24CORE",
+    "src_table": "CURRENCY",
+    "columns": [
+      {
+        "name": "CCY_NAME",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "255",
+        "comment": "Tên đầy đủ của loại tiền tệ"
+      },
+      {
+        "name": "CURR_NO",
+        "type": "DECIMAL(10,0)",
+        "ora_type": "NUMBER",
+        "length": "10",
+        "comment": "Số thứ tự phiên bản bản ghi tiền tệ (Curr No)"
+      },
+      {
+        "name": "DATE_TIME",
+        "type": "DATE",
+        "ora_type": "DATE",
+        "length": "8",
+        "comment": "Thời điểm cập nhật bản ghi tỷ giá trên Core T24"
+      },
+      {
+        "name": "ID",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Mã loại tiền tệ (Currency ID)"
+      },
+      {
+        "name": "MID_REVAL_RATE",
+        "type": "DECIMAL(13,7)",
+        "ora_type": "NUMBER",
+        "length": "13.7",
+        "comment": "Tỷ giá đánh giá lại trung bình (Mid Reval Rate)"
+      },
+      {
+        "name": "NUMERIC_CCY_CODE",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Mã tiền tệ dạng số theo chuẩn ISO"
+      }
+    ]
+  },
+  "T24CORE_CURRENCY_HIS": {
+    "src_schema": "T24CORE",
+    "src_table": "CURRENCY_HIS",
+    "columns": [
+      {
+        "name": "CURR_NO",
+        "type": "DECIMAL(10,0)",
+        "ora_type": "NUMBER",
+        "length": "10",
+        "comment": "Số thứ tự phiên bản lịch sử tỷ giá"
+      },
+      {
+        "name": "DATE_TIME",
+        "type": "DATE",
+        "ora_type": "DATE",
+        "length": "8",
+        "comment": "Thời điểm cập nhật tỷ giá lịch sử"
+      },
+      {
+        "name": "ID",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Mã bản ghi lịch sử tiền tệ (ID;CURR_NO)"
+      },
+      {
+        "name": "MID_REVAL_RATE",
+        "type": "DECIMAL(13,7)",
+        "ora_type": "NUMBER",
+        "length": "13.7",
+        "comment": "Tỷ giá đánh giá lại trung bình lịch sử"
+      }
+    ]
+  },
+  "T24CORE_CUSTOMER": {
+    "src_schema": "T24CORE",
+    "src_table": "CUSTOMER",
+    "columns": [
+      {
+        "name": "ACCOUNT_OFFICER",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Mã nhân viên hạch toán"
+      },
+      {
+        "name": "ACTIVE_STATUS",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Trạng thái bản ghi"
+      },
+      {
+        "name": "AML_CHECK",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Liên quan tới hệ thống Phòng Chống rửa tiền"
+      },
+      {
+        "name": "AML_RESULT",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Liên quan tới hệ thống Phòng Chống rửa tiền"
+      },
+      {
+        "name": "ASSET_CLASS",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Nhóm nợ khách hàng Core tính"
+      },
+      {
+        "name": "BDATE_LEGAL",
+        "type": "DATE",
+        "ora_type": "DATE",
+        "length": "8",
+        "comment": "Ngày sinh của người đại diện theo pháp luật"
+      },
+      {
+        "name": "BDAY_DIRECTOR",
+        "type": "DATE",
+        "ora_type": "DATE",
+        "length": "8",
+        "comment": "Ngày sinh giám đốc công ty"
+      },
+      {
+        "name": "BIRTH_INCORP_DATE",
+        "type": "DATE",
+        "ora_type": "DATE",
+        "length": "8",
+        "comment": "Ngày thành lập doanh nghiệp"
+      },
+      {
+        "name": "COMPANY_BOOK",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Mã chi nhánh mở CIF"
+      },
+      {
+        "name": "CONTACT_DATE",
+        "type": "DATE",
+        "ora_type": "DATE",
+        "length": "8",
+        "comment": "Ngày khách hàng liên hệ/mở CIF"
+      },
+      {
+        "name": "CONTACT_PERSON",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Họ tên người liên hệ của khách hàng doanh nghiệp"
+      },
+      {
+        "name": "COUNTRY",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Tên quốc gia nơi cư trú / đặt trụ sở"
+      },
+      {
+        "name": "CO_CODE",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Mã chi nhánh quản lý khách hàng"
+      },
+      {
+        "name": "CUSTOMER_STATUS",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Trạng thái hiện tại của khách hàng"
+      },
+      {
+        "name": "CUS_IND_PARENT",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Mã ngành nghê kinh tế cha"
+      },
+      {
+        "name": "CU_EFF_DATE",
+        "type": "DATE",
+        "ora_type": "DATE",
+        "length": "8",
+        "comment": "Ngày hiệu lực phân hạng khách hàng VIP"
+      },
+      {
+        "name": "DATE_TIME",
+        "type": "DATE",
+        "ora_type": "DATE",
+        "length": "8",
+        "comment": "Ngày giờ bản ghi nhập liệu"
+      },
+      {
+        "name": "EMAIL_ADDRESS",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "255",
+        "comment": "Địa chỉ emai"
+      },
+      {
+        "name": "EMPLOYMENT_STATUS",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Mã tình trạng việc làm của khách hàng cá nhân"
+      },
+      {
+        "name": "ESTAB_LIC_CODE",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Số giấy phép thành lập / đăng ký kinh doanh"
+      },
+      {
+        "name": "FFB_TYPE",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Phân hạng khách hàng ưu tiên (VIP Type)"
+      },
+      {
+        "name": "GEN_DIR_PLC",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Nơi sinh / quốc tịch của Tổng giám đốc / người đại diện"
+      },
+      {
+        "name": "HOME_NUMBER",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Số điện thoại nhà tiêng"
+      },
+      {
+        "name": "INDUSTRY",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Mã ngành nghề đăng ký kinh doanh"
+      },
+      {
+        "name": "INTERNET_BANKING_SERVICE",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Dịch vụ Internet banking khách hàng giao tiếp"
+      },
+      {
+        "name": "KHOI",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "mã Khối quản lý khách hàng"
+      },
+      {
+        "name": "KYC_CHANNEL",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Kênh thực hiện KYC"
+      },
+      {
+        "name": "MAU_HD",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Mã biểu mẫu hợp đồng chuẩn áp dụng cho khách hàng"
+      },
+      {
+        "name": "MA_BHXH",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Mã bảo hiểm xã hội"
+      },
+      {
+        "name": "MB_CR_STT",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Trạng thái quan hệ tín dụng của khách hàng tại ngân hàng"
+      },
+      {
+        "name": "MB_INDUSTRY",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Ngành nghề kinh tế"
+      },
+      {
+        "name": "MB_RM_BANCHEO",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Mã nhân sự bán chéo sản phẩm"
+      },
+      {
+        "name": "MOBILE_BANKING_SERVICE",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Dịch vụ sử dụng sản phẩm mobile banking"
+      },
+      {
+        "name": "MOBILE_NUMBER",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Số điện thoại di động"
+      },
+      {
+        "name": "NATIONALITY",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Quốc tịch"
+      },
+      {
+        "name": "NATIONAL_ID",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Số giấy tờ định danh quốc gia (CCCD/CMND)"
+      },
+      {
+        "name": "NAT_ID_EXP_DATE",
+        "type": "DATE",
+        "ora_type": "DATE",
+        "length": "8",
+        "comment": "Ngày hêt hạn CC"
+      },
+      {
+        "name": "NAT_ID_ISS_DATE",
+        "type": "DATE",
+        "ora_type": "DATE",
+        "length": "8",
+        "comment": "Ngày cấp Căn cước"
+      },
+      {
+        "name": "NAT_ID_ISS_PLC",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Nơi cấp Căn cước"
+      },
+      {
+        "name": "NAT_ID_TYPE",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Loại căn cước"
+      },
+      {
+        "name": "NET_MONTHLY_IN",
+        "type": "DECIMAL(25,5)",
+        "ora_type": "NUMBER",
+        "length": "25.5",
+        "comment": "Thu nhập theo tháng"
+      },
+      {
+        "name": "NO_LIEN_DOI",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Nợ liên đới"
+      },
+      {
+        "name": "OCCUPATION",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Nghề nghiệp của khách hàng"
+      },
+      {
+        "name": "OPEN_COMPANY",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Chi nhánh mở"
+      },
+      {
+        "name": "PHONE_CONT_PER",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Số điện thoại của người liên hệ chính - KH tổ chức"
+      },
+      {
+        "name": "RECID",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Mã CIF"
+      },
+      {
+        "name": "REFERRED_BY",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Mã người tham chiếu/giới thiệu"
+      },
+      {
+        "name": "RESIDENCE",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Quốc gia cư trú"
+      },
+      {
+        "name": "RESID_PROVINCE",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Tỉnh/thành phố nơi cư trú"
+      },
+      {
+        "name": "SECOND_OFFICER",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Mã nhân viên hạch toán thứ 2"
+      },
+      {
+        "name": "SECTOR",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Mã phân loại hình khách hàng"
+      },
+      {
+        "name": "SHORT_NAME",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "255",
+        "comment": "Tên viết tắt khách hàng"
+      },
+      {
+        "name": "STREET",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "255",
+        "comment": "Tên đường theo địa chỉ"
+      },
+      {
+        "name": "TARGET",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Mã phân khúc đối tượng khách hàng mục tiêu (Target Code)"
+      },
+      {
+        "name": "TAX_SERIAL",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Mã số thuế"
+      },
+      {
+        "name": "TXN_DATE",
+        "type": "DATE",
+        "ora_type": "DATE",
+        "length": "8",
+        "comment": "Ngày giao dịch / ngày cập nhật dữ liệu khách hàng"
+      },
+      {
+        "name": "VAT_INV_DATE",
+        "type": "DATE",
+        "ora_type": "DATE",
+        "length": "8",
+        "comment": "Ngày phát hành hóa đơn"
+      },
+      {
+        "name": "VAT_INV_SERIAL",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Số seri hóa đơn"
+      },
+      {
+        "name": "VIP_CUSTOMER",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Đánh dấu khách hàng ưu tiên"
+      },
+      {
+        "name": "VN_FULL_NAME",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "255",
+        "comment": "Tên khách hàng đầy đủ"
+      },
+      {
+        "name": "VN_GENDER",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Giới tính"
+      },
+      {
+        "name": "VN_STREET",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "255",
+        "comment": "Tên đường theo địa chỉ"
+      },
+      {
+        "name": "VN_TOWN",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "255",
+        "comment": "Tên thành phố theo địa chỉ"
+      }
+    ]
+  },
+  "T24CORE_DEPT_ACCT_OFFICER": {
+    "src_schema": "T24CORE",
+    "src_table": "DEPT_ACCT_OFFICER",
+    "columns": [
+      {
+        "name": "NAME",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "255",
+        "comment": "Tên nhân viên hạch toán"
+      },
+      {
+        "name": "RECID",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Mã nhân viên hạch toán thứ 2"
+      }
+    ]
+  },
+  "T24CORE_LD_LOANS_AND_DEPOSITS": {
+    "src_schema": "T24CORE",
+    "src_table": "LD_LOANS_AND_DEPOSITS",
+    "columns": [
+      {
+        "name": "ACC_FCC",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Mã hợp đồng FlexCube"
+      },
+      {
+        "name": "AMOUNT",
+        "type": "DECIMAL(25,5)",
+        "ora_type": "NUMBER",
+        "length": "25.5",
+        "comment": "Dự nợ hợp đồng"
+      },
+      {
+        "name": "APPROVE_AMOUNT",
+        "type": "DECIMAL(25,5)",
+        "ora_type": "NUMBER",
+        "length": "25.5",
+        "comment": "Giá trị phê duyệt"
+      },
+      {
+        "name": "AUTHORISER",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Mã người phê duyệt"
+      },
+      {
+        "name": "CATEGORY",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Mã phân loại sản phẩm"
+      },
+      {
+        "name": "COMMIT_ACTION",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Trường COMMIT_ACTION của bảng nguồn T24CORE.LD_LOANS_AND_DEPOSITS"
+      },
+      {
+        "name": "CO_CODE",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Mã chi nhánh quản lý hiện tại"
+      },
+      {
+        "name": "CRA_LD",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Số hồ sơ giải ngân"
+      },
+      {
+        "name": "CURRENCY",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Loại tiền"
+      },
+      {
+        "name": "CURR_NO",
+        "type": "DECIMAL(10,0)",
+        "ora_type": "NUMBER",
+        "length": "10",
+        "comment": "Version bản ghi hiện tại"
+      },
+      {
+        "name": "CUSTOMER_ID",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Mã khách hàng"
+      },
+      {
+        "name": "DATE_TIME",
+        "type": "DATE",
+        "ora_type": "DATE",
+        "length": "8",
+        "comment": "Ngày nhập liệu Core"
+      },
+      {
+        "name": "DRAWDOWN_NET_AMT",
+        "type": "DECIMAL(25,5)",
+        "ora_type": "NUMBER",
+        "length": "25.5",
+        "comment": "Số tiền thực tế giải ngân"
+      },
+      {
+        "name": "EXCG_RATE",
+        "type": "DECIMAL(13,7)",
+        "ora_type": "NUMBER",
+        "length": "13.7",
+        "comment": "Tỷ giá quy đổi"
+      },
+      {
+        "name": "FCC_LIMIT",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Mã hạn mức trên Flexcube"
+      },
+      {
+        "name": "FIN_MAT_DATE",
+        "type": "DATE",
+        "ora_type": "DATE",
+        "length": "8",
+        "comment": "Ngày đáo hạn hợp đồng"
+      },
+      {
+        "name": "ID",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Thay = trường RECID"
+      },
+      {
+        "name": "INPUTTER",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "ID người nhập liệu"
+      },
+      {
+        "name": "INTEREST_RATE",
+        "type": "DECIMAL(13,7)",
+        "ora_type": "NUMBER",
+        "length": "13.7",
+        "comment": "Giá trị lãi suất"
+      },
+      {
+        "name": "INTEREST_SPREAD",
+        "type": "DECIMAL(13,7)",
+        "ora_type": "NUMBER",
+        "length": "13.7",
+        "comment": "Biên độ lãi suất"
+      },
+      {
+        "name": "INT_LIQ_ACCT",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Tài khoản thanh toán lãi"
+      },
+      {
+        "name": "INT_RATE_TYPE",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "20",
+        "comment": "Loại lãi suất : Fix , float"
+      },
+      {
+        "name": "INT_VALUE_DATE",
+        "type": "DATE",
+        "ora_type": "DATE",
+        "length": "8",
+        "comment": "Ngày hiệu lực lãi suất"
+      },
+      {
+        "name": "LIMIT_REFERENCE",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Mã tham chiếu hạn mức"
+      },
+      {
+        "name": "LOC_TERM",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Kỳ hạn"
+      },
+      {
+        "name": "LOS_FAC_CODE",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Số hồ sơ"
+      },
+      {
+        "name": "MB_RM_BANCHEO",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "ID nhân viên giới thiệu"
+      },
+      {
+        "name": "ORIG_VAL_DATE",
+        "type": "DATE",
+        "ora_type": "DATE",
+        "length": "8",
+        "comment": "Ngày hiệu lực đầu tiên của hợp đồng"
+      },
+      {
+        "name": "PE_RATE",
+        "type": "DECIMAL(13,7)",
+        "ora_type": "NUMBER",
+        "length": "13.7",
+        "comment": "Lãi phạt penalty rate"
+      },
+      {
+        "name": "PRIN_LIQ_ACCT",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Tài khoản thanh toán gốc"
+      },
+      {
+        "name": "PRODUCTGR_CODE",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Mã nhóm sản phẩm"
+      },
+      {
+        "name": "PS_RATE",
+        "type": "DECIMAL(13,7)",
+        "ora_type": "NUMBER",
+        "length": "13.7",
+        "comment": "Lãi suất cho quá hạn"
+      },
+      {
+        "name": "REAL_RATE",
+        "type": "DECIMAL(13,7)",
+        "ora_type": "NUMBER",
+        "length": "13.7",
+        "comment": "Lãi suât thực tế"
+      },
+      {
+        "name": "RECID",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Mã hợp đồng"
+      },
+      {
+        "name": "RECORD_STATUS",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Trạng thái bản ghi"
+      },
+      {
+        "name": "STATUS",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Trạng thái"
+      },
+      {
+        "name": "USE_OF_LOAN",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Mã mục đích vay"
+      },
+      {
+        "name": "USE_OF_LOAN_CHA",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Mã nhóm mục đích vay"
+      },
+      {
+        "name": "VALUE_DATE",
+        "type": "DATE",
+        "ora_type": "DATE",
+        "length": "8",
+        "comment": "Ngày hiệu lực hợp đồng"
+      }
+    ]
+  },
+  "T24CORE_LD_LOANS_AND_DEPOSITS_HIS": {
+    "src_schema": "T24CORE",
+    "src_table": "LD_LOANS_AND_DEPOSITS_HIS",
+    "columns": [
+      {
+        "name": "ACC_FCC",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Mã hợp đồng FlexCube"
+      },
+      {
+        "name": "AMOUNT",
+        "type": "DECIMAL(25,5)",
+        "ora_type": "NUMBER",
+        "length": "25.5",
+        "comment": "Dự nợ hợp đồng"
+      },
+      {
+        "name": "APPROVE_AMOUNT",
+        "type": "DECIMAL(25,5)",
+        "ora_type": "NUMBER",
+        "length": "25.5",
+        "comment": "Giá trị giải ngân"
+      },
+      {
+        "name": "CATEGORY",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Mã phân loại sản phẩm"
+      },
+      {
+        "name": "COMMIT_ACTION",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Trường COMMIT_ACTION của bảng nguồn T24CORE.LD_LOANS_AND_DEPOSITS_HIS"
+      },
+      {
+        "name": "CO_CODE",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Mã chi nhánh"
+      },
+      {
+        "name": "CRA_LD",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Mã hồ sơ"
+      },
+      {
+        "name": "CURRENCY",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Mã loại tiền"
+      },
+      {
+        "name": "CURR_NO",
+        "type": "DECIMAL(10,0)",
+        "ora_type": "NUMBER",
+        "length": "10",
+        "comment": "Version của bản ghi"
+      },
+      {
+        "name": "CUSTOMER_ID",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Mã khách hành"
+      },
+      {
+        "name": "DATE_TIME",
+        "type": "DATE",
+        "ora_type": "DATE",
+        "length": "8",
+        "comment": "Ngày nhập liệu Core"
+      },
+      {
+        "name": "DRAWDOWN_NET_AMT",
+        "type": "DECIMAL(25,5)",
+        "ora_type": "NUMBER",
+        "length": "25.5",
+        "comment": "Số tiền thực tế giải ngân"
+      },
+      {
+        "name": "EXCG_RATE",
+        "type": "DECIMAL(13,7)",
+        "ora_type": "NUMBER",
+        "length": "13.7",
+        "comment": "Tỷ giá quy đổi"
+      },
+      {
+        "name": "FIN_MAT_DATE",
+        "type": "DATE",
+        "ora_type": "DATE",
+        "length": "8",
+        "comment": "Ngày đáo hạn"
+      },
+      {
+        "name": "INTEREST_RATE",
+        "type": "DECIMAL(13,7)",
+        "ora_type": "NUMBER",
+        "length": "13.7",
+        "comment": "Giá trị lãi suất"
+      },
+      {
+        "name": "INTEREST_SPREAD",
+        "type": "DECIMAL(13,7)",
+        "ora_type": "NUMBER",
+        "length": "13.7",
+        "comment": "Biên độ lãi suất"
+      },
+      {
+        "name": "INT_LIQ_ACCT",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Tài khoản thanh toán lãi"
+      },
+      {
+        "name": "INT_RATE_TYPE",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "20",
+        "comment": "Loại lãi suất: cố định, thả nổi"
+      },
+      {
+        "name": "INT_VALUE_DATE",
+        "type": "DATE",
+        "ora_type": "DATE",
+        "length": "8",
+        "comment": "Ngày thu lãi"
+      },
+      {
+        "name": "LOC_TERM",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Kỳ hạn"
+      },
+      {
+        "name": "MB_RM_BANCHEO",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "ID nhân viên giới thiệu"
+      },
+      {
+        "name": "ORIG_VAL_DATE",
+        "type": "DATE",
+        "ora_type": "DATE",
+        "length": "8",
+        "comment": "Ngày hiệu lực đầu tiên của hợp đồng"
+      },
+      {
+        "name": "PRIN_LIQ_ACCT",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "tài khoản thanh toán gốc"
+      },
+      {
+        "name": "REAL_RATE",
+        "type": "DECIMAL(13,7)",
+        "ora_type": "NUMBER",
+        "length": "13.7",
+        "comment": "Lãi suâất thực tế"
+      },
+      {
+        "name": "RECID",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Mã Hợp đồng"
+      },
+      {
+        "name": "RECORD_STATUS",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Trạng thái bản ghi"
+      },
+      {
+        "name": "USE_OF_LOAN",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Mã Mục đích vay"
+      },
+      {
+        "name": "USE_OF_LOAN_CHA",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Mã nhóm mục đích vay"
+      },
+      {
+        "name": "VALUE_DATE",
+        "type": "DATE",
+        "ora_type": "DATE",
+        "length": "8",
+        "comment": "Ngày hiệu lực hợp đồng"
+      }
+    ]
+  },
+  "T24CORE_LD_SCHEDULE_DEFINE_MV": {
+    "src_schema": "T24CORE",
+    "src_table": "LD_SCHEDULE_DEFINE_MV",
+    "columns": [
+      {
+        "name": "CONTRACT_ID",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Mã Hợp đồng"
+      },
+      {
+        "name": "PREV_SCHED_DATE",
+        "type": "DATE",
+        "ora_type": "DATE",
+        "length": "8",
+        "comment": "Ngày thanh toán gần nhất"
+      }
+    ]
+  },
+  "T24CORE_LIMIT": {
+    "src_schema": "T24CORE",
+    "src_table": "LIMIT",
+    "columns": [
+      {
+        "name": "EXPIRY_DATE",
+        "type": "DATE",
+        "ora_type": "DATE",
+        "length": "8",
+        "comment": "Ngày hết hạn hạn mức tín dụng"
+      },
+      {
+        "name": "INTERNAL_AMOUNT",
+        "type": "DECIMAL(25,5)",
+        "ora_type": "NUMBER",
+        "length": "25.5",
+        "comment": "Số tiền hạn mức nội bộ được cấp"
+      },
+      {
+        "name": "LIMIT_PRODUCT",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Mã sản phẩm hạn mức tín dụng"
+      },
+      {
+        "name": "MAXIMUM_TOTAL",
+        "type": "DECIMAL(25,5)",
+        "ora_type": "NUMBER",
+        "length": "25.5",
+        "comment": "Tổng hạn mức tối đa được phê duyệt"
+      },
+      {
+        "name": "ONLINE_LIMIT_DATE",
+        "type": "DATE",
+        "ora_type": "DATE",
+        "length": "8",
+        "comment": "Ngày hiệu lực hạn mức trực tuyến"
+      },
+      {
+        "name": "RECID",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Mã định danh hạn mức tín dụng (Limit ID)"
+      }
+    ]
+  },
+  "T24CORE_MB_MG_SAVING_MULTI": {
+    "src_schema": "T24CORE",
+    "src_table": "MB_MG_SAVING_MULTI",
+    "columns": [
+      {
+        "name": "LD_ID",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Mã Hợp đồng"
+      },
+      {
+        "name": "MB_LD_TYPE",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Bổ sung cho CTKM VÀ CTKM 2"
+      },
+      {
+        "name": "PRODUCTGR_CODE",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Mã sản phẩm"
+      }
+    ]
+  },
+  "T24CORE_PD_PAYMENT_DUE": {
+    "src_schema": "T24CORE",
+    "src_table": "PD_PAYMENT_DUE",
+    "columns": [
+      {
+        "name": "AUTHORISER",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "ID người phê duyệt"
+      },
+      {
+        "name": "CRA_LD",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Số hợp đồng tín dụng giấy (Paper Contract Number)"
+      },
+      {
+        "name": "CREDIT_STATUS",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Tình trạng tín dụng"
+      },
+      {
+        "name": "CURR_NO",
+        "type": "DECIMAL(10,0)",
+        "ora_type": "NUMBER",
+        "length": "10",
+        "comment": "Version hiện tại của bản ghi"
+      },
+      {
+        "name": "CUSTOMER",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Mã Khách hàng"
+      },
+      {
+        "name": "FLAG_STATUS",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Trường FLAG_STATUS của bảng nguồn T24CORE.PD_PAYMENT_DUE"
+      },
+      {
+        "name": "INPUTTER",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "ID người nhập liệu"
+      },
+      {
+        "name": "LIMIT_REFERENCE",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Mã tham chiếu hạn mức"
+      },
+      {
+        "name": "LOS_FAC_CODE",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Số hồ sơ"
+      },
+      {
+        "name": "ORIGINAL_MAT",
+        "type": "DATE",
+        "ora_type": "DATE",
+        "length": "8",
+        "comment": "Kỳ hạn gốc"
+      },
+      {
+        "name": "PAYMENT_DTE_DUE",
+        "type": "DATE",
+        "ora_type": "DATE",
+        "length": "8",
+        "comment": "Hạn thanh toán"
+      },
+      {
+        "name": "PD_TYPE",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Pd_type = 1 là các khoản phạt gốc quá hạn, lãi quá hạn đc migrate sang thành phần IN Null là gốc, lãi quá hạn"
+      },
+      {
+        "name": "PENALTY_RATE",
+        "type": "DECIMAL(13,7)",
+        "ora_type": "NUMBER",
+        "length": "13.7",
+        "comment": "Lãi suất phạt quá hạn danh nghĩa (Penalty Rate)"
+      },
+      {
+        "name": "PE_RATE",
+        "type": "DECIMAL(13,7)",
+        "ora_type": "NUMBER",
+        "length": "13.7",
+        "comment": "Lãi phạt penalty rate"
+      },
+      {
+        "name": "PS_RATE",
+        "type": "DECIMAL(13,7)",
+        "ora_type": "NUMBER",
+        "length": "13.7",
+        "comment": "Lãi suất cho quá hạn"
+      },
+      {
+        "name": "RECID",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Mã hợp đồng"
+      },
+      {
+        "name": "REPAYMENT_ACCT",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Tài khoản thu nợ quá hạn (Repayment Account)"
+      },
+      {
+        "name": "SNQH_CHUYENDOI",
+        "type": "DECIMAL(10,0)",
+        "ora_type": "NUMBER",
+        "length": "10",
+        "comment": "Số ngày quá hạn chuyển đổi"
+      },
+      {
+        "name": "STATUS",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Mã trạng thái vòng đời khoản vay quá hạn (PD Status)"
+      },
+      {
+        "name": "USE_OF_LOAN",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Mã mục đích vay"
+      },
+      {
+        "name": "USE_OF_LOAN_CHA",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Mã nhóm mục đích vay"
+      }
+    ]
+  },
+  "T24CORE_PD_PAYMENT_DUE_HIS": {
+    "src_schema": "T24CORE",
+    "src_table": "PD_PAYMENT_DUE_HIS",
+    "columns": [
+      {
+        "name": "CURR_NO",
+        "type": "DECIMAL(10,0)",
+        "ora_type": "NUMBER",
+        "length": "10",
+        "comment": "Trường CURR_NO của bảng nguồn T24CORE.PD_PAYMENT_DUE_HIS"
+      },
+      {
+        "name": "PD_TYPE",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Loại sản phẩm"
+      },
+      {
+        "name": "RECID",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Số hồ sơ"
+      }
+    ]
+  },
+  "T24CORE_PD_PAYMENT_DUE_HIS_MV": {
+    "src_schema": "T24CORE",
+    "src_table": "PD_PAYMENT_DUE_HIS_MV",
+    "columns": [
+      {
+        "name": "ACC_FCC",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Mã hợp đồng FlexCube"
+      },
+      {
+        "name": "APPROVE_AMOUNT",
+        "type": "DECIMAL(25,5)",
+        "ora_type": "NUMBER",
+        "length": "25.5",
+        "comment": "Giá trị giải ngân"
+      },
+      {
+        "name": "CATEGORY",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Mã phân loại sản phẩm vay"
+      },
+      {
+        "name": "CO_CODE",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Mã chi nhánh"
+      },
+      {
+        "name": "CREDIT_STATUS",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Nhóm nợ hợp đồng"
+      },
+      {
+        "name": "CURR_NO",
+        "type": "DECIMAL(10,0)",
+        "ora_type": "NUMBER",
+        "length": "10",
+        "comment": "Version hiện tại của bản ghi"
+      },
+      {
+        "name": "CUSTOMER",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Mã khách hàng"
+      },
+      {
+        "name": "DATE_TIME",
+        "type": "DATE",
+        "ora_type": "DATE",
+        "length": "8",
+        "comment": "Trường DATE_TIME của bảng nguồn T24CORE.PD_PAYMENT_DUE_HIS_MV"
+      },
+      {
+        "name": "FINAL_DUE_DATE",
+        "type": "DATE",
+        "ora_type": "DATE",
+        "length": "8",
+        "comment": "Ngày trả nơ cuối khi quá hạn"
+      },
+      {
+        "name": "FLAG_STATUS",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Cờ đánh dấu trạng thái bản ghi"
+      },
+      {
+        "name": "ORIGINAL_MAT",
+        "type": "DATE",
+        "ora_type": "DATE",
+        "length": "8",
+        "comment": "Ngày đáo hạn gốc"
+      },
+      {
+        "name": "PAY_TYPE",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Loại hình thanh toán"
+      },
+      {
+        "name": "PD_TYPE",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Loại sản phẩm"
+      },
+      {
+        "name": "PENALTY_RATE",
+        "type": "DECIMAL(13,7)",
+        "ora_type": "NUMBER",
+        "length": "13.7",
+        "comment": "Lãi suất phạt quá hạn danh nghĩa lịch sử"
+      },
+      {
+        "name": "PE_RATE",
+        "type": "DECIMAL(13,7)",
+        "ora_type": "NUMBER",
+        "length": "13.7",
+        "comment": "Lãi phạt penalty rate"
+      },
+      {
+        "name": "RECID",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Key bản ghi"
+      },
+      {
+        "name": "RECORD_STATUS",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Trạng thái bản ghi"
+      },
+      {
+        "name": "REPAYMENT_ACCT",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Số tài khoản thanh toán"
+      },
+      {
+        "name": "PAYMENT_DTE_DUE",
+        "type": "DATE",
+        "ora_type": "DATE",
+        "length": "8",
+        "comment": "Hạn thanh toán lịch sử quá hạn"
+      },
+      {
+        "name": "PAY_AMT_OUTS",
+        "type": "DECIMAL(25,5)",
+        "ora_type": "NUMBER",
+        "length": "25.5",
+        "comment": "Số tiền quá hạn còn lại chưa thanh toán"
+      }
+    ]
+  },
+  "T24CORE_PD_PAYMENT_DUE_MV": {
+    "src_schema": "T24CORE",
+    "src_table": "PD_PAYMENT_DUE_MV",
+    "columns": [
+      {
+        "name": "ACC_FCC",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Mã hợp đồng FlexCube"
+      },
+      {
+        "name": "APPROVE_AMOUNT",
+        "type": "DECIMAL(25,5)",
+        "ora_type": "NUMBER",
+        "length": "25.5",
+        "comment": "Giá trị giải ngân"
+      },
+      {
+        "name": "CATEGORY",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Mã phân loại sản phẩm vay"
+      },
+      {
+        "name": "COMMIT_ACTION",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Trường COMMIT_ACTION của bảng nguồn T24CORE.PD_PAYMENT_DUE_MV"
+      },
+      {
+        "name": "CO_CODE",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Mã chi nhánh"
+      },
+      {
+        "name": "CREDIT_STATUS",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Nhóm nợ hợp đồng"
+      },
+      {
+        "name": "CURR_NO",
+        "type": "DECIMAL(10,0)",
+        "ora_type": "NUMBER",
+        "length": "10",
+        "comment": "Version hiện tại của bản ghi"
+      },
+      {
+        "name": "CUSTOMER",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Mã khách hàng"
+      },
+      {
+        "name": "DATE_TIME",
+        "type": "DATE",
+        "ora_type": "DATE",
+        "length": "8",
+        "comment": "Trường DATE_TIME của bảng nguồn T24CORE.PD_PAYMENT_DUE_MV"
+      },
+      {
+        "name": "FINAL_DUE_DATE",
+        "type": "DATE",
+        "ora_type": "DATE",
+        "length": "8",
+        "comment": "Ngày trả nơ cuối khi quá hạn"
+      },
+      {
+        "name": "FLAG_STATUS",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Cờ đánh dấu trạng thái bản ghi"
+      },
+      {
+        "name": "ID",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Mã hợp đồng"
+      },
+      {
+        "name": "ORIGINAL_MAT",
+        "type": "DATE",
+        "ora_type": "DATE",
+        "length": "8",
+        "comment": "Ngày đáo hạn gốc"
+      },
+      {
+        "name": "PAYMENT_DTE_DUE",
+        "type": "DATE",
+        "ora_type": "DATE",
+        "length": "8",
+        "comment": "Hạn thanh toán"
+      },
+      {
+        "name": "PAY_AMT_OUTS",
+        "type": "DECIMAL(25,5)",
+        "ora_type": "NUMBER",
+        "length": "25.5",
+        "comment": "Số tiền còn lại chưa thanh toán"
+      },
+      {
+        "name": "PAY_TYPE",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Loại hình thanh toán"
+      },
+      {
+        "name": "PD_TYPE",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Loại sản phẩm"
+      },
+      {
+        "name": "PENALTY_RATE",
+        "type": "DECIMAL(13,7)",
+        "ora_type": "NUMBER",
+        "length": "13.7",
+        "comment": "Lãi suất phạt quá hạn danh nghĩa (Multi-value)"
+      },
+      {
+        "name": "PE_RATE",
+        "type": "DECIMAL(13,7)",
+        "ora_type": "NUMBER",
+        "length": "13.7",
+        "comment": "Lãi phạt penalty rate"
+      },
+      {
+        "name": "RECID",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Key bản ghi"
+      },
+      {
+        "name": "RECORD_STATUS",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Trạng thái bản ghi"
+      },
+      {
+        "name": "REPAID_AMT",
+        "type": "DECIMAL(25,5)",
+        "ora_type": "NUMBER",
+        "length": "25.5",
+        "comment": "Số tiền đã trả"
+      },
+      {
+        "name": "REPAYMENT_ACCT",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Số tài khoản thanh toán"
+      }
+    ]
+  },
+  "T24CORE_SECTOR": {
+    "src_schema": "T24CORE",
+    "src_table": "SECTOR",
+    "columns": [
+      {
+        "name": "CUSTOMER_TYPE",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Loại khách hàng"
+      },
+      {
+        "name": "RECID",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Mã định danh"
+      }
+    ]
+  },
+  "T24CORE_STMT_ENTRY": {
+    "src_schema": "T24CORE",
+    "src_table": "STMT_ENTRY",
+    "columns": [
+      {
+        "name": "ACCOUNTING_DATE",
+        "type": "DATE",
+        "ora_type": "DATE",
+        "length": "8",
+        "comment": "Ngày hạch toán"
+      },
+      {
+        "name": "ACCOUNT_NUMBER",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Số tài khoản liên quan"
+      },
+      {
+        "name": "ACCT_ID",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Maã định danh tài khoản"
+      },
+      {
+        "name": "AMOUNT_FCY",
+        "type": "DECIMAL(25,5)",
+        "ora_type": "NUMBER",
+        "length": "25.5",
+        "comment": "Dư nợ nguyên tệ"
+      },
+      {
+        "name": "AMOUNT_LCY",
+        "type": "DECIMAL(25,5)",
+        "ora_type": "NUMBER",
+        "length": "25.5",
+        "comment": "Dư nợ quy đổi"
+      },
+      {
+        "name": "BALANCE_TYPE",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "20",
+        "comment": "Loại bút toán"
+      },
+      {
+        "name": "BOOKING_DATE",
+        "type": "DATE",
+        "ora_type": "DATE",
+        "length": "8",
+        "comment": "Ngay but toan ghi nhan vao he thong"
+      },
+      {
+        "name": "CARD_NUMBER",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Số thẻ"
+      },
+      {
+        "name": "COMMIT_ACTION",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Trường kỹ thuật đánh dấu bản ghi IUD"
+      },
+      {
+        "name": "COMMIT_TS",
+        "type": "TIMESTAMP",
+        "ora_type": "TIMESTAMP",
+        "length": "11",
+        "comment": "Thời điểm ghi nhận commit giao dịch trên Core T24"
+      },
+      {
+        "name": "COMPANY_CODE",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Mã chi nhánh hạch toán"
+      },
+      {
+        "name": "CONSOL_KEY",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Consol key của bút toán STMT"
+      },
+      {
+        "name": "CRF_PROD_CAT",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Mã Category phân loại bút toán"
+      },
+      {
+        "name": "CRF_TYPE",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Cờ đánh dấu ghi nợ/ghi có"
+      },
+      {
+        "name": "CURRENCY",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Loai tien but toan"
+      },
+      {
+        "name": "CURR_NO",
+        "type": "DECIMAL(10,0)",
+        "ora_type": "NUMBER",
+        "length": "10",
+        "comment": "Trường kỹ thuật, đánh dấu version thay đổi bút toán"
+      },
+      {
+        "name": "CUSTOMER_ID",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Mã khách hàng ứng với Account_number"
+      },
+      {
+        "name": "CYCLE_FORWARD",
+        "type": "DATE",
+        "ora_type": "DATE",
+        "length": "",
+        "comment": "Cờ kết chuyển chu kỳ hạch toán (Cycle Forward)"
+      },
+      {
+        "name": "DATE_TIME",
+        "type": "DATE",
+        "ora_type": "DATE",
+        "length": "8",
+        "comment": "Trường kỹ thuật, ghi nhận thời gian sửa đổi"
+      },
+      {
+        "name": "DEPARTMENT_CODE",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Mã đơn vị hạch toán"
+      },
+      {
+        "name": "DRAWN_ACCOUNT",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Tài khoản ghi nhận số tiền rút"
+      },
+      {
+        "name": "EXCHANGE_RATE",
+        "type": "DECIMAL(13,7)",
+        "ora_type": "NUMBER",
+        "length": "13.7",
+        "comment": "Tỷ giá quy đổi"
+      },
+      {
+        "name": "INTERNAL_CATEGORY",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Mã Category nội bộ"
+      },
+      {
+        "name": "LOCAL_REF",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Trường multivalue - đa nghĩa của T24"
+      },
+      {
+        "name": "NARRATIVE",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "255",
+        "comment": "Mô tả bút toán"
+      },
+      {
+        "name": "ORIGINAL_ACCT",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Số tài khoản hạch toán ban đầu"
+      },
+      {
+        "name": "ORIGINAL_AMOUNT",
+        "type": "DECIMAL(25,5)",
+        "ora_type": "NUMBER",
+        "length": "25.5",
+        "comment": "Giá trị hạch toán ban đầu nguyên tệ"
+      },
+      {
+        "name": "ORIGINAL_CCY",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Loại tiền giao dịch ban đầu"
+      },
+      {
+        "name": "ORIGINAL_EXCH_RATE",
+        "type": "DECIMAL(13,7)",
+        "ora_type": "NUMBER",
+        "length": "13.7",
+        "comment": "Tỷ giá quy đổi cho loại tiền ban đầu"
+      },
+      {
+        "name": "ORIG_AMOUNT_LCY",
+        "type": "DECIMAL(25,5)",
+        "ora_type": "NUMBER",
+        "length": "25.5",
+        "comment": "Giá trị hạch toán ban đầu quy đổi"
+      },
+      {
+        "name": "OUR_REFERENCE",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Ma tham chieu"
+      },
+      {
+        "name": "OUTSTANDING_BAL",
+        "type": "DECIMAL(25,5)",
+        "ora_type": "NUMBER",
+        "length": "25.5",
+        "comment": "Dư nợ tín dụng của hợp đồng ( OUR_REFERENCE)"
+      },
+      {
+        "name": "OVERRIDE",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Cờ cảnh báo"
+      },
+      {
+        "name": "PROCESS_FORWARD",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Cờ xử lý chuyển tiếp bút toán hạch toán (Process Forward)"
+      },
+      {
+        "name": "PRODUCT_CATEGORY",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Loại sản phẩm hạch toán"
+      },
+      {
+        "name": "RECID",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Mã giao dịch, Unique ID"
+      },
+      {
+        "name": "RECORD_STATUS",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Trạng Thái bản ghi"
+      },
+      {
+        "name": "REPAYMENT_AMT",
+        "type": "DECIMAL(25,5)",
+        "ora_type": "NUMBER",
+        "length": "25.5",
+        "comment": "Số tiền thu nợ"
+      },
+      {
+        "name": "REPAYMENT_DATE",
+        "type": "DATE",
+        "ora_type": "DATE",
+        "length": "8",
+        "comment": "Ngày thu"
+      },
+      {
+        "name": "REPAYMENT_TYPE",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Loại thu nợ"
+      },
+      {
+        "name": "SUSPENSE_CATEGORY",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Mã Category phân loại bút toán bị treo"
+      },
+      {
+        "name": "SUSPNSE_VALUE_DATE",
+        "type": "DATE",
+        "ora_type": "DATE",
+        "length": "8",
+        "comment": "Ngày bút toán treo"
+      },
+      {
+        "name": "SYSTEM_ID",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Mã phân hệ"
+      },
+      {
+        "name": "TRANSACTION_CODE",
+        "type": "STRING",
+        "ora_type": "VARCHAR2",
+        "length": "100",
+        "comment": "Mã giao dịch"
+      },
+      {
+        "name": "VALUE_DATE",
+        "type": "DATE",
+        "ora_type": "DATE",
+        "length": "8",
+        "comment": "Ngay Hieu luc but toan"
+      }
+    ]
+  }
+}

@@ -1,0 +1,72 @@
+version: 2
+
+models:
+  - name: fct_loan_ar
+    description: "PG_GOLD.FCT_LOAN_AR – sheet 'Fact Loan Arrangement'"
+    data_tests:
+      - column_contract:
+          expected: [CDR_DT_DIM_KEY, LOAN_AR_DIM_KEY, CST_DIM_KEY, PD_DIM_KEY, OU_DIM_KEY, CCY_DIM_KEY, LMT_DIM_KEY, LOAN_RSTC_TP_DIM_KEY, LOAN_AR_FNC_ST_DIM_KEY, CST_FNC_ST_DIM_KEY, MUD_CODE, PNY_RATE, ODUE_INT_RATE, TOT_INT_ARS_FCY, TOT_INT_PAID_AMT_FCY, DYS_IN_PNP_ARS, DYS_IN_INT_ARS, MX_DYS_IN_ARS, ADDITION_DYS_IN_ARS, OTSND_AMT_LCY, EXG_RATE_TO_LCL_CCY, NBR_OF_DBT_RSTC]
+      - unique_key:
+          columns: [CDR_DT_DIM_KEY, LOAN_AR_DIM_KEY, MUD_CODE]
+          where: "CDR_DT_DIM_KEY = DATE'{{ var('etl_date') }}'"
+      - has_rows:
+          where: "CDR_DT_DIM_KEY = DATE'{{ var('etl_date') }}'"
+    columns:
+      - name: cdr_dt_dim_key
+        description: "Chiều ngày dữ liệu"
+      - name: loan_ar_dim_key
+        description: "Chiều Hợp đồng vay"
+        data_tests:
+          - hash_match_rate:
+              to: "ref('dim_loan_ar')"
+              field: DIM_KEY
+              to_where: "SYS_EXP_DT is null"
+      - name: cst_dim_key
+        description: "Chiều Khách hàng"
+        data_tests:
+          - hash_match_rate:
+              to: "ref('dim_cst')"
+              field: DIM_KEY
+              to_where: "SYS_EXP_DT is null"
+      - name: pd_dim_key
+        description: "Chiều Sản phẩm"
+        data_tests:
+          - hash_match_rate:
+              to: "ref('dim_pd')"
+              field: DIM_KEY
+      - name: ou_dim_key
+        description: "Chiều chi nhánh"
+      - name: ccy_dim_key
+        description: "Chiều loại tiền"
+      - name: lmt_dim_key
+        description: "Chiều hạn mức"
+      - name: loan_rstc_tp_dim_key
+        description: "Chiều loại tái cấu trúc"
+      - name: loan_ar_fnc_st_dim_key
+        description: "Chiều nhóm nợ hợp đồng vay"
+      - name: cst_fnc_st_dim_key
+        description: "Chiều nhóm nợ khách hàng"
+      - name: mud_code
+        description: "Mã phân hệ"
+      - name: pny_rate
+        description: "Lãi phạt penalty rate"
+      - name: odue_int_rate
+        description: "Lãi suất cho quá hạn"
+      - name: tot_int_ars_fcy
+        description: "Tổng lãi phải trả"
+      - name: tot_int_paid_amt_fcy
+        description: "Tổng lãi đã trả"
+      - name: dys_in_pnp_ars
+        description: "Số ngày quá hạn gốc"
+      - name: dys_in_int_ars
+        description: "Số ngày quá hạn lãi"
+      - name: mx_dys_in_ars
+        description: "Số ngày quá hạn cao nhất"
+      - name: addition_dys_in_ars
+        description: "Số ngày quá hạn chuyển đổi"
+      - name: otsnd_amt_lcy
+        description: "Dư nợ quy đổi"
+      - name: exg_rate_to_lcl_ccy
+        description: "Tỷ giá"
+      - name: nbr_of_dbt_rstc
+        description: "Số lần cơ cấu"

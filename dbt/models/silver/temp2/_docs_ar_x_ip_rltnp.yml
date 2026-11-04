@@ -1,0 +1,50 @@
+version: 2
+
+models:
+  - name: ar_x_ip_rltnp
+    description: "PG_SILVER.AR_X_IP_RLTNP – sheet 'Arrangement x Involved Party'"
+    data_tests:
+      - column_contract:
+          expected: [SRC_STM_CODE, AR_ID, AR_CODE, CST_ID, CST_CODE, MAKER_OFCR, CHKER_OFCR, REFRRER_OFCR, DSBR_PRPSL_OFCR, DSBR_PRPSL_MGR, MGT_OFCR, MGT_MGR, APRV_AHR, SYS_EFF_DT, SYS_EXP_DT, SYS_UDT_DT]
+      - unique_key:
+          columns: [AR_ID, SYS_EFF_DT]
+      - scd2_single_current:
+          columns: [AR_ID]
+      - scd2_valid_period
+    columns:
+      - name: src_stm_code
+        description: "Mã nguồn dữ liệu"
+      - name: ar_id
+        description: "Unique key hợp đồng trên DWH"
+        data_tests:
+          - is_md5
+      - name: ar_code
+        description: "Mã hợp đồng"
+      - name: cst_id
+        description: "ID khách hàng trên DWH"
+        data_tests:
+          - is_md5
+      - name: cst_code
+        description: "Mã khách hàng"
+      - name: maker_ofcr
+        description: "ID người nhập liệu"
+      - name: chker_ofcr
+        description: "Mã người phê duyệt"
+      - name: refrrer_ofcr
+        description: "ID nhân viên giới thiệu"
+      - name: dsbr_prpsl_ofcr
+        description: "Cán bộ đề xuất giải ngân"
+      - name: dsbr_prpsl_mgr
+        description: "Người đề xuất giải ngân"
+      - name: mgt_ofcr
+        description: "Cán bộ quản lý khoản vay"
+      - name: mgt_mgr
+        description: "Người quản lý khoản vay"
+      - name: aprv_ahr
+        description: "Cấp phê duyệt giải ngân"
+      - name: sys_eff_dt
+        description: "Ngày bản ghi lần đầu tiên vào hệ thống"
+      - name: sys_exp_dt
+        description: "Ngày hết hạn của bản ghi"
+      - name: sys_udt_dt
+        description: "Ngày update dữ liệu gần nhất"

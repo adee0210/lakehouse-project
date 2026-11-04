@@ -1,0 +1,57 @@
+version: 2
+
+models:
+  - name: cst
+    description: "PG_SILVER.CST – sheet 'Customer'"
+    data_tests:
+      - column_contract:
+          expected: [CST_ID, CST_CODE, CST_GRP_CODE, FRST_OU_CODE, OU_CODE, MAKER_OFCR_CODE, CHKER_OFCR_CODE, REFR_CODE, SCTR_CODE, SHRT_NM, CST_NM, OPN_DT, EMPE_CODE, STR_ADDR, TRGT_CODE, SRC_DT_TM, CTR_TMPL_CODE, CRS_SELL_RM_CODE, CST_TP_CODE, SYS_EFF_DT, SYS_EXP_DT, SYS_UDT_DT]
+      - unique_key:
+          columns: [CST_ID]
+    columns:
+      - name: cst_id
+        description: "Unique key trên DWH"
+        data_tests:
+          - is_md5
+      - name: cst_code
+        description: "Mã CIF"
+      - name: cst_grp_code
+        description: "mã Khối quản lý khách hàng"
+      - name: frst_ou_code
+        description: "Chi nhánh mở"
+      - name: ou_code
+        description: "Mã chi nhánh mở CIF"
+      - name: maker_ofcr_code
+        description: "Mã nhân viên hạch toán"
+      - name: chker_ofcr_code
+        description: "Mã nhân viên hạch toán thứ 2"
+      - name: refr_code
+        description: "Mã người tham chiếu/giới thiệu"
+      - name: sctr_code
+        description: "Mã phân loại hình khách hàng"
+      - name: shrt_nm
+        description: "Tên viết tắt khách hàng"
+      - name: cst_nm
+        description: "Tên khách hàng đầy đủ"
+      - name: opn_dt
+        description: "Ngày khách hàng liên hệ/mở CIF"
+      - name: empe_code
+        description: "Mã nhân viên quản lý / giới thiệu"
+      - name: str_addr
+        description: "Địa chỉ đường phố gốc trên CIF"
+      - name: trgt_code
+        description: "Mã phân khúc khách hàng mục tiêu"
+      - name: src_dt_tm
+        description: "Thời gian cập nhật bản ghi nguồn"
+      - name: ctr_tmpl_code
+        description: "Mã biểu mẫu hợp đồng chuẩn"
+      - name: crs_sell_rm_code
+        description: "Mã nhân sự bán chéo sản phẩm"
+      - name: cst_tp_code
+        description: "Loại khách hàng (theo phân khúc Sector)"
+      - name: sys_eff_dt
+        description: "Ngày bản ghi lần đầu tiên vào hệ thống"
+      - name: sys_exp_dt
+        description: "Ngày hết hạn của bản ghi"
+      - name: sys_udt_dt
+        description: "Ngày update dữ liệu gần nhất"

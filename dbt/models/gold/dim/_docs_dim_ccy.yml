@@ -1,0 +1,29 @@
+version: 2
+
+models:
+  - name: dim_ccy
+    description: "PG_GOLD.DIM_CCY – sheet 'Dimension Currency'"
+    data_tests:
+      - column_contract:
+          expected: [DIM_KEY, CCY_ID, CCY_CODE, CCY_NM, NUMERIC_CCY_CODE, SYS_EFF_DT, SYS_EXP_DT]
+      - unique_key:
+          columns: [DIM_KEY]
+      - scd2_single_current:
+          columns: [CCY_ID]
+    columns:
+      - name: dim_key
+        description: "Key của bảng"
+      - name: ccy_id
+        description: "Mã duy nhất của loại tiền trên DWH"
+        data_tests:
+          - is_md5
+      - name: ccy_code
+        description: "Mã loại tiền"
+      - name: ccy_nm
+        description: "Tên loại tiền"
+      - name: numeric_ccy_code
+        description: "Mã tiền tệ dạng số"
+      - name: sys_eff_dt
+        description: "Ngày hiệu lực bản ghi"
+      - name: sys_exp_dt
+        description: "Ngày hết hiệu lực bản ghi"

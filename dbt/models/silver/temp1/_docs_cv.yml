@@ -1,0 +1,29 @@
+version: 2
+
+models:
+  - name: cv
+    description: "PG_SILVER.CV – sheet 'Classification Value'"
+    data_tests:
+      - column_contract:
+          expected: [CL_ID, CL_CODE, CL_DSC, CL_SCM_CODE, SRC_STM_CODE, SYS_EFF_DT, SYS_EXP_DT, SYS_UDT_DT]
+      - unique_key:
+          columns: [CL_ID]
+    columns:
+      - name: cl_id
+        description: "Mã duy nhất của CL"
+        data_tests:
+          - is_md5
+      - name: cl_code
+        description: "Mã phân loại"
+      - name: cl_dsc
+        description: "mô tả"
+      - name: cl_scm_code
+        description: "Nhóm phân loại"
+      - name: src_stm_code
+        description: "Nguồn dữ liệu"
+      - name: sys_eff_dt
+        description: "Ngày bản ghi lần đầu tiên vào hệ thống"
+      - name: sys_exp_dt
+        description: "Ngày hết hạn của bản ghi"
+      - name: sys_udt_dt
+        description: "Ngày update dữ liệu gần nhất"
