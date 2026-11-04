@@ -14,7 +14,7 @@ mkdir -p $SPARK_CONF_DIR && cp /tmp/spark-defaults.conf $SPARK_CONF_DIR/
 # Bootstrap: Thrift session luôn "USE default" -> namespace lakehouse.default phải tồn tại.
 # Catalog lưu trên Postgres nên chỉ cần tạo 1 lần (lệnh idempotent).
 /opt/spark/bin/spark-sql --master local[1] --driver-memory 512m \
-  -e "CREATE NAMESPACE IF NOT EXISTS lakehouse.default" 2>&1 | grep -v -E "WARN|INFO" || true
+  -e "CREATE NAMESPACE IF NOT EXISTS lakehouse.default; CREATE NAMESPACE IF NOT EXISTS lakehouse.pg_bronze; CREATE NAMESPACE IF NOT EXISTS lakehouse.pg_silver; CREATE NAMESPACE IF NOT EXISTS lakehouse.pg_silver_stg; CREATE NAMESPACE IF NOT EXISTS lakehouse.pg_gold" 2>&1 | grep -v -E "WARN|INFO" || true
 
 export SPARK_NO_DAEMONIZE=true
 exec /opt/spark/sbin/start-thriftserver.sh \

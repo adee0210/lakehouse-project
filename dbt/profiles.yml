@@ -9,7 +9,7 @@ lakehouse:
       schema: default
       auth: NOSASL
       user: dbt
-      threads: 2
+      threads: "{{ env_var('DBT_THREADS', '2') | int }}"
       connect_retries: 10
       connect_timeout: 60
       retry_all: true

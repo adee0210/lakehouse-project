@@ -25,7 +25,10 @@ JOBS = json.load(open(os.path.join(DAG_DIR, "jobs.json"), encoding="utf-8"))
 
 DBT_DIR = os.environ.get("DBT_PROJECT_DIR", "/opt/airflow/dbt")
 SCRIPTS = "/opt/airflow/scripts"
-ETL_DATE = "{{ dag_run.conf.get('etl_date') or ds }}"
+# Ưu tiên: conf {"etl_date": ...} > Airflow Variable `etl_date` > ds.
+# Oracle nguồn hiện là ảnh chụp ngày 2025-10-07 -> đặt Variable etl_date=2025-10-07 để run theo lịch
+# không ghi phân vùng ngày hôm nay (xoá Variable khi nguồn được cập nhật hằng ngày).
+ETL_DATE = "{{ dag_run.conf.get('etl_date') or var.value.get('etl_date', ds) }}"
 SOURCE_MODE = os.environ.get("SOURCE_MODE", "mock")
 DBT_VARS = "{etl_date: '" + ETL_DATE + "', source_mode: " + SOURCE_MODE + "}"
 DBT = ("cd " + DBT_DIR + " && dbt --no-use-colors __CMD__ --vars \"" + DBT_VARS + "\""
@@ -81,7 +84,8 @@ with DAG(
     start_date=datetime(2025, 11, 26),
     catchup=False,
     max_active_runs=1,
-    max_active_tasks=2,
+    max_active_tasks=int(os.environ.get("AIRFLOW__CORE__PARALLELISM", "2")),
+    is_paused_upon_creation=True,
     default_args=default_args,
     tags=["lakehouse", "dbt-spark", "medallion"],
     doc_md=__doc__,

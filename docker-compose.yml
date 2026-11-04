@@ -79,7 +79,7 @@ services:
       timeout: 5s
       retries: 30
       start_period: 30s
-    mem_limit: 2300m
+    mem_limit: ${SPARK_MEM_LIMIT:-2300m}
     restart: unless-stopped
     networks: [lakehouse-net]
 
@@ -90,6 +90,7 @@ services:
       <<: *common-env
       DBT_PROFILES_DIR: /usr/app/dbt
       DBT_SPARK_HOST: spark-thrift
+      DBT_THREADS: ${DBT_THREADS:-2}
       ORACLE_HOST: ${ORACLE_HOST}
       ORACLE_PORT: ${ORACLE_PORT:-1521}
       ORACLE_SERVICE: ${ORACLE_SERVICE}
@@ -117,7 +118,9 @@ services:
       <<: *common-env
       AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/airflow
       AIRFLOW__CORE__EXECUTOR: LocalExecutor
-      AIRFLOW__CORE__PARALLELISM: 2
+      AIRFLOW__CORE__PARALLELISM: ${AIRFLOW_PARALLELISM:-2}
+      AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION: "true"
+      DBT_THREADS: ${DBT_THREADS:-2}
       AIRFLOW__CORE__LOAD_EXAMPLES: "false"
       AIRFLOW__CORE__DEFAULT_TIMEZONE: Asia/Ho_Chi_Minh
       AIRFLOW__CORE__FERNET_KEY: ${AIRFLOW_FERNET_KEY}
@@ -133,7 +136,8 @@ services:
       ORACLE_PASSWORD: ${ORACLE_PASSWORD}
     command: >
       bash -c "airflow db migrate && airflow users create --username ${POSTGRES_USER} --password ${POSTGRES_PASSWORD}
-      --firstname Local --lastname Admin --role Admin --email admin@example.local || true"
+      --firstname Local --lastname Admin --role Admin --email admin@example.local || true;
+      airflow variables set etl_date ${ETL_DATE:-2025-10-07}"
     depends_on:
       postgres: { condition: service_healthy }
     volumes: &airflow-volumes
@@ -157,7 +161,7 @@ services:
     ports:
       - "8081:8080"
     volumes: *airflow-volumes
-    mem_limit: 1200m
+    mem_limit: ${AIRFLOW_MEM_LIMIT:-1200m}
     networks: [lakehouse-net]
 
   # ------------------------------------------------------ UI / Query (profile "ui") --

@@ -176,10 +176,44 @@ Kết quả đối chiếu 28 bảng / 392 cột với Oracle `DBPDB`:
 
 ## 6. Cài đặt & chạy
 
+### 6.0 Chạy nhanh: 1 lệnh `start.ps1` (Windows PowerShell)
+
+Bật Docker Desktop + VPN, rồi:
+```powershell
+cd C:\Users\ADMIN\lakehouse-project
+.\start.ps1                       # bật toàn bộ hệ thống + dbt docs + chạy pipeline 69 job, theo dõi đến khi xong
+.\start.ps1 -EtlDate 2025-10-07   # chạy cho 1 ngày nghiệp vụ cụ thể (mặc định: Airflow Variable etl_date)
+.\start.ps1 -NoRun                # chỉ bật hệ thống + giao diện, không chạy pipeline (không cần VPN)
+.\start.ps1 -NoWait               # trigger pipeline rồi thoát ngay
+.\start.ps1 -Build                # rebuild image sau khi sửa thư mục docker/
+.\start.ps1 -Stop                 # tắt toàn bộ container (dữ liệu giữ nguyên)
+# Nếu bị chặn script: powershell -ExecutionPolicy Bypass -File .\start.ps1
+```
+Script làm lần lượt: mở Docker Desktop nếu chưa chạy → kiểm tra kết nối Oracle (VPN) → `docker compose --profile airflow
+--profile ui up -d` → chờ Airflow healthy → `dbt docs` (:8082) → trigger DAG `dag_lakehouse_daily` (mở trang Graph
+trên trình duyệt) → in tiến độ mỗi 20 s đến khi xong, liệt kê task lỗi nếu có. Thời gian trên máy 16 GB: ~8 phút.
+
+> Không dùng `docker compose down -v`: `-v` xoá volume Postgres (Iceberg catalog + lịch sử Airflow).
+
 ### 6.1 Chuẩn bị
 * Docker Desktop (≥ 4 GB RAM cho Docker), Git Bash/PowerShell.
 * Kết nối VPN tới Oracle `192.168.26.180:1521/DBPDB` (container Spark đi ra ngoài qua mạng của máy).
 * `.env` (xem `.env.example`): `ORACLE_*`, `MINIO_ROOT_*`, `POSTGRES_*`, `SOURCE_MODE=oracle`.
+* `AIRFLOW_FERNET_KEY` phải là khoá Fernet hợp lệ (Variable/Connection được mã hoá bằng khoá này):
+  `python -c "import base64,os;print(base64.urlsafe_b64encode(os.urandom(32)).decode())"`.
+
+**Tài nguyên theo máy** – mọi giới hạn đọc từ `.env`, không cần sửa code (bỏ trống = mặc định cho Docker 4 GB):
+
+| Biến | Mặc định (Docker 4 GB) | Máy 16 GB RAM (Docker 8 GB) |
+|---|---|---|
+| `SPARK_CORES` / `SPARK_DRIVER_MEMORY` / `SPARK_MEM_LIMIT` | 4 / 1600m / 2300m | 6 / 3g / 4g |
+| `DBT_THREADS` (dbt `threads`) | 2 | 4 |
+| `AIRFLOW_PARALLELISM` (= `max_active_tasks` của DAG) / `AIRFLOW_MEM_LIMIT` | 2 / 1200m | 4 / 1800m |
+| `ETL_DATE` (Airflow Variable `etl_date`) | 2025-10-07 | 2025-10-07 |
+
+**Chuyển sang máy khác:** `git clone/pull` → kiểm tra `.env` → `docker compose --profile airflow --profile ui up -d --build`
+→ bật DAG (`airflow dags unpause dag_lakehouse_daily`). Dữ liệu lakehouse (`data/minio`) và metadata (volume Postgres)
+**không nằm trong git**, nên máy mới bắt đầu từ lakehouse rỗng và cần chạy lại DAG một lần (~15 phút với cấu hình 16 GB).
 
 ### 6.2 Khởi động lakehouse
 ```bash
@@ -213,10 +247,10 @@ docker compose exec dbt dbt run -s +fct_loan_ar --vars '{etl_date: 2025-10-07}' 
 ### 6.5 Chạy bằng Airflow
 ```bash
 docker compose --profile airflow up -d --build      # http://localhost:8081  (airflow / airflow)
-# DAG để pause (tránh run theo lịch với ngày hôm nay). Trigger tay với ngày nghiệp vụ của Oracle:
-docker compose exec airflow airflow dags unpause dag_lakehouse_daily
-docker compose exec airflow airflow dags trigger dag_lakehouse_daily -c '{"etl_date": "2025-10-07"}'
-# hoặc trên UI: nút ▶ "Trigger DAG w/ config"
+docker compose exec airflow airflow dags unpause dag_lakehouse_daily   # DAG mới tạo luôn ở trạng thái pause
+# Ngày nghiệp vụ = conf {"etl_date": ...} > Variable etl_date (airflow-init đặt = ETL_DATE trong .env) > ds
+docker compose exec airflow airflow dags trigger dag_lakehouse_daily -c '{"etl_date": "2025-10-07"}'   # chạy tay 1 ngày bất kỳ
+# hoặc trên UI: nút ▶ "Trigger DAG w/ config"; đổi ngày mặc định: Admin → Variables → etl_date
 ```
 DAG `dag_lakehouse_daily` (73 task = `prepare_source` + 69 job + `dbt_test_data_quality` + `report_layer_row_counts` + `end`):
 * TaskGroup theo `GRP_OBJ` (WAVE_0 … WAVE_4); mỗi job = `dbt run -s <model>`.
@@ -323,6 +357,9 @@ Môi trường: Docker Desktop 4 GB RAM, 8 vCPU (Windows 11). Nguồn: Oracle `D
 | `dbt_test_data_quality` | 207 test | **203 PASS · 4 WARN · 0 ERROR** | 6 phút 40 s |
 | `report_layer_row_counts` | 1 | success (bảng số dòng trong log) | 9 s |
 | **Tổng** | 73 | **73/73 success** | **~23 phút** |
+
+**Máy 16 GB RAM** (Docker 8 GB, cấu hình bảng 6.1, lakehouse rỗng ban đầu): **73/73 success trong 5 phút 16 s**
+(69 job ~4,5 phút với 4 task song song, `dbt test` 18 s) – kết quả test và đối soát giống hệt máy 4 GB.
 
 Qua Airflow chậm hơn chạy tay theo wave vì mỗi task khởi động 1 tiến trình dbt riêng (~20 s parse + kết nối),
 đổi lại thấy được từng job, log và retry riêng.
@@ -459,5 +496,6 @@ Ghi chú số liệu: `IP_ALT_IDENTN` = 0 dòng vì nguồn `PG_T24CORE.CUSTOMER
 | FCT dư nợ thấp bất thường | ép ngầm chuỗi số tiền sang INT bị tràn | `CAST(... AS DECIMAL(25,5))` tường minh |
 | `UCP-0: Unable to start the Universal Connection Pool` (Trino catalog `oracle`) | VPN chưa kết nối | bật VPN; catalog `lakehouse` không phụ thuộc Oracle |
 | Trino không khởi động: `Unrecognized VM option` | sai tên cờ JVM trong `jvm.config` | dùng `-XX:-OmitStackTraceInFastThrow` |
-| Unpause DAG → Airflow tự tạo 1 run theo lịch với `ds` = hôm nay (2026-11-03), chạy song song chờ slot của run thủ công | `catchup=False` vẫn tạo run cho khoảng lịch gần nhất | đánh dấu run đó failed/skip, xoá phân vùng Bronze lỡ ghi (`DELETE … WHERE etl_date <> DATE '2025-10-07'` bằng Trino). **DAG để ở trạng thái pause**: Oracle là ảnh chụp ngày 2025-10-07 → luôn trigger tay với conf `{"etl_date": "2025-10-07"}` |
+| Unpause DAG → Airflow tự tạo 1 run theo lịch với `ds` = hôm nay (2026-11-03), chạy song song chờ slot của run thủ công | `catchup=False` vẫn tạo run cho khoảng lịch gần nhất | đánh dấu run đó failed/skip, xoá phân vùng Bronze lỡ ghi (`DELETE … WHERE etl_date <> DATE '2025-10-07'` bằng Trino). Đã sửa gốc: ngày mặc định lấy từ Airflow Variable `etl_date` (= 2025-10-07) thay vì `ds`, nên run theo lịch cũng ghi đúng ngày nghiệp vụ của Oracle |
 | Docker treo / API 500, Spark bị restart sau `dbt test` | Spark + Trino + CloudBeaver + Airflow vượt 4 GB của WSL | tắt `trino cloudbeaver` khi chạy pipeline; hoặc tăng `memory=6GB` trong `.wslconfig` |
+| Lần chạy đầu trên lakehouse rỗng: `duplicate key … iceberg_namespace_properties_pkey` (2 task Bronze, tự qua khi retry) | nhiều task song song cùng `CREATE SCHEMA pg_bronze` | entrypoint Spark tạo sẵn namespace `pg_bronze/pg_silver/pg_silver_stg/pg_gold` khi khởi động |
