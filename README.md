@@ -183,6 +183,8 @@ Bật Docker Desktop + VPN, rồi:
 cd C:\Users\ADMIN\lakehouse-project
 .\start.ps1                       # bật toàn bộ hệ thống + dbt docs + chạy pipeline 69 job, theo dõi đến khi xong
 .\start.ps1 -EtlDate 2025-10-07   # chạy cho 1 ngày nghiệp vụ cụ thể (mặc định: Airflow Variable etl_date)
+.\start.ps1 -From 2025-10-08 -To 2025-10-09                    # nhiều ngày: TUẦN TỰ từng ngày (SCD2 cần đúng thứ tự)
+.\start.ps1 -From 2025-10-08 -To 2025-10-09 -ContinueOnError   # ngày lỗi vẫn chạy tiếp ngày sau
 .\start.ps1 -NoRun                # chỉ bật hệ thống + giao diện, không chạy pipeline (không cần VPN)
 .\start.ps1 -NoWait               # trigger pipeline rồi thoát ngay
 .\start.ps1 -Build                # rebuild image sau khi sửa thư mục docker/
@@ -194,6 +196,14 @@ Script làm lần lượt: mở Docker Desktop nếu chưa chạy → kiểm tra
 trên trình duyệt) → in tiến độ mỗi 20 s đến khi xong, liệt kê task lỗi nếu có. Thời gian trên máy 16 GB: ~8 phút.
 
 > Không dùng `docker compose down -v`: `-v` xoá volume Postgres (Iceberg catalog + lịch sử Airflow).
+
+**Chạy nhiều ngày:** mỗi ngày là 1 DAG run riêng (conf `etl_date`), ngày sau chỉ bắt đầu khi ngày trước xong. Bronze đọc
+trạng thái Oracle *tại thời điểm chạy* (không lọc theo ngày), Silver/Gold lọc theo ngày nghiệp vụ. Trên Oracle hiện tại
+SAOKE (số dư) chỉ có ngày 2025-10-07, nên chạy 2025-10-08 cho kết quả: 69/69 job thành công, `dbt test` 198 PASS ·
+8 ERROR – toàn bộ là `has_rows` (AR_BAL, SAOKE_GIAINGAN, AR_TVR_SMY, AST_AR_INT_SMY, INTF_LOAN_AR, FCT_LOAN_AR,
+PST_ENTR, INTF_LOAN_REPYMT_SHD rỗng). `has_rows` cố ý để mức error: chạy hằng ngày mà bảng snapshot rỗng = nguồn chưa về.
+Lịch Airflow `30 0 * * *` chạy 1 lần/ngày khi máy bật (`catchup=False`: không chạy bù ngày đã lỡ). Khi Oracle được cập
+nhật hằng ngày, xoá Variable `etl_date` (Admin → Variables) để mỗi run tự lấy ngày T-1 (`ds`).
 
 ### 6.1 Chuẩn bị
 * Docker Desktop (≥ 4 GB RAM cho Docker), Git Bash/PowerShell.
