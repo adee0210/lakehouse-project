@@ -40,8 +40,6 @@ cả 3 tầng được lưu trên **ổ đĩa local** (`./data/minio`).
 | CloudBeaver                              | 24.3                   | SQL editor trên web, kết nối sẵn tới Trino                                           |
 | graphify                                 | 0.9                    | Đồ thị code (`graphify-out/`) để tra cứu nhanh cấu trúc dự án                        |
 
-Khác biệt so với local-lakehouse gốc (có chủ đích, do máy chỉ cấp **4 GB RAM** cho Docker):
-
 - Catalog Iceberg dùng **JDBC catalog trên Postgres** sẵn có thay cho service `iceberg-rest` (bớt 1 JVM).
 - Spark chạy **local mode trong chính Thrift Server** (không tách master/worker).
 - Airflow webserver + scheduler gộp 1 container, đặt trong profile `airflow` (bật khi cần).
